@@ -1205,7 +1205,9 @@ let adminToken=null, adminData=null, aTab='requests';
 try{ adminToken=sessionStorage.getItem('ex360_admin_token'); }catch(e){}
 const ROLE_RANK={Viewer:1,Approver:2,Owner:3}; const can=role=>adminData&&adminData.me&&ROLE_RANK[adminData.me.role]>=ROLE_RANK[role];
 const AF={from:'',to:'',status:'All',desig:'All',org:'All',sec:'All',q:''};
-$('#adminForm').onsubmit=async e=>{ e.preventDefault(); const b=$('#admSubmit'); b.disabled=true; b.textContent='Signing in…';
+$('#adminForm').onsubmit=async e=>{ e.preventDefault();
+  if(!LIVE && /github\.io$/.test(location.hostname)){ $('#adminMsg').innerHTML='<div class="msg info">The admin console opens once the Google Sheet approval system is connected (BACKEND_URL in config.js).</div>'; return; }
+  const b=$('#admSubmit'); b.disabled=true; b.textContent='Signing in…';
   try{ const r=await api({action:'adminLogin',email:$('#admEmail').value,password:$('#admPass').value}); if(!r.ok) throw new Error(r.error);
     adminToken=r.token; try{ sessionStorage.setItem('ex360_admin_token',adminToken); }catch(e){} $('#admPass').value=''; await loadAdmin(); }
   catch(err){ $('#adminMsg').innerHTML=`<div class="msg err">${esc(err.message)}</div>`; }
