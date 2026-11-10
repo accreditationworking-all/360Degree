@@ -528,7 +528,7 @@ footer a{color:var(--on-teal)}
     <div class="wrap">
       <div class="block-head">
         <div><div class="eyebrow">2-minute tour</div><h2>See the whole portal in action</h2></div>
-        <p class="muted">Thirteen features in just over two minutes. Pick a chapter to jump straight to it.</p>
+        <p class="muted">Twelve features in just over two minutes. Pick a chapter to jump straight to it.</p>
       </div>
       <div class="tour">
         <div class="tour-frame"><video id="tourVid" controls playsinline preload="metadata" poster="media/tour-poster.jpg"><source src="media/excellence360-tour.mp4" type="video/mp4"></video></div>
@@ -1579,7 +1579,7 @@ async function exportPdf(){
 
 /* ---------- tour video chapters ---------- */
 (function(){
-  const CH=[['Intro',0],['The framework orbit',10],['Secure reader access',21],['Smart contents',32],['305-page digital reader',39],['Readiness Compass',54],['2026 to 2029 roadmap',64],['Role-based reading paths',76],['Accreditation navigator',84],['NEW · Ask-us chatbot',91],['NEW · My account tracking',98],['NEW · QR scan & share',106],['NEW · Analytics & reports',113],['NEW · Queries, roles & audit',121],['Outro',128]];
+  const CH=[['Intro',0],['The framework orbit',10],['Secure reader access',21],['Smart contents',32],['305-page digital reader',39],['Readiness Compass',54],['2026 to 2029 roadmap',64],['Role-based reading paths',76],['Accreditation navigator',84],['NEW · Ask-us chatbot',91],['NEW · PDF copy on approval',98],['NEW · My account tracking',106],['NEW · QR scan & share',113],['Outro',121]];
   const v=$('#tourVid'), box=$('#chapters'); if(!v||!box) return;
   const mmss=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
   box.innerHTML=CH.map((c,i)=>`<button type="button" data-t="${c[1]}"><span class="n">${i&&i<CH.length-1?String(i).padStart(2,'0'):'—'}</span><span>${esc(c[0])}</span><span class="t">${mmss(c[1])}</span></button>`).join('');
@@ -1691,7 +1691,7 @@ const BOT = (()=>{
     {k:['professional body','professional bodies','acca','cima','cpa','iet','cim','14 bodies'],a:'Part II of Section 2 covers 14 international professional bodies, from ACCA to CIM, with eligibility, process and fees.',acts:[A('Open Part II',page(235))]},
     {k:['kpi','kpis','dashboard','indicator','metrics'],a:'The KPI Dashboard 2027–2029 lists 23 lead KPIs with baseline, yearly targets and owners, for example patents filed (15 → 35 → 60) and faculty with PhD (50% → 60% → 70%).',acts:[A('Open the KPI dashboard',page(286))]},
     {k:['compass','readiness','self assessment','maturity','where do we stand'],a:'The <b>Readiness Compass</b> lets you rate your institution in 8 areas on the five MBGL maturity levels. It draws a radar chart and tells you which pages to read first.',acts:[A('Open the Compass',go('compass'))]},
-    {k:['demo','video','tour','how it works','walkthrough'],a:'Here is a 2-minute tour of every feature of the portal, including the chatbot, My account, QR codes and reports.',acts:[A('Watch the demo',()=>{ closeChat(false); goDemo(); })]},
+    {k:['demo','video','tour','how it works','walkthrough'],a:'Here is a 2-minute tour of every feature of the portal, including the chatbot, the PDF copy, My account and QR codes.',acts:[A('Watch the demo',()=>{ closeChat(false); goDemo(); })]},
     {k:['qr','scan','scanner','phone','mobile','other device','camera'],a:'Use <b>Scan</b> in the top bar to read QR codes printed in the book or shared with you. <b>On phone</b> shows a QR code to open the portal on your phone; approved readers can also carry their access to another device this way.',acts:[A('Open on phone',()=>{ closeChat(false); $('#phoneBtn').click(); }),A('Open the scanner',()=>{ closeChat(false); $('#scanBtn').click(); })]},
     {k:['search box','search the book','full text search','how to search'],a:'Type a topic in the search box. Guests search chapter titles; approved readers search the full text of all 305 pages. Or just ask me the topic and I will find the chapter.',acts:[A('Open search',go('search'))]},
     {k:['bookmark','progress','continue reading','where i left'],a:'In the reader, the bookmark button saves a page, and the home page shows your reading progress and a <b>Continue reading</b> button. These are kept on your device.',acts:[A('Open the contents',go('contents'))]},
