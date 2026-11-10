@@ -118,7 +118,7 @@ h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.
 .tour{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
 .tour-frame{position:relative;border-radius:var(--r);overflow:hidden;background:#06161a;box-shadow:var(--shadow);aspect-ratio:16/9}
 .tour-frame video{width:100%;height:100%;display:block;background:#06161a}
-.chapters{display:grid;gap:6px;counter-reset:ch}
+.chapters{display:grid;gap:6px;counter-reset:ch;max-height:min(70vh,560px);overflow:auto}
 .chapters button{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 12px;cursor:pointer;font-size:14px}
 .chapters button:hover,.chapters button[aria-current="true"]{border-color:var(--coral);background:var(--coral-soft)}
 .chapters .t{font:600 12px var(--mono);color:var(--coral)}
@@ -137,6 +137,41 @@ h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.
 .scan-line{position:absolute;left:18%;right:18%;height:2px;background:var(--coral);top:20%;animation:scan 2.2s ease-in-out infinite alternate;z-index:2}
 @keyframes scan{to{top:80%}}
 .qr-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+
+/* chatbot */
+.chat,.chat *,.acard,.acard *,#acctBody p{text-align:left!important;hyphens:manual;-webkit-hyphens:manual}
+.chat-fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:70;display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;background:var(--coral);color:#fff;padding:13px 18px;font:700 15px var(--body);box-shadow:0 10px 30px rgba(0,0,0,.25);cursor:pointer}
+.chat-fab:hover{transform:translateY(-2px)}
+.chat{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:75;width:min(400px,calc(100vw - 24px));height:min(600px,calc(100dvh - 120px));display:flex;flex-direction:column;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.3);overflow:hidden}
+.chat[hidden]{display:none!important}
+.chat-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;background:var(--teal);color:var(--on-teal)}
+.chat-head small{display:block;font-size:12px;color:var(--on-teal-muted)}
+.chat-head .x{background:rgba(255,255,255,.12);color:#fff}
+.chat-log{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px;text-align:left}
+.cmsg{display:flex;flex-direction:column;gap:6px;max-width:92%}
+.cmsg .bubble{padding:10px 12px;border-radius:12px;font-size:14px;line-height:1.5;text-align:left!important}
+.cmsg.bot{align-self:flex-start}.cmsg.bot .bubble{background:var(--surface-2);border-top-left-radius:4px}
+.cmsg.user{align-self:flex-end}.cmsg.user .bubble{background:var(--teal);color:var(--on-teal);border-top-right-radius:4px}
+.cmsg.form{max-width:100%;align-self:stretch}
+.cacts{display:flex;flex-wrap:wrap;gap:6px}
+.cacts .chip{font-size:12px;padding:5px 11px;text-align:left!important}
+.cform{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.cform input,.cform textarea{border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface);font-size:14px}
+.chat-in{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+.chat-in input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:999px;padding:9px 14px;background:var(--bg)}
+.chat-in input:focus{border-color:var(--coral);outline:none}
+/* account */
+.acard{border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:10px;background:var(--bg)}
+.ahead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ah{font:700 15px var(--display);margin:20px 0 4px}
+.tl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.tl li{display:grid;grid-template-columns:16px minmax(0,1fr);gap:10px;align-items:start;color:var(--muted);font-size:14px}
+.tl li span{width:12px;height:12px;border-radius:50%;border:2px solid var(--line);margin-top:4px}
+.tl li.on{color:var(--fg)}.tl li.on span{background:var(--ok);border-color:var(--ok)}
+.tl small{display:block;color:var(--muted);font-size:12px}
+.areply{margin-top:10px;padding:10px 12px;border-left:3px solid var(--coral);background:var(--surface);border-radius:6px}
+.areply small{color:var(--muted)}
+@media (max-width:560px){ .chat-fab span{display:none} .chat-fab{padding:14px} }
 
 /* compass */
 .compass{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)}
@@ -339,7 +374,7 @@ section.block{padding-block:64px;scroll-margin-top:72px}
 
 /* admin */
 .admin{padding-block:40px 80px}
-.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:20px 0}
 .whoami{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px;padding:12px 16px;border-radius:var(--r);background:var(--surface-2);font-size:14px}
 .whoami .role{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--teal);color:var(--on-teal);font:700 12px var(--body);margin-left:6px}
 .afilters{display:grid;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:20px}
@@ -429,6 +464,7 @@ footer a{color:var(--on-teal)}
   <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h7v-4M17 21v-.01"/></symbol>
   <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></symbol>
   <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M17 6l3 3M14 9l2 2"/></symbol>
 </svg>
 
@@ -443,6 +479,7 @@ footer a{color:var(--on-teal)}
       <a href="#tour" data-nav="tour">Demo</a>
       <a href="#compass" data-nav="compass">Compass</a>
       <a href="#search" data-nav="search">Search</a>
+      <a href="#account" data-nav="account" id="acctBtn">My account</a>
     </nav>
     <button class="qr-btn" id="scanBtn" type="button" aria-label="Scan a QR code"><svg class="icon"><use href="#i-scan"/></svg><span>Scan</span></button>
     <button class="qr-btn" id="phoneBtn" type="button" aria-label="Open on your phone"><svg class="icon"><use href="#i-qr"/></svg><span>On phone</span></button>
@@ -490,8 +527,8 @@ footer a{color:var(--on-teal)}
   <section class="block" id="tour">
     <div class="wrap">
       <div class="block-head">
-        <div><div class="eyebrow">100-second tour</div><h2>See the whole portal in action</h2></div>
-        <p class="muted">Eight features in under two minutes. Pick a chapter to jump straight to it.</p>
+        <div><div class="eyebrow">2-minute tour</div><h2>See the whole portal in action</h2></div>
+        <p class="muted">Thirteen features in just over two minutes. Pick a chapter to jump straight to it.</p>
       </div>
       <div class="tour">
         <div class="tour-frame"><video id="tourVid" controls playsinline preload="metadata" poster="media/tour-poster.jpg"><source src="media/excellence360-tour.mp4" type="video/mp4"></video></div>
@@ -647,10 +684,14 @@ footer a{color:var(--on-teal)}
       </div>
       <div class="kpis" id="kpis"></div>
       <div class="atabbar">
-        <div class="tabs" id="aTabs" role="tablist" style="padding:0;border:0"><button role="tab" type="button" data-tab="requests" aria-selected="true">Requests</button><button role="tab" type="button" data-tab="analytics" aria-selected="false">Analytics</button><button role="tab" type="button" data-tab="log" aria-selected="false">Activity log</button><button role="tab" type="button" data-tab="audit" aria-selected="false">Admin audit</button><button role="tab" type="button" data-tab="admins" aria-selected="false" id="tabAdmins" hidden>Admins</button></div>
+        <div class="tabs" id="aTabs" role="tablist" style="padding:0;border:0"><button role="tab" type="button" data-tab="requests" aria-selected="true">Requests</button><button role="tab" type="button" data-tab="queries" aria-selected="false" id="tabQueries">Queries</button><button role="tab" type="button" data-tab="analytics" aria-selected="false">Analytics</button><button role="tab" type="button" data-tab="log" aria-selected="false">Activity log</button><button role="tab" type="button" data-tab="audit" aria-selected="false">Admin audit</button><button role="tab" type="button" data-tab="admins" aria-selected="false" id="tabAdmins" hidden>Admins</button></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="chip" type="button" id="aRefresh">Refresh</button><button class="btn btn-teal btn-sm" type="button" id="aXlsx">Excel report</button><button class="btn btn-coral btn-sm" type="button" id="aPdf">PDF report</button></div>
       </div>
       <div id="paneReq"><div class="table-wrap"><table><thead><tr><th>Reader</th><th>Organisation</th><th>Asked for</th><th>Purpose</th><th>Submitted</th><th>Status</th><th>Decision</th></tr></thead><tbody id="reqRows"></tbody></table></div></div>
+      <div id="paneQ" hidden>
+        <div class="filters" id="qFilters" style="margin-bottom:12px"></div>
+        <div id="qList" style="display:grid;gap:10px"></div>
+      </div>
       <div id="paneAna" hidden><div class="viz-grid" id="chartGrid"></div></div>
       <div id="paneLog" hidden><div class="log" id="logList" style="max-height:none"></div></div>
       <div id="paneAudit" hidden><p class="note" style="margin-top:0">Every admin sign-in, failed attempt, approval, rejection, revocation, export and account change, newest first.</p><div class="table-wrap"><table><thead><tr><th>Time</th><th>Admin</th><th>Role</th><th>Action</th><th>Target</th><th>Detail</th></tr></thead><tbody id="auditRows"></tbody></table></div></div>
@@ -702,7 +743,7 @@ footer a{color:var(--on-teal)}
           <p style="max-width:40ch;margin:0 auto 18px;color:#cfe3e6" id="rLockMsg">Request access once. After the admin approves it, you get an access code by email.</p>
           <button class="btn btn-coral" type="button" data-open-access="request">Request access</button>
           <button class="btn btn-ghost" type="button" data-open-access="code" style="color:#fff;margin-left:6px">I have a code</button>
-          <p style="margin:16px 0 0"><a href="#tour" id="lockDemo" style="color:#cfe3e6">Not sure yet? Watch the 100-second demo</a></p>
+          <p style="margin:16px 0 0"><a href="#tour" id="lockDemo" style="color:#cfe3e6">Not sure yet? Watch the 2-minute demo</a></p>
         </div>
       </div>
     </div>
@@ -743,10 +784,11 @@ footer a{color:var(--on-teal)}
               <label class="chk"><input type="checkbox" name="sec" value="S3" checked> 3 · Strategic Planner</label>
             </div></div>
           <div class="field full"><label for="fPurpose">How will you use it?</label><textarea id="fPurpose" rows="3" required placeholder="e.g. Preparing the NBA SAR for our B.Tech programme"></textarea></div>
+          <label class="full chk" style="font-size:14px"><input type="checkbox" id="fPdf"> Also send me the PDF copy of the book when my request is approved</label>
           <label class="full note" style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="fAgree" required style="margin-top:4px"> I agree to use the content for internal academic and quality-assurance work and not to reproduce it without the publisher's permission. My details and reading activity are recorded for access control.</label>
           <div class="full"><button class="btn btn-coral" type="submit" id="reqSubmit">Send request</button></div>
         </form>
-        <p class="note" style="margin:14px 0 0">Want to see what you get first? <a href="#tour" id="reqDemo">Watch the 100-second demo</a>.</p>
+        <p class="note" style="margin:14px 0 0">Want to see what you get first? <a href="#tour" id="reqDemo">Watch the 2-minute demo</a>.</p>
         <div class="flow"><div><b>01</b>You send this request</div><div><b>02</b>IQAC reviews it</div><div><b>03</b>You get an access code by email</div></div>
         <div id="reqMsg"></div>
       </div>
@@ -777,6 +819,19 @@ footer a{color:var(--on-teal)}
     <div class="sheet-body" id="qrBody"></div>
   </div>
 </div>
+<div class="modal" id="acct" hidden role="dialog" aria-modal="true" aria-labelledby="acctTitle">
+  <div class="sheet" style="width:min(620px,100%)">
+    <div class="sheet-head"><div><div class="eyebrow">My account</div><h3 id="acctTitle" style="margin-top:6px">Track your requests and questions</h3></div>
+      <button class="x" type="button" id="acctClose" aria-label="Close"><svg class="icon" style="margin:auto"><use href="#i-x"/></svg></button></div>
+    <div class="sheet-body" id="acctBody"></div>
+  </div>
+</div>
+<button class="chat-fab" id="chatFab" type="button" aria-controls="chat" aria-expanded="false" aria-label="Ask Excellence 360"><svg class="icon" style="width:24px;height:24px"><use href="#i-chat"/></svg><span>Ask us</span></button>
+<section class="chat" id="chat" hidden aria-label="Excellence 360 assistant">
+  <header class="chat-head"><div><b>Excellence 360 assistant</b><small>Answers from the handbook · our team for the rest</small></div><div style="display:flex;gap:4px"><button class="x" type="button" id="chatClear" aria-label="Start a new chat" title="New chat"><svg class="icon" style="margin:auto"><use href="#i-plus"/></svg></button><button class="x" type="button" id="chatClose" aria-label="Close chat"><svg class="icon" style="margin:auto"><use href="#i-x"/></svg></button></div></header>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <form class="chat-in" id="chatForm"><input id="chatIn" placeholder="Ask about NAAC, access, the PDF…" autocomplete="off" aria-label="Your question"><button class="btn btn-coral btn-sm" type="submit">Send</button></form>
+</section>
 <div class="toast" id="toast" hidden></div>
 
 <script src="config.js"></script>
@@ -833,8 +888,23 @@ async function demoApi(b){
       const ex=find(email);
       if(ex && (ex.Status==='Pending'||(ex.Status==='Approved'&&!expired(ex)))){ out={ok:true,id:ex['Request ID'],status:ex.Status,duplicate:true}; break; }
       const id='EX360-'+now.slice(2,10).replace(/-/g,'')+'-'+Math.floor(1000+Math.random()*9000);
-      db.rows.push({'Request ID':id,Submitted:now,Name:b.name,Email:email,Phone:b.phone,Designation:b.designation,Organisation:b.organisation,Department:b.department,'Sections requested':(b.sections||[]).join(', '),Purpose:b.purpose,Status:'Pending','Sections granted':'','Access code':'','Valid until':'','Decided by':'','Decided on':'',Remarks:'','Last access':'','Pages viewed':0});
+      db.rows.push({'Request ID':id,Submitted:now,Name:b.name,Email:email,Phone:b.phone,Designation:b.designation,Organisation:b.organisation,Department:b.department,'Sections requested':(b.sections||[]).join(', '),Purpose:b.purpose,Status:'Pending','Sections granted':'','Access code':'','Valid until':'','Decided by':'','Decided on':'',Remarks:'','Last access':'','Pages viewed':0,'PDF requested':b.pdf?'Yes':'No','PDF sent':''});
       log(email,'Request submitted','',id); out={ok:true,id,status:'Pending'}; break; }
+    case 'query':{
+      const em=String(b.email||'').trim().toLowerCase(), ph=String(b.phone||'').replace(/[^\d+]/g,'');
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ out={ok:false,error:'Please enter a valid email address.'}; break; }
+      if(!/^(\+?91)?[6-9]\d{9}$/.test(ph)){ out={ok:false,error:'Please enter a valid 10-digit Indian mobile number.'}; break; }
+      if(!b.consent){ out={ok:false,error:'Please confirm that we may contact you.'}; break; }
+      db.queries=db.queries||[]; const id='EXQ-'+now.slice(2,10).replace(/-/g,'')+'-'+Math.floor(1000+Math.random()*9000);
+      db.queries.push({'Query ID':id,Submitted:now,Name:b.name,Email:em,Phone:ph,Organisation:b.organisation,Question:b.question,Source:b.source||'Chat',Status:'Open',Reply:'','Replied by':'','Replied on':''});
+      log(em,'Query submitted','',id); out={ok:true,id}; break; }
+    case 'otpSend':{ const em=String(b.email||'').trim().toLowerCase(); if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ out={ok:false,error:'Please enter a valid email address.'}; break; }
+      db.otp=db.otp||{}; const c=String(Math.floor(100000+Math.random()*900000)); db.otp[em]=c; out={ok:true,demoOtp:c}; break; }
+    case 'otpVerify':{ const em=String(b.email||'').trim().toLowerCase(); if(!db.otp||db.otp[em]!==String(b.otp||'').trim()){ out={ok:false,error:'That code is not correct or has expired.'}; break; }
+      delete db.otp[em]; db.vis=db.vis||{}; const ut='vis-'+Math.random().toString(36).slice(2); db.vis[ut]=em; log(em,'Account sign-in'); out={ok:true,utoken:ut,email:em}; break; }
+    case 'myAccount':{ const em=db.vis&&db.vis[b.utoken]; if(!em){ out={ok:false,error:'Please sign in again.'}; break; }
+      out={ok:true,email:em,requests:db.rows.filter(r=>r.Email===em).map(r=>({id:r['Request ID'],submitted:r.Submitted,status:r.Status==='Approved'&&expired(r)?'Expired':r.Status,requested:r['Sections requested'],granted:r['Sections granted'],validUntil:r['Valid until'],decidedOn:r['Decided on'],remarks:r.Remarks,pdfRequested:r['PDF requested'],pdfSent:r['PDF sent']})).reverse(),
+        queries:(db.queries||[]).filter(q=>q.Email===em).map(q=>({id:q['Query ID'],submitted:q.Submitted,question:q.Question,status:q.Status,reply:q.Reply,repliedOn:q['Replied on']})).reverse()}; break; }
     case 'status':{ const r=find(b.email); out = r?{ok:true,status:r.Status==='Approved'&&expired(r)?'Expired':r.Status,id:r['Request ID'],remarks:r.Remarks,validUntil:r['Valid until']}:{ok:true,status:'None'}; break; }
     case 'verify':{
       const r=find(b.email), code=String(b.code||'').trim().toUpperCase();
@@ -858,11 +928,12 @@ async function demoApi(b){
     default:{
       const em=db.tokens&&db.tokens[b.token]; const me=em&&(db.admins||[]).find(x=>x.email===em&&x.active);
       if(!me){ out={ok:false,error:'Your admin session has ended. Please sign in again.'}; break; }
-      const RR={Viewer:1,Approver:2,Owner:3}, need={adminList:1,adminLogExport:1,adminSetPassword:1,adminDecide:2,adminAddUser:3,adminSetActive:3}[b.action];
+      const RR={Viewer:1,Approver:2,Owner:3}, need={adminList:1,adminLogExport:1,adminSetPassword:1,adminDecide:2,adminReply:2,adminAddUser:3,adminSetActive:3}[b.action];
       if(!need){ out={ok:false,error:'Unknown action'}; break; }
       if(RR[me.role]<need){ out={ok:false,error:'Your role ('+me.role+') cannot do this. Ask an Owner.'}; break; }
       const alog=(action,target,detail)=>db.adminLog.push({time:now,admin:me.name+' <'+me.email+'>',role:me.role,action,target:target||'',detail:detail||''});
-      if(b.action==='adminList'){ out={ok:true,rows:db.rows,log:[...db.log].reverse(),me:{name:me.name,email:me.email,role:me.role},adminLog:[...db.adminLog].reverse()}; if(me.role==='Owner') out.admins=db.admins.map(x=>({name:x.name,email:x.email,role:x.role,active:x.active,addedOn:x.addedOn,addedBy:x.addedBy,lastLogin:x.lastLogin})); break; }
+      if(b.action==='adminReply'){ const q=(db.queries||[]).find(x=>x['Query ID']===b.id); if(!q){ out={ok:false,error:'Query not found'}; break; } if(!String(b.reply||'').trim()){ out={ok:false,error:'Type a reply first.'}; break; } q.Status='Answered'; q.Reply=b.reply; q['Replied by']=me.name+' <'+me.email+'>'; q['Replied on']=now; alog('Replied to query',b.id,String(b.reply).slice(0,80)); log(q.Email,'Query answered','',b.id); out={ok:true}; break; }
+      if(b.action==='adminList'){ out={ok:true,queries:db.queries||[],rows:db.rows,log:[...db.log].reverse(),me:{name:me.name,email:me.email,role:me.role},adminLog:[...db.adminLog].reverse()}; if(me.role==='Owner') out.admins=db.admins.map(x=>({name:x.name,email:x.email,role:x.role,active:x.active,addedOn:x.addedOn,addedBy:x.addedBy,lastLogin:x.lastLogin})); break; }
       if(b.action==='adminLogExport'){ alog('Exported report',b.kind,b.filters); out={ok:true}; break; }
       if(b.action==='adminAddUser'){ const e2=String(b.email||'').trim().toLowerCase(); if(db.admins.some(x=>x.email===e2)){ out={ok:false,error:'That email is already an admin.'}; break; } if(String(b.password||'').length<8){ out={ok:false,error:'The first password needs at least 8 characters.'}; break; }
         db.admins.push({name:b.name||e2,email:e2,role:b.role,pass:b.password,active:true,addedOn:now,addedBy:me.email,lastLogin:''}); alog('Added admin',e2,b.role); out={ok:true}; break; }
@@ -873,7 +944,8 @@ async function demoApi(b){
         r.Status=b.decision; r['Decided by']=me.name+' <'+me.email+'>'; r['Decided on']=now; if(b.remarks) r.Remarks=b.remarks;
         if(b.decision==='Approved'){ const al='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let c=''; for(let i=0;i<8;i++) c+=al[Math.floor(Math.random()*al.length)];
           r['Access code']=r['Access code']||c.slice(0,4)+'-'+c.slice(4); r['Sections granted']=(b.sections&&b.sections.length?b.sections:['S1','S2','S3']).join(', ');
-          r['Valid until']=new Date(Date.now()+(+b.days||180)*864e5).toISOString(); }
+          r['Valid until']=new Date(Date.now()+(+b.days||180)*864e5).toISOString();
+          if(b.sendPdf){ r['PDF sent']='Shared on Google Drive (preview) '+fmtDate(now); log(r.Email,'PDF sent','',r['PDF sent']); } }
         log(r.Email,b.decision,'',b.remarks||r['Sections granted']); alog(b.decision,b.id,(b.sections||[]).join(', ')); out={ok:true}; break; }
     }
 
@@ -1158,10 +1230,10 @@ $('#reqForm').onsubmit=async e=>{
   const secs=$$('#reqForm input[name=sec]:checked').map(x=>x.value);
   if(!secs.length){ msg('#reqMsg','err','Choose at least one section.'); btn.disabled=false; btn.textContent='Send request'; return; }
   try{
-    const r=await api({action:'request',name:$('#fName').value,email:$('#fEmail').value,phone:$('#fPhone').value,designation:$('#fDesig').value,organisation:$('#fOrg').value,department:$('#fDept').value,sections:secs,purpose:$('#fPurpose').value});
+    const r=await api({action:'request',name:$('#fName').value,email:$('#fEmail').value,phone:$('#fPhone').value,designation:$('#fDesig').value,organisation:$('#fOrg').value,department:$('#fDept').value,sections:secs,purpose:$('#fPurpose').value,pdf:$('#fPdf').checked});
     if(!r.ok) throw new Error(r.error);
     const email=$('#fEmail').value.trim().toLowerCase();
-    store.set('ex360_pending',{email,id:r.id}); renderWho();
+    store.set('ex360_pending',{email,id:r.id}); store.set('ex360_profile',Object.assign(store.get('ex360_profile',{}),{name:$('#fName').value,email,phone:$('#fPhone').value,org:$('#fOrg').value})); renderWho();
     msg('#reqMsg','ok', r.duplicate ? `You already have a request on file (<b class="mono">${esc(r.id)}</b>, ${esc(r.status)}). ${r.status==='Approved'?'Use the <b>I have an access code</b> tab.':'We will email you when it is approved.'}` :
       `Request <b class="mono">${esc(r.id)}</b> received. The IQAC team will review it and email your access code to <b>${esc(email)}</b>.${LIVE?'':' <br><i>Preview mode:</i> open the Admin console (any email, password <b>demo</b>) to approve it and see the code.'}`);
     $('#reqForm').reset(); $$('#reqForm input[name=sec]').forEach(x=>x.checked=true);
@@ -1342,6 +1414,7 @@ function renderAdmin(){
   const {rows,log}=filtered(), A=analyse(rows,log), P=palette(false);
   const fmtH=h=>h==null?'—':h<48?Math.round(h)+' h':(h/24).toFixed(1)+' d';
   $('#kpis').innerHTML=[['Enquiries',A.total],['Waiting',A.pending],['Approved',A.approved],['Rejected / closed',A.closed],['Approval rate',A.rate==null?'—':A.rate+'%'],['Median decision time',fmtH(A.median)],['Active readers',A.readers],['Pages viewed',A.views]]
+    .concat([['Open queries',(adminData.queries||[]).filter(x=>x.Status==='Open').length],['PDF copies sent',rows.filter(r=>/Shared|Emailed/.test(String(r['PDF sent']||''))).length]])
     .map(k=>`<div class="kpi"><b class="mono">${k[1]}</b><span>${k[0]}</span></div>`).join('');
   $('#aSummary').textContent=filterSummary()+' · '+rows.length+' of '+(adminData.rows||[]).length+' requests';
   const me=adminData.me||{name:'',email:'',role:'Viewer'};
@@ -1349,7 +1422,7 @@ function renderAdmin(){
   $('#tabAdmins').hidden=!can('Owner');
   $('#whoami').innerHTML=`<span>Signed in as <b>${esc(me.name)}</b> · ${esc(me.email)}<span class="role">${esc(me.role)}</span>${can('Approver')?'':' <span class="note">· view only</span>'}</span><span style="display:flex;gap:8px"><button class="chip" type="button" id="chgPass">Change password</button><button class="chip" type="button" id="signOutAdm">Sign out</button></span>`;
   $('#signOutAdm').onclick=adminSignOut; $('#chgPass').onclick=changePassword;
-  $$('#aTabs [data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===aTab)); $('#paneReq').hidden=aTab!=='requests'; $('#paneAna').hidden=aTab!=='analytics'; $('#paneLog').hidden=aTab!=='log'; $('#paneAudit').hidden=aTab!=='audit'; $('#paneAdmins').hidden=aTab!=='admins';
+  $$('#aTabs [data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===aTab)); $('#paneReq').hidden=aTab!=='requests'; $('#paneAna').hidden=aTab!=='analytics'; $('#paneLog').hidden=aTab!=='log'; $('#paneAudit').hidden=aTab!=='audit'; $('#paneAdmins').hidden=aTab!=='admins'; $('#paneQ').hidden=aTab!=='queries'; renderQueries();
   $('#auditRows').innerHTML=(adminData.adminLog||[]).slice(0,500).map(a=>`<tr><td class="mono" style="white-space:nowrap">${esc(new Date(a.time).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}))}</td><td>${esc(a.admin)}</td><td>${esc(a.role)}</td><td><span class="status ${/fail|block|Revok|Reject|Disabl/i.test(a.action)?'st-Rejected':/Approv|Signed|Added|Enabl/i.test(a.action)?'st-Approved':'st-Pending'}">${esc(a.action)}</span></td><td>${esc(a.target)}</td><td class="muted">${esc(a.detail)}</td></tr>`).join('')||'<tr><td colspan="6" class="muted" style="text-align:center;padding:24px">No admin activity yet.</td></tr>';
   if(can('Owner')) $('#adminRows').innerHTML=(adminData.admins||[]).map(a=>`<tr><td><b>${esc(a.name)}</b></td><td>${esc(a.email)}</td><td>${esc(a.role)}</td><td><span class="status ${a.active?'st-Approved':'st-Rejected'}">${a.active?'Active':'Disabled'}</span></td><td class="mono">${a.lastLogin?esc(new Date(a.lastLogin).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'})):'—'}</td><td class="note">${esc(fmtDate(a.addedOn))}<br>by ${esc(a.addedBy||'')}</td><td style="white-space:nowrap">${a.email===me.email?'<span class="note">you</span>':`<button class="chip" type="button" data-act-admin="${a.active?'disable':'enable'}" data-email="${esc(a.email)}">${a.active?'Disable':'Enable'}</button> <button class="chip" type="button" data-act-admin="reset" data-email="${esc(a.email)}">Reset password</button>`}</td></tr>`).join('');
   $$('#adminRows [data-act-admin]').forEach(b=>b.onclick=()=>adminAction(b.dataset.actAdmin,b.dataset.email,b));
@@ -1361,7 +1434,7 @@ function renderAdmin(){
     <td>${esc(secTxt(r['Sections requested']))}</td>
     <td style="max-width:240px">${esc(r.Purpose)}</td>
     <td class="mono" style="white-space:nowrap">${esc(fmtDate(r.Submitted))}</td>
-    <td><span class="status st-${esc(r._st)}">${esc(r._st)}</span>${r['Access code']&&r._st==='Approved'?`<div class="mono" style="margin-top:6px">${esc(r['Access code'])}</div><div class="note">until ${esc(fmtDate(r['Valid until']))}<br>${+r['Pages viewed']||0} pages viewed</div>`:''}${r.Remarks?`<div class="note">${esc(r.Remarks)}</div>`:''}</td>
+    <td><span class="status st-${esc(r._st)}">${esc(r._st)}</span>${r['Access code']&&r._st==='Approved'?`<div class="mono" style="margin-top:6px">${esc(r['Access code'])}</div><div class="note">until ${esc(fmtDate(r['Valid until']))}<br>${+r['Pages viewed']||0} pages viewed</div>`:''}${r.Remarks?`<div class="note">${esc(r.Remarks)}</div>`:''}${String(r['PDF requested'])==='Yes'?`<div class="note">PDF: ${esc(r['PDF sent']||'requested')}</div>`:''}</td>
     <td style="min-width:240px">${decideUi(r)}</td></tr>`).join('') : `<tr><td colspan="7" class="muted" style="text-align:center;padding:30px">No requests match these filters.</td></tr>`;
   $$('#reqRows [data-act]').forEach(b=>b.onclick=()=>decide(b));
   // charts
@@ -1371,6 +1444,29 @@ function renderAdmin(){
   // log
   $('#logList').innerHTML = log.slice(0,300).map(l=>`<div><span class="mono note">${esc(new Date(l.time).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}))}</span><span><b>${esc(l.event)}</b> · ${esc(l.email)}${l.detail?' · <span class="muted">'+esc(l.detail)+'</span>':''}</span><span class="pgno">${l.page?'p. '+esc(l.page):''}</span></div>`).join('') || '<p class="muted">No activity for these filters.</p>';
 }
+/* ----- queries (chatbot hand-offs) ----- */
+let qFilter='Open';
+function renderQueries(){
+  const all=(adminData.queries||[]), q=AF.q.trim().toLowerCase();
+  const from=AF.from?new Date(AF.from+'T00:00:00'):null, to=AF.to?new Date(AF.to+'T23:59:59'):null;
+  const inR=d=>{ const x=new Date(d); return (!from||x>=from)&&(!to||x<=to); };
+  const base=all.filter(x=>inR(x.Submitted)&&(!q||[x.Name,x.Email,x.Organisation,x.Question,x['Query ID']].join(' ').toLowerCase().includes(q)));
+  const open=base.filter(x=>x.Status==='Open').length;
+  $('#tabQueries').textContent='Queries'+(all.filter(x=>x.Status==='Open').length?' · '+all.filter(x=>x.Status==='Open').length:'');
+  $('#qFilters').innerHTML=['Open','Answered','All'].map(f=>`<button class="chip" type="button" aria-pressed="${qFilter===f}" data-qf="${f}">${f}${f==='Open'?' · '+open:f==='Answered'?' · '+(base.length-open):' · '+base.length}</button>`).join('');
+  $$('#qFilters [data-qf]').forEach(b=>b.onclick=()=>{ qFilter=b.dataset.qf; renderQueries(); });
+  const list=base.filter(x=>qFilter==='All'||(qFilter==='Open'?x.Status==='Open':x.Status!=='Open')).reverse();
+  $('#qList').innerHTML=list.map(x=>`<div class="acard" data-qid="${esc(x['Query ID'])}" style="margin:0;background:var(--surface)"><div class="ahead"><span><b>${esc(x.Name)}</b> · ${esc(x.Organisation||'')} <span class="mono note">${esc(x['Query ID'])}</span></span><span class="status ${x.Status==='Open'?'st-Pending':'st-Approved'}">${esc(x.Status)}</span></div>
+    <p class="note" style="margin:4px 0 0">${esc(x.Email)} · <span class="mono">${esc(x.Phone)}</span> · ${esc(fmtDate(x.Submitted))} · via ${esc(x.Source||'')}</p>
+    <p style="margin:8px 0 0">${esc(x.Question)}</p>
+    ${x.Reply?`<div class="areply"><b>Reply</b> <small>${esc(x['Replied by'])} · ${esc(fmtDate(x['Replied on']))}</small><p style="margin:4px 0 0;white-space:pre-wrap">${esc(x.Reply)}</p></div>`:''}
+    ${can('Approver')?`<div class="decide" style="margin-top:10px"><textarea name="reply" rows="3" placeholder="${x.Reply?'Send a follow-up answer':'Type your answer; it is emailed to the visitor and shown in their account'}"></textarea><div class="row"><button class="btn btn-teal btn-sm" type="button" data-reply>Send answer</button></div></div>`:''}</div>`).join('')||'<p class="muted">No queries here.</p>';
+  $$('#qList [data-reply]').forEach(b=>b.onclick=async()=>{ const card=b.closest('[data-qid]'), txt=card.querySelector('textarea').value;
+    b.disabled=true; b.textContent='Sending…';
+    try{ const r=await api({action:'adminReply',token:adminToken,id:card.dataset.qid,reply:txt}); if(!r.ok) throw new Error(r.error); toast(LIVE?'Answer emailed to the visitor':'Answer saved'); await loadAdmin(); }
+    catch(err){ toast(err.message); b.disabled=false; b.textContent='Send answer'; } });
+}
+
 /* tooltip for charts */
 (function(){ const tip=document.createElement('div'); tip.className='viz-tip'; tip.hidden=true; document.body.appendChild(tip);
   document.addEventListener('mousemove',e=>{ const g=e.target.closest&&e.target.closest('#chartGrid [data-tip]'); if(!g){ tip.hidden=true; return; } tip.textContent=g.getAttribute('data-tip'); tip.hidden=false; tip.style.left=Math.min(innerWidth-tip.offsetWidth-8,e.clientX+14)+'px'; tip.style.top=(e.clientY+14)+'px'; }); })();
@@ -1411,7 +1507,7 @@ function decideUi(r){
   const box=(s)=>`<label class="chk" style="padding:4px 8px;font-size:12px"><input type="checkbox" name="g" value="${s}" ${req.includes(s)?'checked':''}>${s}</label>`;
   if(!can('Approver')) return '<span class="note">View only</span>';
   if(r._st==='Approved') return `<div class="decide"><input name="rm" placeholder="Reason (optional)"><button class="btn btn-ghost btn-sm" type="button" data-act="Revoked">Revoke access</button></div>`;
-  return `<div class="decide"><div class="row">${box('S1')}${box('S2')}${box('S3')}</div><div class="row"><label class="note">Valid for <input type="number" name="days" value="180" min="1" max="1095"> days</label></div><input name="rm" placeholder="Note to reader (optional)"><div class="row"><button class="btn btn-teal btn-sm" type="button" data-act="Approved">Approve</button><button class="btn btn-ghost btn-sm" type="button" data-act="Rejected">Reject</button></div></div>`;
+  return `<div class="decide"><div class="row">${box('S1')}${box('S2')}${box('S3')}</div><div class="row"><label class="note">Valid for <input type="number" name="days" value="180" min="1" max="1095"> days</label><label class="chk" style="padding:4px 8px;font-size:12px"><input type="checkbox" name="pdf" ${String(r['PDF requested'])==='Yes'?'checked':''}>Send PDF</label></div><input name="rm" placeholder="Note to reader (optional)"><div class="row"><button class="btn btn-teal btn-sm" type="button" data-act="Approved">Approve</button><button class="btn btn-ghost btn-sm" type="button" data-act="Rejected">Reject</button></div></div>`;
 }
 async function decide(b){
   const tr=b.closest('tr'), id=tr.dataset.id;
@@ -1419,11 +1515,11 @@ async function decide(b){
   const days=(tr.querySelector('input[name=days]')||{}).value, remarks=(tr.querySelector('input[name=rm]')||{}).value||'';
   if(b.dataset.act==='Approved'&&!sections.length){ toast('Choose at least one section to grant'); return; }
   b.disabled=true; b.textContent='Saving…';
-  try{ const r=await api({action:'adminDecide',token:adminToken,id,decision:b.dataset.act,sections,days,remarks}); if(!r.ok) throw new Error(r.error); toast(b.dataset.act==='Approved'?(LIVE?'Approved · access code emailed':'Approved · code shown in the Status column'):b.dataset.act); await loadAdmin(); }
+  try{ const pdfBox=tr.querySelector('input[name=pdf]'); const r=await api({action:'adminDecide',token:adminToken,id,decision:b.dataset.act,sections,days,remarks,sendPdf:pdfBox?pdfBox.checked:undefined}); if(!r.ok) throw new Error(r.error); toast(b.dataset.act==='Approved'?(LIVE?'Approved · access code emailed':'Approved · code shown in the Status column'):b.dataset.act); await loadAdmin(); }
   catch(err){ toast(err.message); b.disabled=false; }
 }
 /* ----- exports ----- */
-const REQ_COLS=['Request ID','Submitted','Name','Email','Phone','Designation','Organisation','Department','Sections requested','Purpose','Status','Sections granted','Access code','Valid until','Decided by','Decided on','Remarks','Last access','Pages viewed'];
+const REQ_COLS=['Request ID','Submitted','Name','Email','Phone','Designation','Organisation','Department','Sections requested','Purpose','Status','Sections granted','Access code','Valid until','Decided by','Decided on','Remarks','Last access','Pages viewed','PDF requested','PDF sent'];
 const stamp=()=>dayKey(new Date());
 function saveBlob(blob,name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500); }
 function exportXlsx(){
@@ -1435,6 +1531,7 @@ function exportXlsx(){
     ['Enquiries',A.total],['Waiting',A.pending],['Approved',A.approved],['Rejected / closed',A.closed],['Approval rate (%)',A.rate??''],['Median decision time (hours)',A.median==null?'':Math.round(A.median)],['Active readers',A.readers],['Pages viewed',A.views]];
   const ws=XLSX.utils.aoa_to_sheet(summary); ws['!cols']=[{wch:32},{wch:60}]; XLSX.utils.book_append_sheet(wb,ws,'Summary');
   add('Requests',[REQ_COLS.concat(['Current status'])].concat(rows.map(r=>REQ_COLS.map(c=>['Submitted','Valid until','Decided on','Last access'].includes(c)?iso(r[c]):(r[c]??'')).concat([r._st]))),[18,18,22,28,14,22,26,20,14,40,10,14,12,18,14,18,24,18,10,12]);
+  add('Queries',[['Query ID','Submitted','Name','Email','Mobile','Organisation','Question','Source','Status','Reply','Replied by','Replied on']].concat((adminData.queries||[]).map(x=>[x['Query ID'],iso(x.Submitted),x.Name,x.Email,x.Phone,x.Organisation,x.Question,x.Source,x.Status,x.Reply,x['Replied by'],iso(x['Replied on'])])),[18,18,22,28,14,24,50,10,12,50,24,18]);
   add('Activity log',[['Time','Email','Event','Page','Detail']].concat(log.map(l=>[iso(l.time),l.email,l.event,l.page,l.detail])),[20,28,16,8,40]);
   add('Trend',[[A.trend.weekly?'Week starting':'Date','Enquiries']].concat(A.trend.map(d=>[d.label,d.value])),[16,12]);
   add('Funnel',[['Stage','Count','% of enquiries']].concat(A.funnel.map(d=>[d.label,d.value,A.total?Math.round(d.value/A.total*100):0])),[18,10,16]);
@@ -1482,10 +1579,10 @@ async function exportPdf(){
 
 /* ---------- tour video chapters ---------- */
 (function(){
-  const CH=[['Intro',0],['The framework orbit',10],['Secure reader access',21],['Smart contents',32],['305-page digital reader',39],['Readiness Compass',54],['2026 to 2029 roadmap',64],['Role-based reading paths',76],['Accreditation navigator',84]];
+  const CH=[['Intro',0],['The framework orbit',10],['Secure reader access',21],['Smart contents',32],['305-page digital reader',39],['Readiness Compass',54],['2026 to 2029 roadmap',64],['Role-based reading paths',76],['Accreditation navigator',84],['NEW · Ask-us chatbot',91],['NEW · My account tracking',98],['NEW · QR scan & share',106],['NEW · Analytics & reports',113],['NEW · Queries, roles & audit',121],['Outro',128]];
   const v=$('#tourVid'), box=$('#chapters'); if(!v||!box) return;
   const mmss=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
-  box.innerHTML=CH.map((c,i)=>`<button type="button" data-t="${c[1]}"><span class="n">${i?'0'+i:'—'}</span><span>${esc(c[0])}</span><span class="t">${mmss(c[1])}</span></button>`).join('');
+  box.innerHTML=CH.map((c,i)=>`<button type="button" data-t="${c[1]}"><span class="n">${i&&i<CH.length-1?String(i).padStart(2,'0'):'—'}</span><span>${esc(c[0])}</span><span class="t">${mmss(c[1])}</span></button>`).join('');
   $$('#chapters button').forEach(b=>b.onclick=()=>{ v.currentTime=+b.dataset.t; v.play().catch(()=>{}); });
   v.addEventListener('timeupdate',()=>{ let k=0; CH.forEach((c,i)=>{ if(v.currentTime>=c[1]) k=i; }); $$('#chapters button').forEach((b,i)=>b.setAttribute('aria-current',i===k)); });
 })();
@@ -1551,11 +1648,169 @@ function goDemo(e){ if(e) e.preventDefault(); $('#access').hidden=true; if(!$('#
   location.hash='tour'; route(); const v=$('#tourVid'); if(v){ v.currentTime=0; v.play().catch(()=>{}); } }
 $('#lockDemo').onclick=goDemo; $('#reqDemo').onclick=goDemo;
 
+/* ---------- tour video: pause when out of sight, resume on click ---------- */
+(function(){
+  const v=$('#tourVid'); if(!v) return;
+  const pause=()=>{ if(!v.paused) v.pause(); };
+  window.pauseTour=pause;
+  if('IntersectionObserver' in window){ new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting||e.intersectionRatio<0.35) pause(); }),{threshold:[0,0.35]}).observe(v); }
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden) pause(); });
+  window.addEventListener('hashchange',()=>{ if(location.hash!=='#tour') pause(); });
+  const ob=new MutationObserver(()=>{ if(!$('#reader').hidden||!$('#access').hidden||!$('#qrModal').hidden||!$('#acct').hidden) pause(); });
+  ['#reader','#access','#qrModal','#acct'].forEach(id=>{ const el=$(id); if(el) ob.observe(el,{attributes:true,attributeFilter:['hidden']}); });
+  v.addEventListener('click',()=>{ if(v.paused) v.play().catch(()=>{}); });
+})();
+
+/* ---------- chatbot: answers from the site's own content, hands off to the team ---------- */
+const BOT = (()=>{
+  const go = h => ()=>{ closeChat(false); location.hash=h; route(); };
+  const page = n => ()=>openPage(n);
+  const A = (label,fn)=>({label,fn});
+  const KB = [
+    {k:['hello','hi','hey','namaste','good morning','good evening'],a:'Hello! I can help you find anything in the Excellence 360 handbook, explain how to get reader access, or connect you with our team. What would you like to know?',acts:[A('What is in the book?',()=>BOT.ask('What is in the book?')),A('How do I get access?',()=>BOT.ask('How do I get access?')),A('Watch the demo',go('tour'))]},
+    {k:['what is this','what is the book','about the book','overview','what is in the book','contents','excellence 360','handbook','tell me about'],a:'<b>University Excellence 360°</b> is a 305-page handbook from Ajeenkya D Y Patil University with three sections:<br>1 · <b>University Excellence 360°</b>: pillars, policies, SOPs, playbooks and annexures.<br>2 · <b>Accreditation, Ranking & Recognition</b>: NAAC, NBA, NIRF, QS, THE, ratings, international accreditation, awards and 14 professional bodies.<br>3 · <b>Strategic Planner 2027–2029</b>: goals, targets, KPIs and month-by-month plans.',acts:[A('Open the contents',go('contents')),A('Watch the demo',go('tour'))]},
+    {k:['author','who wrote','writer','rakesh','vice chancellor'],a:'The handbook is written by <b>Dr. Rakesh Kumar Jain</b>, Vice Chancellor, Ajeenkya D Y Patil University, Pune.',acts:[A('Read About the Author',page(5)),A('Read the Preface',page(6))]},
+    {k:['access','read full','unlock','request','get access','how to read','permission','register','sign up','full book'],a:'Cover, front matter and contents are free to read. For Sections 1–3:<br>1. Click <b>Request reader access</b> and fill in the short form.<br>2. The IQAC team reviews it.<br>3. You get an email with an access code and an <b>Unlock</b> button.',acts:[A('Request access',()=>{ closeChat(false); openAccess('request'); }),A('I have a code',()=>{ closeChat(false); openAccess('code'); })]},
+    {k:['status','track','my request','approved yet','pending','where is my','follow up','my account','login','sign in','my query','my queries','answer to my'],a:'Sign in to <b>My account</b> with a one-time code sent to your email. You will see every access request and question you have sent, with live status and our replies.',acts:[A('Open My account',()=>{ closeChat(false); openAcct(); })]},
+    {k:['code not received','no email','did not get','didnt get','code missing','spam','lost code','forgot code'],a:'Please check your spam or promotions folder for an email from the Excellence 360 portal. You can also see your request status under My account. If it still has not arrived, ask our team and we will resend it.',acts:[A('Open My account',()=>{ closeChat(false); openAcct(); }),A('Ask our team',()=>BOT.handoff('My access code email has not arrived.'))]},
+    {k:['how long','time to approve','approval time','when will','how many days'],a:'Requests are reviewed by the IQAC team, usually within a few working days. You get an email the moment yours is approved, and you can watch its status under My account.',acts:[A('Open My account',()=>{ closeChat(false); openAcct(); })]},
+    {k:['pdf','download','soft copy','copy of the book','print','offline'],a:'Yes. When you request reader access, tick <b>Also send me the PDF copy</b>. Once your request is approved, the PDF is shared with your email automatically.',acts:[A('Request access with PDF',()=>{ closeChat(false); openAccess('request'); setTimeout(()=>{ const c=$('#fPdf'); if(c) c.checked=true; },50); })]},
+    {k:['price','cost','fee','fees','paid','free','charge'],a:'Pricing or fees are not listed on this portal. Our team can answer that for you directly.',acts:[A('Ask our team',()=>BOT.handoff('Is there any fee to access the Excellence 360 handbook?'))]},
+    {k:['section 1','pillar','pillars','sop','policies','playbook','annexure','annexures','roadmap','governance'],a:'<b>Section 1 · University Excellence 360°</b> sets out three pillars (Compliance & Governance, Process & Quality Excellence, Institutional & Global Excellence), a policy and SOP library, a ten-year roadmap, eight challenge playbooks and nine annexures.',acts:[A('Open Section 1',page(13)),A('Challenge playbooks',page(26)),A('Annexures',page(34))]},
+    {k:['section 2','accreditation','ranking','rankings','recognition'],a:'<b>Section 2 · Accreditation, Ranking & Recognition</b> explains NAAC, NBA, NIRF, QS, THE, ratings and certifications, international accreditation, awards and reputation, plus 14 international professional bodies.',acts:[A('Open Section 2',page(92)),A('Jump to a framework',go('home'))]},
+    {k:['section 3','strategic plan','planner','2027','2028','2029','goals','targets','monthly plan'],a:'<b>Section 3 · Strategic Planner 2027–2029</b> covers ten strategic goals, year-wise targets for every framework, a KPI dashboard with 23 lead KPIs, a master roadmap and month-by-month planners for 2027, 2028 and 2029.',acts:[A('Open Section 3',page(278)),A('Targets by framework',page(285)),A('KPI dashboard',page(286))]},
+    {k:['naac','mbgl','ssr','aqar','binary accreditation','cgpa'],a:'NAAC, including the new binary and maturity-based (MBGL) accreditation, is Chapter 1 of Section 2.',acts:[A('Open Ch. 1 NAAC',page(93)),A('NAAC targets 2027–29',page(285))]},
+    {k:['nba','sar','programme accreditation','obe','co po','attainment','outcome based'],a:'NBA programme accreditation, SAR preparation and OBE / CO-PO attainment are in Chapter 2 of Section 2.',acts:[A('Open Ch. 2 NBA',page(105))]},
+    {k:['nirf','national ranking','india ranking'],a:'NIRF is Chapter 3 of Section 2. The plan targets NIRF Engineering moving from the 201–300 band to 101–150 by 2029.',acts:[A('Open Ch. 3 NIRF',page(120)),A('Recognition ladder',page(285))]},
+    {k:['qs','qs asia','qs world','sustainability ranking'],a:'QS World, QS Asia and QS Sustainability rankings are Chapter 4 of Section 2.',acts:[A('Open Ch. 4 QS',page(137))]},
+    {k:['the ranking','times higher','impact ranking','the impact','sdg','sdgs'],a:'Times Higher Education (THE) World University and Impact Rankings are Chapter 5 of Section 2.',acts:[A('Open Ch. 5 THE',page(153))]},
+    {k:['i-gauge','igauge','qs stars','iso','nabl','rating','ratings','certification'],a:'Ratings and certifications such as QS I-GAUGE, QS Stars, ISO and NABL are Chapter 6 of Section 2.',acts:[A('Open Ch. 6 Ratings',page(170))]},
+    {k:['abet','aacsb','international accreditation','washington accord','global accreditation'],a:'International accreditation such as ABET and AACSB is Chapter 7 of Section 2.',acts:[A('Open Ch. 7',page(186))]},
+    {k:['award','awards','media ranking','industry award'],a:'Awards and media recognition are Chapter 8 of Section 2.',acts:[A('Open Ch. 8 Awards',page(201))]},
+    {k:['reputation','brand','visibility','pr'],a:'Reputation and visibility are Chapter 9 of Section 2.',acts:[A('Open Ch. 9',page(218))]},
+    {k:['professional body','professional bodies','acca','cima','cpa','iet','cim','14 bodies'],a:'Part II of Section 2 covers 14 international professional bodies, from ACCA to CIM, with eligibility, process and fees.',acts:[A('Open Part II',page(235))]},
+    {k:['kpi','kpis','dashboard','indicator','metrics'],a:'The KPI Dashboard 2027–2029 lists 23 lead KPIs with baseline, yearly targets and owners, for example patents filed (15 → 35 → 60) and faculty with PhD (50% → 60% → 70%).',acts:[A('Open the KPI dashboard',page(286))]},
+    {k:['compass','readiness','self assessment','maturity','where do we stand'],a:'The <b>Readiness Compass</b> lets you rate your institution in 8 areas on the five MBGL maturity levels. It draws a radar chart and tells you which pages to read first.',acts:[A('Open the Compass',go('compass'))]},
+    {k:['demo','video','tour','how it works','walkthrough'],a:'Here is a 2-minute tour of every feature of the portal, including the chatbot, My account, QR codes and reports.',acts:[A('Watch the demo',()=>{ closeChat(false); goDemo(); })]},
+    {k:['qr','scan','scanner','phone','mobile','other device','camera'],a:'Use <b>Scan</b> in the top bar to read QR codes printed in the book or shared with you. <b>On phone</b> shows a QR code to open the portal on your phone; approved readers can also carry their access to another device this way.',acts:[A('Open on phone',()=>{ closeChat(false); $('#phoneBtn').click(); }),A('Open the scanner',()=>{ closeChat(false); $('#scanBtn').click(); })]},
+    {k:['search box','search the book','full text search','how to search'],a:'Type a topic in the search box. Guests search chapter titles; approved readers search the full text of all 305 pages. Or just ask me the topic and I will find the chapter.',acts:[A('Open search',go('search'))]},
+    {k:['bookmark','progress','continue reading','where i left'],a:'In the reader, the bookmark button saves a page, and the home page shows your reading progress and a <b>Continue reading</b> button. These are kept on your device.',acts:[A('Open the contents',go('contents'))]},
+    {k:['privacy','data','personal information','safe','secure','who can see'],a:'Your details are used only for access control and to reply to you. Sections 1–3 are encrypted and open only for approved readers. Each page shows a light watermark with the reader\'s name.',acts:[]},
+    {k:['contact','email','phone number','call','reach','talk to','human','person','team','support','help desk'],a:'You can write to <b>'+esc(CFG.CONTACT_EMAIL)+'</b>, or leave your question here and our team will reply by email. You can track the reply under My account.',acts:[A('Ask our team',()=>BOT.handoff(''))]},
+    {k:['thank','thanks','great','ok','okay','bye'],a:'You are welcome! Ask me anything else about the handbook or the portal.',acts:[]}
+  ];
+  const STOP=new Set('a an the is are was were be to of in on for and or with my me i you we our your it this that how what where when which who can do does please about tell show give find get want need any there'.split(' '));
+  const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9\s-]/g,' ').replace(/\s+/g,' ').trim();
+  const toks=s=>norm(s).split(' ').filter(w=>w.length>1&&!STOP.has(w));
+  function answer(q){
+    const nq=' '+norm(q)+' ';
+    let best=null,bs=0;
+    KB.forEach(e=>{ let sc=0; e.k.forEach(k=>{ const nk=norm(k); if(nq.includes(' '+nk+' ')||(nk.length>5&&nq.includes(' '+nk))) sc+=Math.max(3,nk.length/2); }); if(sc>bs){bs=sc;best=e;} });
+    const t=toks(q);
+    const wre=w=>new RegExp('(^| )'+w.replace(/[^a-z0-9]/g,'')+(w.length>=5?'':'( |$)'));
+    const tocHits=t.length?TOC.filter(e=>e.l>=2).map(e=>{ const tt=' '+norm(e.t)+' '; let s=0; t.forEach(w=>{ if(w.length>=3&&wre(w).test(tt)) s+=w.length>4?2:1; }); return {e,s}; }).filter(x=>x.s>=2).sort((a,b)=>b.s-a.s||a.e.p-b.e.p).slice(0,4):[];
+    if(best&&bs>=3) return {html:best.a,acts:best.acts,extra:tocHits.length&&bs<5?tocHits:null};
+    if(tocHits.length) return {html:'I found these in the handbook:',toc:tocHits};
+    const texts=FULLTEXT||META.public||{}; const pg=[];
+    if(t.length){ Object.keys(texts).forEach(k=>{ const n=+k; const tx=' '+norm(texts[k])+' '; let s=0; t.forEach(w=>{ if(w.length>3&&wre(w).test(tx)) s++; }); if(s>=Math.min(2,t.length)) pg.push({n,s}); }); }
+    if(pg.length){ pg.sort((a,b)=>b.s-a.s); return {html:'These pages mention that:',pages:pg.slice(0,4).map(x=>x.n)}; }
+    return null;
+  }
+  const H=()=>{ try{ return JSON.parse(sessionStorage.getItem('ex360_chat')||'[]'); }catch(e){ return []; } };
+  const save=h=>{ try{ sessionStorage.setItem('ex360_chat',JSON.stringify(h.slice(-40))); }catch(e){} };
+  let lastQ='';
+  function push(role,html,acts){
+    const box=$('#chatLog'), d=document.createElement('div'); d.className='cmsg '+role; d.innerHTML='<div class="bubble">'+html+'</div>';
+    if(acts&&acts.length){ const a=document.createElement('div'); a.className='cacts'; acts.forEach(x=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=x.label; b.onclick=x.fn; a.appendChild(b); }); d.appendChild(a); }
+    box.appendChild(d); box.scrollTop=box.scrollHeight;
+    if(role!=='form'){ const h=H(); h.push({role,html:role==='user'?html:html}); save(h); }
+  }
+  function reply(q){
+    const r=answer(q);
+    if(!r){ push('bot','I could not find that in the handbook or on this portal. Would you like our team to answer you personally?',[A('Yes, ask the team',()=>BOT.handoff(q)),A('Show the contents',go('contents'))]); return; }
+    let acts=r.acts||[];
+    if(r.toc) acts=r.toc.map(x=>A(short(x.e.t,38)+' · p. '+label(x.e.p),page(x.e.p)));
+    if(r.pages) acts=r.pages.map(n=>A('p. '+label(n)+' · '+short(sectionTitleFor(n),30),page(n)));
+    if(r.extra) acts=acts.concat(r.extra.slice(0,2).map(x=>A(short(x.e.t,38)+' · p. '+label(x.e.p),page(x.e.p))));
+    if(!acts.some(a=>a.label==='Ask our team')) acts=acts.concat([A('Ask our team',()=>BOT.handoff(q))]);
+    push('bot',r.html,acts);
+  }
+  return {
+    ask(q){ q=String(q||'').trim(); if(!q) return; lastQ=q; push('user',esc(q)); setTimeout(()=>reply(q),250); },
+    handoff(q){
+      push('bot','Sure. Leave your details and our team will reply by email. You can track the answer under <b>My account</b>.');
+      const d=document.createElement('div'); d.className='cmsg form';
+      const p=store.get('ex360_profile',{});
+      d.innerHTML=`<form class="cform" id="cForm"><input id="cqName" placeholder="Full name" required value="${esc(p.name||'')}" autocomplete="name"><input id="cqEmail" type="email" placeholder="Email" required value="${esc(p.email||'')}" autocomplete="email"><input id="cqPhone" type="tel" placeholder="Mobile, 10 digits" required pattern="(\\+?91)?[6-9][0-9]{9}" value="${esc(p.phone||'')}" autocomplete="tel"><input id="cqOrg" placeholder="Organisation" value="${esc(p.org||'')}" autocomplete="organization"><textarea id="cqQ" rows="3" required placeholder="Your question">${esc(q||lastQ||'')}</textarea><label class="note" style="display:flex;gap:6px;align-items:flex-start"><input type="checkbox" id="cqOk" required style="margin-top:3px">I authorise the ADYPU IQAC team to contact me on this email and mobile number about my query.</label><button class="btn btn-coral btn-sm" type="submit">Send to the team</button><div id="cqMsg"></div></form>`;
+      $('#chatLog').appendChild(d); $('#chatLog').scrollTop=$('#chatLog').scrollHeight;
+      $('#cForm').onsubmit=async e=>{ e.preventDefault();
+        if(!LIVE && /github\.io$/.test(location.hostname)){ msg('#cqMsg','info','Online queries open shortly. Please email '+esc(CFG.CONTACT_EMAIL)+' meanwhile.'); return; }
+        const body={action:'query',name:$('#cqName').value,email:$('#cqEmail').value,phone:$('#cqPhone').value,organisation:$('#cqOrg').value,question:$('#cqQ').value,consent:$('#cqOk').checked,source:'Chatbot'};
+        try{ const r=await api(body); if(!r.ok) throw new Error(r.error); store.set('ex360_profile',{name:body.name,email:body.email.trim().toLowerCase(),phone:body.phone,org:body.organisation}); d.remove();
+          push('bot',`Thank you. Your question is saved as <b class="mono">${esc(r.id)}</b>. Our team will reply to <b>${esc(body.email)}</b>. Sign in to My account any time to see the answer.`,[A('Open My account',()=>{ closeChat(false); openAcct(body.email); })]); }
+        catch(err){ msg('#cqMsg','err',esc(err.message)); } };
+    },
+    restore(){ const h=H(); if(!h.length){ push('bot','Hi! I am the Excellence 360 assistant. Ask me about the handbook, a framework like NAAC or NIRF, getting access, or the PDF copy.',[A('What is in the book?',()=>BOT.ask('What is in the book?')),A('How do I get access?',()=>BOT.ask('How do I get access?')),A('Track my request',()=>BOT.ask('track my request')),A('Talk to the team',()=>BOT.handoff(''))]); return; }
+      h.forEach(m=>{ const d=document.createElement('div'); d.className='cmsg '+m.role; d.innerHTML='<div class="bubble">'+m.html+'</div>'; $('#chatLog').appendChild(d); }); }
+  };
+})();
+let chatReady=false;
+function openChat(){ $('#chat').hidden=false; $('#chatFab').setAttribute('aria-expanded','true'); if(!chatReady){ BOT.restore(); chatReady=true; } setTimeout(()=>$('#chatIn').focus(),50); }
+function closeChat(focusFab=true){ $('#chat').hidden=true; $('#chatFab').setAttribute('aria-expanded','false'); if(focusFab) $('#chatFab').focus(); }
+$('#chatFab').onclick=()=>$('#chat').hidden?openChat():closeChat();
+$('#chatClose').onclick=()=>closeChat();
+$('#chatForm').onsubmit=e=>{ e.preventDefault(); const v=$('#chatIn').value; $('#chatIn').value=''; BOT.ask(v); };
+$('#chatClear').onclick=()=>{ try{ sessionStorage.removeItem('ex360_chat'); }catch(e){} $('#chatLog').innerHTML=''; BOT.restore(); };
+
+/* ---------- My account: track requests and questions ---------- */
+let utoken=store.get('ex360_utoken',null);
+function openAcct(prefill){ $('#acct').hidden=false; if(utoken) loadAcct(); else acctStep1(prefill); }
+$('#acctClose').onclick=()=>{ $('#acct').hidden=true; if(location.hash==='#account') history.replaceState(null,'','#home'); };
+$('#acct').addEventListener('click',e=>{ if(e.target.id==='acct') $('#acctClose').click(); });
+function acctStep1(prefill){
+  const p=store.get('ex360_profile',{}), pend=store.get('ex360_pending',null);
+  $('#acctBody').innerHTML=`<p class="muted" style="margin-top:0">See every access request and question you have sent, with live status and our replies. We email you a 6-digit code; no password needed.</p><form class="form" id="otpForm" style="grid-template-columns:1fr"><div class="field"><label for="otpEmail">Your email</label><input id="otpEmail" type="email" required autocomplete="email" value="${esc(prefill||p.email||(pend&&pend.email)||'')}"></div><div><button class="btn btn-teal" type="submit">Email me a sign-in code</button></div></form><div id="otpMsg"></div>`;
+  $('#otpForm').onsubmit=async e=>{ e.preventDefault(); const email=$('#otpEmail').value.trim().toLowerCase();
+    if(!LIVE && /github\.io$/.test(location.hostname)){ msg('#otpMsg','info','Account sign-in opens shortly, once the approval system is connected.'); return; }
+    try{ const r=await api({action:'otpSend',email}); if(!r.ok) throw new Error(r.error); acctStep2(email,r.demoOtp); }catch(err){ msg('#otpMsg','err',esc(err.message)); } };
+}
+function acctStep2(email,demo){
+  $('#acctBody').innerHTML=`<p style="margin-top:0">We sent a 6-digit code to <b>${esc(email)}</b>. It works for 10 minutes.${demo?`<br><span class="note">Preview mode, no email is sent. Your code is <b class="mono">${esc(demo)}</b>.</span>`:''}</p><form class="form" id="otp2Form" style="grid-template-columns:1fr"><div class="field"><label for="otpCode">Code</label><input id="otpCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required class="mono" style="letter-spacing:.3em;font-size:20px"></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-teal" type="submit">Sign in</button><button class="btn btn-ghost" type="button" id="otpBack">Use another email</button></div></form><div id="otp2Msg"></div>`;
+  $('#otpBack').onclick=()=>acctStep1(email); setTimeout(()=>$('#otpCode').focus(),30);
+  $('#otp2Form').onsubmit=async e=>{ e.preventDefault(); try{ const r=await api({action:'otpVerify',email,otp:$('#otpCode').value}); if(!r.ok) throw new Error(r.error); utoken=r.utoken; store.set('ex360_utoken',utoken); store.set('ex360_profile',Object.assign(store.get('ex360_profile',{}),{email})); loadAcct(); }catch(err){ msg('#otp2Msg','err',esc(err.message)); } };
+}
+async function loadAcct(){
+  $('#acctBody').innerHTML='<p class="muted">Loading your account…</p>';
+  try{ const r=await api({action:'myAccount',utoken}); if(!r.ok) throw new Error(r.error); renderAcct(r); }
+  catch(err){ utoken=null; store.set('ex360_utoken',null); acctStep1(); msg('#otpMsg','info',esc(err.message)); }
+}
+function renderAcct(r){
+  const step=(on,txt,when)=>`<li class="${on?'on':''}"><span></span><div><b>${txt}</b>${when?`<small>${esc(when)}</small>`:''}</div></li>`;
+  const reqs=r.requests.map(q=>{ const st=q.status, ok=st==='Approved', done=ok||['Rejected','Revoked','Expired'].includes(st);
+    return `<div class="acard"><div class="ahead"><b class="mono">${esc(q.id)}</b><span class="status st-${esc(st)}">${esc(st)}</span></div>
+      <ol class="tl">${step(true,'Request received',fmtDate(q.submitted))}${step(done,ok?'Approved':done?st:'Under review',done?fmtDate(q.decidedOn):'IQAC team is reviewing it')}${String(q.pdfRequested)==='Yes'?step(!!q.pdfSent,q.pdfSent?'PDF copy sent':'PDF copy',q.pdfSent?q.pdfSent:'Sent automatically when approved'):''}</ol>
+      <p class="note" style="margin:6px 0 0">Asked for: ${esc(secTxt(q.requested))}${q.granted?' · Granted: '+esc(secTxt(q.granted)):''}${q.validUntil&&ok?' · Valid until '+esc(fmtDate(q.validUntil)):''}${q.remarks?'<br>Note: '+esc(q.remarks):''}</p>
+      ${ok&&!session?`<button class="btn btn-coral btn-sm" type="button" data-unlock style="margin-top:10px">Enter my access code</button>`:''}</div>`; }).join('')||'<p class="muted">No access requests yet.</p>';
+  const qs=r.queries.map(q=>`<div class="acard"><div class="ahead"><b class="mono">${esc(q.id)}</b><span class="status ${String(q.status).startsWith('Answered')?'st-Approved':'st-Pending'}">${esc(q.status)}</span></div><p style="margin:8px 0 0"><b>You asked:</b> ${esc(q.question)}</p>${q.reply?`<div class="areply"><b>Our answer</b> <small>${esc(fmtDate(q.repliedOn))}</small><p style="margin:4px 0 0;white-space:pre-wrap">${esc(q.reply)}</p></div>`:'<p class="note" style="margin:6px 0 0">Waiting for our team’s reply. You will also get it by email.</p>'}<p class="note" style="margin:6px 0 0">Sent ${esc(fmtDate(q.submitted))}</p></div>`).join('')||'<p class="muted">No questions yet.</p>';
+  $('#acctBody').innerHTML=`<div class="whoami" style="margin-top:0"><span>Signed in as <b>${esc(r.email)}</b></span><span style="display:flex;gap:8px"><button class="chip" type="button" id="acctRefresh">Refresh</button><button class="chip" type="button" id="acctOut">Sign out</button></span></div>
+    <h4 class="ah">Access requests (${r.requests.length})</h4>${reqs}
+    <h4 class="ah">Questions to our team (${r.queries.length})</h4>${qs}
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn btn-teal btn-sm" type="button" id="acctAsk">Ask a new question</button>${r.requests.some(q=>['Pending','Approved'].includes(q.status))?'':'<button class="btn btn-ghost btn-sm" type="button" id="acctReq">Request reader access</button>'}</div>`;
+  $('#acctRefresh').onclick=loadAcct;
+  $('#acctOut').onclick=()=>{ utoken=null; store.set('ex360_utoken',null); acctStep1(r.email); };
+  $('#acctAsk').onclick=()=>{ $('#acct').hidden=true; openChat(); BOT.handoff(''); };
+  if($('#acctReq')) $('#acctReq').onclick=()=>{ $('#acct').hidden=true; openAccess('request'); };
+  $$('#acctBody [data-unlock]').forEach(b=>b.onclick=()=>{ $('#acct').hidden=true; openAccess('code'); $('#cEmail').value=r.email; });
+}
+$('#acctBtn').onclick=e=>{ e.preventDefault(); openAcct(); };
+
 /* ---------- routing ---------- */
 let lastView='home';
 function route(){
   const h=(location.hash||'#home').slice(1);
   if(h.startsWith('unlock=')){ unlockFromHash(h); return; }
+  if(h==='account'){ openAcct(); }
+  if(h==='chat'){ openChat(); }
   if(h.startsWith('read-')){ openPage(parseInt(h.slice(5),10)||1,true); return; }
   if(!$('#reader').hidden && !h.startsWith('read-')){ $('#reader').hidden=true; document.body.style.overflow=''; }
   const v = h==='contents'?'contents':h==='admin'?'admin':'home';
