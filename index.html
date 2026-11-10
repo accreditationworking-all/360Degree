@@ -339,7 +339,26 @@ section.block{padding-block:64px;scroll-margin-top:72px}
 
 /* admin */
 .admin{padding-block:40px 80px}
-.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:24px 0}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}
+.whoami{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px;padding:12px 16px;border-radius:var(--r);background:var(--surface-2);font-size:14px}
+.whoami .role{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--teal);color:var(--on-teal);font:700 12px var(--body);margin-left:6px}
+.afilters{display:grid;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:20px}
+.arow{display:flex;gap:12px;flex-wrap:wrap;align-items:end}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-right:auto}
+.af{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--muted);min-width:0}
+.af.grow{flex:1;min-width:200px}
+.af input,.af select{border:1.5px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 10px;font:14px var(--body);color:var(--fg);max-width:220px}
+.af.grow input{max-width:none;width:100%}
+.atabbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:16px}
+.viz-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.viz{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-width:0}
+.viz.wide{grid-column:1/-1}
+.viz figcaption{display:grid;gap:2px;margin-bottom:10px;text-align:left}
+.viz figcaption span{font-size:13px;color:var(--muted)}
+.viz svg{width:100%;height:auto;display:block}
+.viz-table summary{font-size:12px;color:var(--muted);cursor:pointer;margin-top:8px}
+.viz-table table{min-width:0;font-size:13px}
+.viz-tip{position:fixed;z-index:120;pointer-events:none;background:var(--fg);color:var(--bg);font:600 12px var(--body);padding:6px 10px;border-radius:6px;max-width:320px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
 .kpi b{display:block;font:800 30px var(--display)}
 .kpi span{font-size:13px;color:var(--muted)}
@@ -376,6 +395,7 @@ footer a{color:var(--on-teal)}
   .paths{grid-template-columns:1fr}.roles{flex-direction:row;flex-wrap:wrap}
   .contents-layout{grid-template-columns:1fr}.rail{position:static;flex-direction:row;flex-wrap:wrap}
   .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .viz-grid{grid-template-columns:1fr}
 }
 @media (max-width:560px){
   .node button{padding:5px 8px;font-size:10px}.node button small{display:none}
@@ -412,7 +432,7 @@ footer a{color:var(--on-teal)}
   <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M17 6l3 3M14 9l2 2"/></symbol>
 </svg>
 
-<div id="previewBanner" class="preview-banner" hidden>Preview mode: requests are saved only in this browser. Approve them yourself in the <a href="#admin">Admin console</a> (key: <b class="mono">demo</b>). Connect the Google Sheet backend to go live.</div>
+<div id="previewBanner" class="preview-banner" hidden>Preview mode: requests are saved only in this browser. Approve them yourself in the <a href="#admin">Admin console</a> (any email, password <b class="mono">demo</b>). Connect the Google Sheet backend to go live.</div>
 
 <header class="topbar">
   <div class="wrap">
@@ -597,18 +617,54 @@ footer a{color:var(--on-teal)}
 <main id="viewAdmin" hidden>
   <div class="wrap admin">
     <div class="eyebrow">Admin console</div>
-    <h1 style="font-size:clamp(28px,4vw,40px);margin-top:8px">Reader access requests</h1>
+    <h1 style="font-size:clamp(28px,4vw,40px);margin-top:8px">Access requests &amp; reports</h1>
     <div id="adminLogin" style="max-width:420px;margin-top:20px">
-      <p class="muted">Enter the admin key set in the backend to review and approve requests.</p>
-      <form id="adminForm" class="search-box"><input id="adminKey" type="password" placeholder="Admin key" aria-label="Admin key" autocomplete="current-password"><button class="btn btn-teal btn-sm" type="submit">Sign in</button></form>
+      <p class="muted">Authorised IQAC staff only. Every sign-in, approval and export is recorded.</p>
+      <form id="adminForm" class="form" style="grid-template-columns:1fr">
+        <div class="field"><label for="admEmail">Admin email</label><input id="admEmail" type="email" required autocomplete="username"></div>
+        <div class="field"><label for="admPass">Password</label><input id="admPass" type="password" required autocomplete="current-password"></div>
+        <div><button class="btn btn-teal" type="submit" id="admSubmit">Sign in</button></div>
+      </form>
       <div id="adminMsg"></div>
     </div>
     <div id="adminBody" hidden>
+      <div class="whoami" id="whoami"></div>
+      <div class="afilters" role="group" aria-label="Report filters">
+        <div class="arow">
+          <div class="presets" id="aPresets"><button class="chip" type="button" data-p="7" aria-pressed="false">7 days</button><button class="chip" type="button" data-p="30" aria-pressed="false">30 days</button><button class="chip" type="button" data-p="90" aria-pressed="false">90 days</button><button class="chip" type="button" data-p="365" aria-pressed="false">12 months</button><button class="chip" type="button" data-p="all" aria-pressed="true">All time</button></div>
+          <label class="af">From<input type="date" id="fFrom"></label><label class="af">To<input type="date" id="fTo"></label>
+        </div>
+        <div class="arow">
+          <label class="af">Status<select id="fStatusSel"><option value="All">All statuses</option><option>Pending</option><option>Approved</option><option value="Rejected">Rejected / closed</option></select></label>
+          <label class="af">Designation<select id="fDesigSel"></select></label>
+          <label class="af">Organisation<select id="fOrgSel"></select></label>
+          <label class="af">Section<select id="fSecSel"><option value="All">All sections</option><option value="S1">1 · Excellence 360°</option><option value="S2">2 · Accreditation &amp; Ranking</option><option value="S3">3 · Strategic Planner</option></select></label>
+          <label class="af grow">Search<input type="search" id="fSearch" placeholder="Name, email, organisation, purpose…"></label>
+          <button class="chip" type="button" id="fReset">Reset</button>
+        </div>
+        <p class="note" id="aSummary" style="margin:0"></p>
+      </div>
       <div class="kpis" id="kpis"></div>
-      <div class="filters" id="filters"></div>
-      <div class="table-wrap"><table><thead><tr><th>Reader</th><th>Organisation</th><th>Asked for</th><th>Purpose</th><th>Submitted</th><th>Status</th><th>Decision</th></tr></thead><tbody id="reqRows"></tbody></table></div>
-      <h2 style="font-size:22px;margin:36px 0 12px">Activity log</h2>
-      <div class="log" id="logList"></div>
+      <div class="atabbar">
+        <div class="tabs" id="aTabs" role="tablist" style="padding:0;border:0"><button role="tab" type="button" data-tab="requests" aria-selected="true">Requests</button><button role="tab" type="button" data-tab="analytics" aria-selected="false">Analytics</button><button role="tab" type="button" data-tab="log" aria-selected="false">Activity log</button><button role="tab" type="button" data-tab="audit" aria-selected="false">Admin audit</button><button role="tab" type="button" data-tab="admins" aria-selected="false" id="tabAdmins" hidden>Admins</button></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="chip" type="button" id="aRefresh">Refresh</button><button class="btn btn-teal btn-sm" type="button" id="aXlsx">Excel report</button><button class="btn btn-coral btn-sm" type="button" id="aPdf">PDF report</button></div>
+      </div>
+      <div id="paneReq"><div class="table-wrap"><table><thead><tr><th>Reader</th><th>Organisation</th><th>Asked for</th><th>Purpose</th><th>Submitted</th><th>Status</th><th>Decision</th></tr></thead><tbody id="reqRows"></tbody></table></div></div>
+      <div id="paneAna" hidden><div class="viz-grid" id="chartGrid"></div></div>
+      <div id="paneLog" hidden><div class="log" id="logList" style="max-height:none"></div></div>
+      <div id="paneAudit" hidden><p class="note" style="margin-top:0">Every admin sign-in, failed attempt, approval, rejection, revocation, export and account change, newest first.</p><div class="table-wrap"><table><thead><tr><th>Time</th><th>Admin</th><th>Role</th><th>Action</th><th>Target</th><th>Detail</th></tr></thead><tbody id="auditRows"></tbody></table></div></div>
+      <div id="paneAdmins" hidden>
+        <div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Last sign-in</th><th>Added</th><th></th></tr></thead><tbody id="adminRows"></tbody></table></div>
+        <h3 style="font-size:18px;margin:24px 0 10px">Add an admin</h3>
+        <form class="form" id="addAdminForm" style="max-width:720px">
+          <div class="field"><label for="naName">Name</label><input id="naName" required></div>
+          <div class="field"><label for="naEmail">Email</label><input id="naEmail" type="email" required></div>
+          <div class="field"><label for="naRole">Role</label><select id="naRole"><option value="Viewer">Viewer · sees requests and reports</option><option value="Approver" selected>Approver · can also approve and reject</option><option value="Owner">Owner · can also manage admins</option></select></div>
+          <div class="field"><label for="naPass">First password (8+ characters)</label><input id="naPass" type="text" minlength="8" required autocomplete="new-password"></div>
+          <div class="full"><button class="btn btn-teal btn-sm" type="submit">Add admin</button></div>
+        </form>
+        <div id="addAdminMsg"></div>
+      </div>
     </div>
   </div>
 </main>
@@ -723,6 +779,9 @@ footer a{color:var(--on-teal)}
 <script src="config.js"></script>
 <script src="vendor/qrcode.js"></script>
 <script src="vendor/jsQR.js"></script>
+<script src="vendor/xlsx.full.min.js" defer></script>
+<script src="vendor/jspdf.umd.min.js" defer></script>
+<script src="vendor/jspdf.plugin.autotable.min.js" defer></script>
 <script>
 (function(){
 'use strict';
@@ -783,16 +842,38 @@ async function demoApi(b){
       r['Last access']=now; log(r.Email,'Signed in');
       out={ok:true,name:r.Name,granted,keys,validUntil:r['Valid until']}; break; }
     case 'log':{ const r=find(b.email); if(r&&r['Access code']===String(b.code).toUpperCase()){ r['Pages viewed']=(+r['Pages viewed']||0)+1; r['Last access']=now; log(r.Email,'Viewed page',b.page,b.detail);} out={ok:true}; break; }
-    case 'adminList': if(b.adminKey!=='demo'){out={ok:false,error:'Admin key is incorrect. In preview mode the key is "demo".'};break;} out={ok:true,rows:db.rows,log:[...db.log].reverse().slice(0,300)}; break;
-    case 'adminDecide':{
-      if(b.adminKey!=='demo'){out={ok:false,error:'Admin key is incorrect.'};break;}
-      const r=db.rows.find(x=>x['Request ID']===b.id); if(!r){out={ok:false,error:'Request not found'};break;}
-      r.Status=b.decision; r['Decided by']='Admin console'; r['Decided on']=now; if(b.remarks) r.Remarks=b.remarks;
-      if(b.decision==='Approved'){ const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let c=''; for(let i=0;i<8;i++) c+=a[Math.floor(Math.random()*a.length)];
-        r['Access code']=r['Access code']||c.slice(0,4)+'-'+c.slice(4); r['Sections granted']=(b.sections&&b.sections.length?b.sections:['S1','S2','S3']).join(', ');
-        r['Valid until']=new Date(Date.now()+(+b.days||180)*864e5).toISOString(); }
-      log(r.Email,b.decision,'',b.remarks||r['Sections granted']); out={ok:true}; break; }
-    default: out={ok:false,error:'Unknown action'};
+    case 'adminLogin':{
+      db.admins=db.admins||[{name:'Demo Owner',email:'owner@demo',role:'Owner',pass:'demo',active:true,addedOn:now,addedBy:'setup',lastLogin:''}];
+      db.adminLog=db.adminLog||[];
+      const em=String(b.email||'').trim().toLowerCase(); let a=db.admins.find(x=>x.email===em);
+      if(!a && b.password==='demo'){ a=db.admins[0]; }
+      if(!a||!a.active||(a.pass!==b.password&&b.password!=='demo')){ db.adminLog.push({time:now,admin:'— <'+em+'>',role:'',action:'Login failed',target:em,detail:'wrong email or password'}); out={ok:false,error:'Email or password is incorrect. In preview mode use any email with password "demo".'}; break; }
+      a.lastLogin=now; const token='demo-'+Math.random().toString(36).slice(2); db.tokens=db.tokens||{}; db.tokens[token]=a.email;
+      db.adminLog.push({time:now,admin:a.name+' <'+a.email+'>',role:a.role,action:'Signed in',target:'',detail:''});
+      out={ok:true,token,admin:{name:a.name,email:a.email,role:a.role}}; break; }
+    case 'adminLogout': if(db.tokens) delete db.tokens[b.token]; out={ok:true}; break;
+    default:{
+      const em=db.tokens&&db.tokens[b.token]; const me=em&&(db.admins||[]).find(x=>x.email===em&&x.active);
+      if(!me){ out={ok:false,error:'Your admin session has ended. Please sign in again.'}; break; }
+      const RR={Viewer:1,Approver:2,Owner:3}, need={adminList:1,adminLogExport:1,adminSetPassword:1,adminDecide:2,adminAddUser:3,adminSetActive:3}[b.action];
+      if(!need){ out={ok:false,error:'Unknown action'}; break; }
+      if(RR[me.role]<need){ out={ok:false,error:'Your role ('+me.role+') cannot do this. Ask an Owner.'}; break; }
+      const alog=(action,target,detail)=>db.adminLog.push({time:now,admin:me.name+' <'+me.email+'>',role:me.role,action,target:target||'',detail:detail||''});
+      if(b.action==='adminList'){ out={ok:true,rows:db.rows,log:[...db.log].reverse(),me:{name:me.name,email:me.email,role:me.role},adminLog:[...db.adminLog].reverse()}; if(me.role==='Owner') out.admins=db.admins.map(x=>({name:x.name,email:x.email,role:x.role,active:x.active,addedOn:x.addedOn,addedBy:x.addedBy,lastLogin:x.lastLogin})); break; }
+      if(b.action==='adminLogExport'){ alog('Exported report',b.kind,b.filters); out={ok:true}; break; }
+      if(b.action==='adminAddUser'){ const e2=String(b.email||'').trim().toLowerCase(); if(db.admins.some(x=>x.email===e2)){ out={ok:false,error:'That email is already an admin.'}; break; } if(String(b.password||'').length<8){ out={ok:false,error:'The first password needs at least 8 characters.'}; break; }
+        db.admins.push({name:b.name||e2,email:e2,role:b.role,pass:b.password,active:true,addedOn:now,addedBy:me.email,lastLogin:''}); alog('Added admin',e2,b.role); out={ok:true}; break; }
+      if(b.action==='adminSetActive'){ const t=db.admins.find(x=>x.email===b.email); if(!t||t.email===me.email){ out={ok:false,error:'Not allowed.'}; break; } t.active=!!b.active; alog(b.active?'Enabled admin':'Disabled admin',t.email); out={ok:true}; break; }
+      if(b.action==='adminSetPassword'){ const t=db.admins.find(x=>x.email===(b.email||me.email)); if(!t){ out={ok:false,error:'Admin not found.'}; break; } if(t.email===me.email&&t.pass!==b.current&&b.current!=='demo'){ out={ok:false,error:'Your current password is incorrect.'}; break; } if(String(b.password||'').length<8){ out={ok:false,error:'The new password needs at least 8 characters.'}; break; } t.pass=b.password; alog('Changed password',t.email,t.email===me.email?'own password':'reset by Owner'); out={ok:true}; break; }
+      if(b.action==='adminDecide'){
+        const r=db.rows.find(x=>x['Request ID']===b.id); if(!r){out={ok:false,error:'Request not found'};break;}
+        r.Status=b.decision; r['Decided by']=me.name+' <'+me.email+'>'; r['Decided on']=now; if(b.remarks) r.Remarks=b.remarks;
+        if(b.decision==='Approved'){ const al='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let c=''; for(let i=0;i<8;i++) c+=al[Math.floor(Math.random()*al.length)];
+          r['Access code']=r['Access code']||c.slice(0,4)+'-'+c.slice(4); r['Sections granted']=(b.sections&&b.sections.length?b.sections:['S1','S2','S3']).join(', ');
+          r['Valid until']=new Date(Date.now()+(+b.days||180)*864e5).toISOString(); }
+        log(r.Email,b.decision,'',b.remarks||r['Sections granted']); alog(b.decision,b.id,(b.sections||[]).join(', ')); out={ok:true}; break; }
+    }
+
   }
   demoSave(db); return out;
 }
@@ -1079,7 +1160,7 @@ $('#reqForm').onsubmit=async e=>{
     const email=$('#fEmail').value.trim().toLowerCase();
     store.set('ex360_pending',{email,id:r.id}); renderWho();
     msg('#reqMsg','ok', r.duplicate ? `You already have a request on file (<b class="mono">${esc(r.id)}</b>, ${esc(r.status)}). ${r.status==='Approved'?'Use the <b>I have an access code</b> tab.':'We will email you when it is approved.'}` :
-      `Request <b class="mono">${esc(r.id)}</b> received. The IQAC team will review it and email your access code to <b>${esc(email)}</b>.${LIVE?'':' <br><i>Preview mode:</i> open the Admin console (key <b>demo</b>) to approve it and see the code.'}`);
+      `Request <b class="mono">${esc(r.id)}</b> received. The IQAC team will review it and email your access code to <b>${esc(email)}</b>.${LIVE?'':' <br><i>Preview mode:</i> open the Admin console (any email, password <b>demo</b>) to approve it and see the code.'}`);
     $('#reqForm').reset(); $$('#reqForm input[name=sec]').forEach(x=>x.checked=true);
   }catch(err){ msg('#reqMsg','err',esc(err.message)); }
   btn.disabled=false; btn.textContent='Send request';
@@ -1119,22 +1200,156 @@ async function runSearch(q){
 $('#searchForm').onsubmit=e=>{e.preventDefault(); runSearch($('#q').value);};
 let sT; $('#q').oninput=e=>{ clearTimeout(sT); sT=setTimeout(()=>runSearch(e.target.value),250); };
 
-/* ---------- admin ---------- */
-let adminKey=null, adminData=null, adminFilter='Pending';
-$('#adminForm').onsubmit=async e=>{ e.preventDefault(); adminKey=$('#adminKey').value; await loadAdmin(); };
-async function loadAdmin(){
-  try{ const r=await api({action:'adminList',adminKey}); if(!r.ok) throw new Error(r.error); adminData=r; $('#adminLogin').hidden=true; $('#adminBody').hidden=false; renderAdmin(); }
+/* ---------- admin: requests, analytics & reports ---------- */
+let adminToken=null, adminData=null, aTab='requests';
+try{ adminToken=sessionStorage.getItem('ex360_admin_token'); }catch(e){}
+const ROLE_RANK={Viewer:1,Approver:2,Owner:3}; const can=role=>adminData&&adminData.me&&ROLE_RANK[adminData.me.role]>=ROLE_RANK[role];
+const AF={from:'',to:'',status:'All',desig:'All',org:'All',sec:'All',q:''};
+$('#adminForm').onsubmit=async e=>{ e.preventDefault(); const b=$('#admSubmit'); b.disabled=true; b.textContent='Signing in…';
+  try{ const r=await api({action:'adminLogin',email:$('#admEmail').value,password:$('#admPass').value}); if(!r.ok) throw new Error(r.error);
+    adminToken=r.token; try{ sessionStorage.setItem('ex360_admin_token',adminToken); }catch(e){} $('#admPass').value=''; await loadAdmin(); }
   catch(err){ $('#adminMsg').innerHTML=`<div class="msg err">${esc(err.message)}</div>`; }
+  b.disabled=false; b.textContent='Sign in'; };
+function adminSignOut(){ if(adminToken) api({action:'adminLogout',token:adminToken}).catch(()=>{}); adminToken=null; adminData=null; try{ sessionStorage.removeItem('ex360_admin_token'); }catch(e){} $('#adminBody').hidden=true; $('#adminLogin').hidden=false; $('#adminMsg').innerHTML=''; }
+async function loadAdmin(){
+  if(!adminToken) return;
+  try{ const r=await api({action:'adminList',token:adminToken}); if(!r.ok) throw new Error(r.error); adminData=r; $('#adminLogin').hidden=true; $('#adminBody').hidden=false; buildFilterUi(); renderAdmin(); }
+  catch(err){ adminSignOut(); $('#adminMsg').innerHTML=`<div class="msg err">${esc(err.message)}</div>`; }
+}
+const stOf = r => r.Status==='Approved'&&r['Valid until']&&new Date(r['Valid until'])<new Date()?'Expired':r.Status;
+const dayKey = d => { const x=new Date(d); return isNaN(x)?'':x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0'); };
+const secTxt = s => String(s||'').split(/\s*,\s*/).filter(Boolean).map(x=>(SEC_INFO[x]||{}).short||x).join(', ')||'—';
+const uniq = a => [...new Set(a.filter(Boolean))].sort((x,y)=>String(x).localeCompare(String(y)));
+function allRows(){ return (adminData.rows||[]).map(r=>Object.assign({},r,{_st:stOf(r)})); }
+function buildFilterUi(){
+  const rows=allRows(), opt=(v,l)=>`<option value="${esc(v)}">${esc(l||v)}</option>`;
+  $('#fDesigSel').innerHTML=opt('All','All designations')+uniq(rows.map(r=>r.Designation)).map(v=>opt(v)).join('');
+  $('#fOrgSel').innerHTML=opt('All','All organisations')+uniq(rows.map(r=>r.Organisation)).map(v=>opt(v)).join('');
+  ['fDesigSel','fOrgSel'].forEach(id=>{ const k=id==='fDesigSel'?'desig':'org'; $('#'+id).value=AF[k]; if($('#'+id).value!==AF[k]){ AF[k]='All'; $('#'+id).value='All'; } });
+}
+function filtered(){
+  const from=AF.from?new Date(AF.from+'T00:00:00'):null, to=AF.to?new Date(AF.to+'T23:59:59'):null, q=AF.q.trim().toLowerCase();
+  const inRange=d=>{ const x=new Date(d); return (!from||x>=from)&&(!to||x<=to); };
+  const rows=allRows().filter(r=>inRange(r.Submitted)
+    &&(AF.status==='All'||r._st===AF.status||(AF.status==='Rejected'&&['Revoked','Expired'].includes(r._st)))
+    &&(AF.desig==='All'||r.Designation===AF.desig)&&(AF.org==='All'||r.Organisation===AF.org)
+    &&(AF.sec==='All'||String(r['Sections requested']||'').includes(AF.sec))
+    &&(!q||[r.Name,r.Email,r.Organisation,r.Department,r.Purpose,r['Request ID'],r.Phone].join(' ').toLowerCase().includes(q)));
+  const narrowed = AF.status!=='All'||AF.desig!=='All'||AF.org!=='All'||AF.sec!=='All'||q;
+  const emails=new Set(rows.map(r=>String(r.Email).toLowerCase()));
+  const log=(adminData.log||[]).filter(l=>inRange(l.time)&&(!narrowed||emails.has(String(l.email).toLowerCase())));
+  return {rows,log};
+}
+function filterSummary(){
+  const p=[]; if(AF.from||AF.to) p.push('Dates '+(AF.from||'start')+' to '+(AF.to||'today')); else p.push('All dates');
+  if(AF.status!=='All') p.push('Status: '+AF.status); if(AF.desig!=='All') p.push('Designation: '+AF.desig);
+  if(AF.org!=='All') p.push('Organisation: '+AF.org); if(AF.sec!=='All') p.push('Section: '+(SEC_INFO[AF.sec]||{}).short);
+  if(AF.q) p.push('Search: "'+AF.q+'"'); return p.join(' · ');
+}
+/* ----- analysis ----- */
+function analyse(rows,log){
+  const c=s=>rows.filter(r=>r._st===s).length;
+  const decided=rows.filter(r=>['Approved','Rejected','Revoked','Expired'].includes(r._st));
+  const approvedAll=rows.filter(r=>['Approved','Revoked','Expired'].includes(r._st)).length;
+  const hrs=decided.map(r=>(new Date(r['Decided on'])-new Date(r.Submitted))/36e5).filter(h=>isFinite(h)&&h>=0).sort((a,b)=>a-b);
+  const median=hrs.length?hrs[Math.floor((hrs.length-1)/2)]:null;
+  const views=log.filter(l=>l.event==='Viewed page'), signins=log.filter(l=>l.event==='Signed in');
+  const readers=new Set(views.map(l=>l.email));
+  const count=(arr,f)=>{ const m=new Map(); arr.forEach(x=>{ const k=f(x); if(k) m.set(k,(m.get(k)||0)+1); }); return [...m.entries()].map(([label,value])=>({label,value})).sort((a,b)=>b.value-a.value); };
+  // daily (or weekly) trend
+  const days=rows.map(r=>dayKey(r.Submitted)).filter(Boolean).sort();
+  let trend=[];
+  if(days.length){ const start=new Date((AF.from||days[0])+'T00:00:00'), end=new Date((AF.to||dayKey(new Date()))+'T00:00:00');
+    const span=Math.round((end-start)/864e5)+1, weekly=span>62, m=new Map();
+    rows.forEach(r=>{ let d=new Date(r.Submitted); if(weekly){ d=new Date(d); d.setDate(d.getDate()-((d.getDay()+6)%7)); } const k=dayKey(d); m.set(k,(m.get(k)||0)+1); });
+    for(let d=new Date(start); d<=end; d.setDate(d.getDate()+(weekly?7:1))){ let k=new Date(d); if(weekly){ k.setDate(k.getDate()-((k.getDay()+6)%7)); } const key=dayKey(k); trend.push({label:key,value:m.get(key)||0}); if(trend.length>400) break; }
+    trend.weekly=weekly; }
+  const secReq=['S1','S2','S3'].map(s=>({label:SEC_INFO[s].short,value:rows.filter(r=>String(r['Sections requested']||'').includes(s)).length}));
+  const chapterViews=count(views,l=>{ const n=fromLabel(l.page); if(!n) return l.detail||''; const ch=chapterFor(n); return ch?ch.t:SEC_INFO[SEC(n)].short; }).slice(0,10);
+  const secViews=['S1','S2','S3','B'].map(s=>({label:SEC_INFO[s].short||SEC_INFO[s].name,value:views.filter(l=>{ const n=fromLabel(l.page); return n&&SEC(n)===s; }).length}));
+  const heat=Array.from({length:7},()=>Array(24).fill(0)); views.concat(signins).forEach(l=>{ const d=new Date(l.time); if(!isNaN(d)) heat[(d.getDay()+6)%7][d.getHours()]++; });
+  const topReaders=count(views,l=>l.email).slice(0,10).map(x=>{ const r=rows.find(y=>String(y.Email).toLowerCase()===String(x.label).toLowerCase()); return {label:r?r.Name+' · '+(r.Organisation||''):x.label,value:x.value}; });
+  const funnel=[{label:'Enquiries',value:rows.length},{label:'Decided',value:decided.length},{label:'Approved',value:approvedAll},
+    {label:'Signed in',value:rows.filter(r=>signins.some(l=>l.email===String(r.Email).toLowerCase())||r['Last access']).length},
+    {label:'Read 1+ page',value:rows.filter(r=>readers.has(String(r.Email).toLowerCase())||(+r['Pages viewed']||0)>0).length}];
+  return {total:rows.length,pending:c('Pending'),approved:c('Approved'),closed:c('Rejected')+c('Revoked')+c('Expired'),
+    rate:decided.length?Math.round(approvedAll/decided.length*100):null, median, views:views.length, readers:readers.size,
+    trend, status:[{label:'Pending',value:c('Pending'),k:'warn'},{label:'Approved',value:c('Approved'),k:'ok'},{label:'Rejected',value:c('Rejected'),k:'bad'},{label:'Revoked',value:c('Revoked'),k:'bad'},{label:'Expired',value:c('Expired'),k:'muted'}].filter(x=>x.value),
+    desig:count(rows,r=>r.Designation).slice(0,10), org:count(rows,r=>r.Organisation).slice(0,10), secReq, chapterViews, secViews, heat, topReaders, funnel};
+}
+/* ----- charts (SVG, resolved colours so they also export) ----- */
+function palette(light){
+  if(light) return {bar:'#126577',hi:'#E0673F',ink:'#10282E',muted:'#5A7177',grid:'#D3DEDF',surf:'#FFFFFF',ok:'#1D8A5B',warn:'#B7791F',bad:'#C2413A',heat:['#EAF3F4','#BFDCE1','#86BEC8','#3F95A6','#126577','#0B4A58']};
+  const v=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const dark=matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement.dataset.theme!=='light'||document.documentElement.dataset.theme==='dark';
+  return {bar:v('--teal-2'),hi:v('--coral'),ink:v('--fg'),muted:v('--muted'),grid:v('--line'),surf:v('--surface'),ok:v('--ok'),warn:v('--warn'),bad:v('--bad'),
+    heat:dark?['#173037','#174B57','#1E6574','#2B8597','#4FA7B7','#8ED0DB']:['#EAF3F4','#BFDCE1','#86BEC8','#3F95A6','#126577','#0B4A58']};
+}
+const FONT="font-family='Arial, Helvetica, sans-serif'";
+const short=(s,n)=>{ s=String(s); return s.length>n?s.slice(0,n-1)+'…':s; };
+function svgWrap(w,h,body,P){ return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}' width='${w}' height='${h}' ${FONT} role='img'><rect width='${w}' height='${h}' fill='${P.surf}'/>${body}</svg>`; }
+function hbars(data,P,opt={}){
+  if(!data.length||!data.some(d=>d.value)) return null;
+  const w=opt.w||560, lw=opt.labelW||190, rowH=26, h=data.length*rowH+16, max=Math.max(...data.map(d=>d.value)), sc=(w-lw-56)/max;
+  const body=data.map((d,i)=>{ const y=8+i*rowH, bw=Math.max(2,d.value*sc), col=d.k?P[d.k]:(opt.highlightTop&&i===0?P.hi:P.bar);
+    return `<g data-tip='${esc(d.label)}: ${d.value}${opt.unit?' '+opt.unit:''}'><rect x='0' y='${y}' width='${w}' height='${rowH}' fill='transparent'/><text x='${lw-10}' y='${y+17}' text-anchor='end' font-size='12' fill='${P.ink}'>${esc(short(d.label,opt.cut||28))}</text><rect x='${lw}' y='${y+5}' width='${bw}' height='16' rx='4' fill='${col}'/><text x='${lw+bw+6}' y='${y+17}' font-size='12' font-weight='700' fill='${P.ink}'>${d.value}</text></g>`; }).join('');
+  return svgWrap(w,h,body,P);
+}
+function vbars(data,P,weekly,W){
+  if(!data.length) return null;
+  const w=W||560,h=220,l=34,r=10,t=12,b=34, max=Math.max(1,...data.map(d=>d.value)), step=Math.max(1,Math.ceil(max/4)), top=step*Math.ceil(max/step);
+  const bw=(w-l-r)/data.length, Y=v=>t+(h-t-b)*(1-v/top);
+  let g=''; for(let v=0;v<=top;v+=step){ g+=`<line x1='${l}' x2='${w-r}' y1='${Y(v)}' y2='${Y(v)}' stroke='${P.grid}' stroke-width='1'/><text x='${l-6}' y='${Y(v)+4}' text-anchor='end' font-size='11' fill='${P.muted}'>${v}</text>`; }
+  const every=Math.ceil(data.length/7);
+  const mon=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], fmt=k=>Number(k.slice(8))+' '+mon[Number(k.slice(5,7))-1];
+  const bars=data.map((d,i)=>{ const x=l+i*bw, hh=Y(0)-Y(d.value); return `<g data-tip='${weekly?'Week of ':''}${fmt(d.label)}: ${d.value} enquir${d.value===1?'y':'ies'}'><rect x='${x}' y='${t}' width='${bw}' height='${h-t-b}' fill='transparent'/>${d.value?`<rect x='${x+Math.min(2,bw*.15)}' y='${Y(d.value)}' width='${Math.max(1,bw-Math.min(4,bw*.3))}' height='${hh}' rx='${Math.min(4,bw/3)}' fill='${P.bar}'/>`:''}${i%every===0?`<text x='${x+bw/2}' y='${h-12}' text-anchor='middle' font-size='11' fill='${P.muted}'>${fmt(d.label)}</text>`:''}</g>`; }).join('');
+  return svgWrap(w,h,g+bars,P);
+}
+function heatmap(m,P,W){
+  const total=m.flat().reduce((a,b)=>a+b,0); if(!total) return null;
+  const w=W||560,h=220,l=40,t=14,cw=(w-l-8)/24,ch=24, max=Math.max(...m.flat()), D=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  let s=''; m.forEach((row,di)=>{ s+=`<text x='${l-8}' y='${t+di*ch+16}' text-anchor='end' font-size='11' fill='${P.muted}'>${D[di]}</text>`;
+    row.forEach((v,hh)=>{ const k=v?Math.min(5,1+Math.floor(v/max*4.999)):0; s+=`<rect data-tip='${D[di]} ${String(hh).padStart(2,'0')}:00 · ${v} event${v===1?'':'s'}' x='${l+hh*cw+1}' y='${t+di*ch+1}' width='${cw-2}' height='${ch-2}' rx='3' fill='${P.heat[k]}'/>`; }); });
+  [0,6,12,18,23].forEach(hh=>{ s+=`<text x='${l+hh*cw+cw/2}' y='${t+7*ch+16}' text-anchor='middle' font-size='11' fill='${P.muted}'>${String(hh).padStart(2,'0')}:00</text>`; });
+  return svgWrap(w,h,s,P);
+}
+function funnelChart(data,P){
+  if(!data[0].value) return null;
+  const w=560,rowH=34,h=data.length*rowH+12,lw=120,max=data[0].value,sc=(w-lw-120)/max;
+  return svgWrap(w,h,data.map((d,i)=>{ const y=6+i*rowH, bw=Math.max(2,d.value*sc), pct=Math.round(d.value/max*100);
+    return `<g data-tip='${esc(d.label)}: ${d.value} (${pct}% of enquiries)'><rect x='0' y='${y}' width='${w}' height='${rowH}' fill='transparent'/><text x='${lw-10}' y='${y+21}' text-anchor='end' font-size='12' fill='${P.ink}'>${esc(d.label)}</text><rect x='${lw}' y='${y+6}' width='${bw}' height='22' rx='4' fill='${i===data.length-1?P.hi:P.bar}'/><text x='${lw+bw+8}' y='${y+21}' font-size='12' font-weight='700' fill='${P.ink}'>${d.value}</text><text x='${lw+bw+8+String(d.value).length*8+8}' y='${y+21}' font-size='11' fill='${P.muted}'>${pct}%</text></g>`; }).join(''),P);
+}
+function chartSet(A,P,WW){ WW=WW||560;
+  return [
+    {id:'trend',title:A.trend.weekly?'Enquiries per week':'Enquiries per day',note:'New access requests over the selected period.',svg:vbars(A.trend,P,A.trend.weekly,WW),wide:true,rows:A.trend},
+    {id:'funnel',title:'Access funnel',note:'From enquiry to active reading. Last step highlighted.',svg:funnelChart(A.funnel,P),rows:A.funnel},
+    {id:'status',title:'Requests by status',note:'Current state of every request in view.',svg:hbars(A.status,P,{labelW:110}),rows:A.status},
+    {id:'desig',title:'Who is asking: designation',note:'Top 10 designations.',svg:hbars(A.desig,P,{highlightTop:true}),rows:A.desig},
+    {id:'org',title:'Who is asking: organisation',note:'Top 10 organisations.',svg:hbars(A.org,P,{highlightTop:true}),rows:A.org},
+    {id:'secReq',title:'Sections requested',note:'A request can ask for more than one section.',svg:hbars(A.secReq,P,{labelW:170}),rows:A.secReq},
+    {id:'secViews',title:'Pages read by section',note:'Page views logged in the reader.',svg:hbars(A.secViews,P,{labelW:170,unit:'views'}),rows:A.secViews},
+    {id:'chapters',title:'Most-read chapters',note:'Top 10 chapters by page views.',svg:hbars(A.chapterViews,P,{labelW:WW>560?320:230,cut:WW>560?48:34,highlightTop:true,unit:'views',w:WW}),rows:A.chapterViews,wide:true},
+    {id:'heat',title:'When readers are active',note:'Sign-ins and page views by weekday and hour (IST). Darker = busier.',svg:heatmap(A.heat,P,WW),wide:true},
+    {id:'readers',title:'Most engaged readers',note:'Top 10 readers by pages viewed.',svg:hbars(A.topReaders,P,{labelW:WW>560?320:230,cut:WW>560?48:34,unit:'pages',w:WW}),rows:A.topReaders,wide:true}
+  ];
 }
 function renderAdmin(){
-  const rows=adminData.rows.map(r=>Object.assign({},r,{_st: r.Status==='Approved'&&r['Valid until']&&new Date(r['Valid until'])<new Date()?'Expired':r.Status}));
-  const c=s=>rows.filter(r=>r._st===s).length, views=rows.reduce((a,r)=>a+(+r['Pages viewed']||0),0);
-  $('#kpis').innerHTML=[['Total requests',rows.length],['Waiting',c('Pending')],['Approved',c('Approved')],['Rejected / revoked',c('Rejected')+c('Revoked')+c('Expired')],['Pages viewed',views]].map(k=>`<div class="kpi"><b class="mono">${k[1]}</b><span>${k[0]}</span></div>`).join('');
-  $('#filters').innerHTML=['Pending','Approved','Rejected','All'].map(f=>`<button class="chip" type="button" aria-pressed="${adminFilter===f}" data-f="${f}">${f}${f!=='All'?' · '+c(f):''}</button>`).join('')+`<span style="margin-left:auto;display:flex;gap:8px"><button class="chip" type="button" id="refresh">Refresh</button>${LIVE?'<button class="chip" type="button" id="csv">Export CSV</button>':''}</span>`;
-  $$('#filters [data-f]').forEach(b=>b.onclick=()=>{adminFilter=b.dataset.f;renderAdmin();});
-  $('#refresh').onclick=loadAdmin; if($('#csv')) $('#csv').onclick=()=>exportCsv(rows);
-  const list=rows.filter(r=>adminFilter==='All'||r._st===adminFilter||(adminFilter==='Rejected'&&['Revoked','Expired'].includes(r._st))).reverse();
-  const secTxt=s=>String(s||'').split(/\s*,\s*/).filter(Boolean).map(x=>(SEC_INFO[x]||{}).short||x).join(', ')||'—';
+  const {rows,log}=filtered(), A=analyse(rows,log), P=palette(false);
+  const fmtH=h=>h==null?'—':h<48?Math.round(h)+' h':(h/24).toFixed(1)+' d';
+  $('#kpis').innerHTML=[['Enquiries',A.total],['Waiting',A.pending],['Approved',A.approved],['Rejected / closed',A.closed],['Approval rate',A.rate==null?'—':A.rate+'%'],['Median decision time',fmtH(A.median)],['Active readers',A.readers],['Pages viewed',A.views]]
+    .map(k=>`<div class="kpi"><b class="mono">${k[1]}</b><span>${k[0]}</span></div>`).join('');
+  $('#aSummary').textContent=filterSummary()+' · '+rows.length+' of '+(adminData.rows||[]).length+' requests';
+  const me=adminData.me||{name:'',email:'',role:'Viewer'};
+  if(aTab==='admins'&&!can('Owner')) aTab='requests';
+  $('#tabAdmins').hidden=!can('Owner');
+  $('#whoami').innerHTML=`<span>Signed in as <b>${esc(me.name)}</b> · ${esc(me.email)}<span class="role">${esc(me.role)}</span>${can('Approver')?'':' <span class="note">· view only</span>'}</span><span style="display:flex;gap:8px"><button class="chip" type="button" id="chgPass">Change password</button><button class="chip" type="button" id="signOutAdm">Sign out</button></span>`;
+  $('#signOutAdm').onclick=adminSignOut; $('#chgPass').onclick=changePassword;
+  $$('#aTabs [data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===aTab)); $('#paneReq').hidden=aTab!=='requests'; $('#paneAna').hidden=aTab!=='analytics'; $('#paneLog').hidden=aTab!=='log'; $('#paneAudit').hidden=aTab!=='audit'; $('#paneAdmins').hidden=aTab!=='admins';
+  $('#auditRows').innerHTML=(adminData.adminLog||[]).slice(0,500).map(a=>`<tr><td class="mono" style="white-space:nowrap">${esc(new Date(a.time).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}))}</td><td>${esc(a.admin)}</td><td>${esc(a.role)}</td><td><span class="status ${/fail|block|Revok|Reject|Disabl/i.test(a.action)?'st-Rejected':/Approv|Signed|Added|Enabl/i.test(a.action)?'st-Approved':'st-Pending'}">${esc(a.action)}</span></td><td>${esc(a.target)}</td><td class="muted">${esc(a.detail)}</td></tr>`).join('')||'<tr><td colspan="6" class="muted" style="text-align:center;padding:24px">No admin activity yet.</td></tr>';
+  if(can('Owner')) $('#adminRows').innerHTML=(adminData.admins||[]).map(a=>`<tr><td><b>${esc(a.name)}</b></td><td>${esc(a.email)}</td><td>${esc(a.role)}</td><td><span class="status ${a.active?'st-Approved':'st-Rejected'}">${a.active?'Active':'Disabled'}</span></td><td class="mono">${a.lastLogin?esc(new Date(a.lastLogin).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'})):'—'}</td><td class="note">${esc(fmtDate(a.addedOn))}<br>by ${esc(a.addedBy||'')}</td><td style="white-space:nowrap">${a.email===me.email?'<span class="note">you</span>':`<button class="chip" type="button" data-act-admin="${a.active?'disable':'enable'}" data-email="${esc(a.email)}">${a.active?'Disable':'Enable'}</button> <button class="chip" type="button" data-act-admin="reset" data-email="${esc(a.email)}">Reset password</button>`}</td></tr>`).join('');
+  $$('#adminRows [data-act-admin]').forEach(b=>b.onclick=()=>adminAction(b.dataset.actAdmin,b.dataset.email,b));
+  // table
+  const list=[...rows].reverse();
   $('#reqRows').innerHTML = list.length ? list.map(r=>`<tr data-id="${esc(r['Request ID'])}">
     <td><b>${esc(r.Name)}</b><br><span class="muted">${esc(r.Email)}</span><br><span class="muted">${esc(r.Phone||'')}</span><br><span class="mono note">${esc(r['Request ID'])}</span></td>
     <td>${esc(r.Organisation)}<br><span class="muted">${esc(r.Designation)}${r.Department?' · '+esc(r.Department):''}</span></td>
@@ -1142,13 +1357,54 @@ function renderAdmin(){
     <td style="max-width:240px">${esc(r.Purpose)}</td>
     <td class="mono" style="white-space:nowrap">${esc(fmtDate(r.Submitted))}</td>
     <td><span class="status st-${esc(r._st)}">${esc(r._st)}</span>${r['Access code']&&r._st==='Approved'?`<div class="mono" style="margin-top:6px">${esc(r['Access code'])}</div><div class="note">until ${esc(fmtDate(r['Valid until']))}<br>${+r['Pages viewed']||0} pages viewed</div>`:''}${r.Remarks?`<div class="note">${esc(r.Remarks)}</div>`:''}</td>
-    <td style="min-width:240px">${decideUi(r)}</td></tr>`).join('') : `<tr><td colspan="7" class="muted" style="text-align:center;padding:30px">No ${adminFilter==='All'?'':adminFilter.toLowerCase()+' '}requests yet.</td></tr>`;
+    <td style="min-width:240px">${decideUi(r)}</td></tr>`).join('') : `<tr><td colspan="7" class="muted" style="text-align:center;padding:30px">No requests match these filters.</td></tr>`;
   $$('#reqRows [data-act]').forEach(b=>b.onclick=()=>decide(b));
-  $('#logList').innerHTML = (adminData.log||[]).slice(0,150).map(l=>`<div><span class="mono note">${esc(new Date(l.time).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}))}</span><span><b>${esc(l.event)}</b> · ${esc(l.email)}${l.detail?' · <span class="muted">'+esc(l.detail)+'</span>':''}</span><span class="pgno">${l.page?'p. '+esc(l.page):''}</span></div>`).join('') || '<p class="muted">No activity yet.</p>';
+  // charts
+  if(aTab==='analytics'){
+    $('#chartGrid').innerHTML=chartSet(A,P,960).map(c=>`<figure class="viz${c.wide?' wide':''}"><figcaption><b>${esc(c.title)}</b><span>${esc(c.note)}</span></figcaption>${c.svg||'<p class="muted" style="padding:24px 0">No data for these filters yet.</p>'}${c.rows&&c.rows.length?`<details class="viz-table"><summary>Show as table</summary><table><tbody>${c.rows.map(r=>`<tr><td>${esc(r.label)}</td><td class="mono">${r.value}</td></tr>`).join('')}</tbody></table></details>`:''}</figure>`).join('');
+  }
+  // log
+  $('#logList').innerHTML = log.slice(0,300).map(l=>`<div><span class="mono note">${esc(new Date(l.time).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}))}</span><span><b>${esc(l.event)}</b> · ${esc(l.email)}${l.detail?' · <span class="muted">'+esc(l.detail)+'</span>':''}</span><span class="pgno">${l.page?'p. '+esc(l.page):''}</span></div>`).join('') || '<p class="muted">No activity for these filters.</p>';
+}
+/* tooltip for charts */
+(function(){ const tip=document.createElement('div'); tip.className='viz-tip'; tip.hidden=true; document.body.appendChild(tip);
+  document.addEventListener('mousemove',e=>{ const g=e.target.closest&&e.target.closest('#chartGrid [data-tip]'); if(!g){ tip.hidden=true; return; } tip.textContent=g.getAttribute('data-tip'); tip.hidden=false; tip.style.left=Math.min(innerWidth-tip.offsetWidth-8,e.clientX+14)+'px'; tip.style.top=(e.clientY+14)+'px'; }); })();
+/* filters wiring */
+function setPreset(days){ if(days==='all'){ AF.from=''; AF.to=''; } else { const t=new Date(), f=new Date(); f.setDate(t.getDate()-days+1); AF.from=dayKey(f); AF.to=dayKey(t); } $('#fFrom').value=AF.from; $('#fTo').value=AF.to; $$('#aPresets [data-p]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===String(days))); renderAdmin(); }
+$$('#aPresets [data-p]').forEach(b=>b.onclick=()=>setPreset(b.dataset.p==='all'?'all':+b.dataset.p));
+$('#fFrom').onchange=e=>{ AF.from=e.target.value; $$('#aPresets [data-p]').forEach(b=>b.setAttribute('aria-pressed','false')); renderAdmin(); };
+$('#fTo').onchange=e=>{ AF.to=e.target.value; $$('#aPresets [data-p]').forEach(b=>b.setAttribute('aria-pressed','false')); renderAdmin(); };
+$('#fStatusSel').onchange=e=>{ AF.status=e.target.value; renderAdmin(); };
+$('#fDesigSel').onchange=e=>{ AF.desig=e.target.value; renderAdmin(); };
+$('#fOrgSel').onchange=e=>{ AF.org=e.target.value; renderAdmin(); };
+$('#fSecSel').onchange=e=>{ AF.sec=e.target.value; renderAdmin(); };
+let aqT; $('#fSearch').oninput=e=>{ clearTimeout(aqT); aqT=setTimeout(()=>{ AF.q=e.target.value; renderAdmin(); },200); };
+$('#fReset').onclick=()=>{ Object.assign(AF,{from:'',to:'',status:'All',desig:'All',org:'All',sec:'All',q:''}); ['fFrom','fTo','fSearch'].forEach(id=>$('#'+id).value=''); ['fStatusSel','fDesigSel','fOrgSel','fSecSel'].forEach(id=>$('#'+id).value='All'); $$('#aPresets [data-p]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p==='all')); renderAdmin(); };
+$$('#aTabs [data-tab]').forEach(b=>b.onclick=()=>{ aTab=b.dataset.tab; renderAdmin(); });
+$('#aRefresh').onclick=loadAdmin;
+$('#aXlsx').onclick=()=>{ exportXlsx(); api({action:'adminLogExport',token:adminToken,kind:'Excel',filters:filterSummary()}).catch(()=>{}); };
+$('#aPdf').onclick=()=>{ exportPdf(); api({action:'adminLogExport',token:adminToken,kind:'PDF',filters:filterSummary()}).catch(()=>{}); };
+$('#addAdminForm').onsubmit=async e=>{ e.preventDefault();
+  try{ const r=await api({action:'adminAddUser',token:adminToken,name:$('#naName').value,email:$('#naEmail').value,role:$('#naRole').value,password:$('#naPass').value}); if(!r.ok) throw new Error(r.error);
+    $('#addAdminForm').reset(); $('#naRole').value='Approver'; msg('#addAdminMsg','ok','Admin added. Share the first password with them privately and ask them to change it after signing in.'); await loadAdmin(); }
+  catch(err){ msg('#addAdminMsg','err',esc(err.message)); } };
+async function adminAction(act,email,btn){
+  btn.disabled=true;
+  try{ let r;
+    if(act==='reset'){ const pw=(Math.random().toString(36).slice(2,8)+Math.random().toString(36).slice(2,8)).slice(0,12); r=await api({action:'adminSetPassword',token:adminToken,email,password:pw}); if(!r.ok) throw new Error(r.error); msg('#addAdminMsg','ok',`New password for <b>${esc(email)}</b>: <b class="mono">${esc(pw)}</b>. Share it privately; it is shown only once.`); }
+    else { r=await api({action:'adminSetActive',token:adminToken,email,active:act==='enable'}); if(!r.ok) throw new Error(r.error); toast(act==='enable'?'Admin enabled':'Admin disabled'); }
+    await loadAdmin(); }
+  catch(err){ toast(err.message); btn.disabled=false; } }
+function changePassword(){
+  $('#qrEyebrow').textContent='Admin account'; $('#qrTitle').textContent='Change your password';
+  $('#qrBody').innerHTML=`<form class="form" id="cpForm" style="grid-template-columns:1fr"><div class="field"><label for="cpCur">Current password</label><input id="cpCur" type="password" required autocomplete="current-password"></div><div class="field"><label for="cpNew">New password (8+ characters)</label><input id="cpNew" type="password" minlength="8" required autocomplete="new-password"></div><div><button class="btn btn-teal btn-sm" type="submit">Save new password</button></div></form><div id="cpMsg"></div>`;
+  $('#qrModal').hidden=false;
+  $('#cpForm').onsubmit=async e=>{ e.preventDefault(); try{ const r=await api({action:'adminSetPassword',token:adminToken,current:$('#cpCur').value,password:$('#cpNew').value}); if(!r.ok) throw new Error(r.error); msg('#cpMsg','ok','Password changed.'); setTimeout(closeQr,900); }catch(err){ msg('#cpMsg','err',esc(err.message)); } };
 }
 function decideUi(r){
   const req=String(r['Sections requested']||'S1, S2, S3');
   const box=(s)=>`<label class="chk" style="padding:4px 8px;font-size:12px"><input type="checkbox" name="g" value="${s}" ${req.includes(s)?'checked':''}>${s}</label>`;
+  if(!can('Approver')) return '<span class="note">View only</span>';
   if(r._st==='Approved') return `<div class="decide"><input name="rm" placeholder="Reason (optional)"><button class="btn btn-ghost btn-sm" type="button" data-act="Revoked">Revoke access</button></div>`;
   return `<div class="decide"><div class="row">${box('S1')}${box('S2')}${box('S3')}</div><div class="row"><label class="note">Valid for <input type="number" name="days" value="180" min="1" max="1095"> days</label></div><input name="rm" placeholder="Note to reader (optional)"><div class="row"><button class="btn btn-teal btn-sm" type="button" data-act="Approved">Approve</button><button class="btn btn-ghost btn-sm" type="button" data-act="Rejected">Reject</button></div></div>`;
 }
@@ -1158,13 +1414,65 @@ async function decide(b){
   const days=(tr.querySelector('input[name=days]')||{}).value, remarks=(tr.querySelector('input[name=rm]')||{}).value||'';
   if(b.dataset.act==='Approved'&&!sections.length){ toast('Choose at least one section to grant'); return; }
   b.disabled=true; b.textContent='Saving…';
-  try{ const r=await api({action:'adminDecide',adminKey,id,decision:b.dataset.act,sections,days,remarks}); if(!r.ok) throw new Error(r.error); toast(b.dataset.act==='Approved'?(LIVE?'Approved · access code emailed':'Approved · code shown in the Status column'):b.dataset.act); await loadAdmin(); }
+  try{ const r=await api({action:'adminDecide',token:adminToken,id,decision:b.dataset.act,sections,days,remarks}); if(!r.ok) throw new Error(r.error); toast(b.dataset.act==='Approved'?(LIVE?'Approved · access code emailed':'Approved · code shown in the Status column'):b.dataset.act); await loadAdmin(); }
   catch(err){ toast(err.message); b.disabled=false; }
 }
-function exportCsv(rows){
-  const cols=['Request ID','Submitted','Name','Email','Phone','Designation','Organisation','Department','Sections requested','Purpose','Status','Sections granted','Access code','Valid until','Decided by','Decided on','Remarks','Last access','Pages viewed'];
-  const csv=[cols.join(',')].concat(rows.map(r=>cols.map(c=>'"'+String(r[c]??'').replace(/"/g,'""')+'"').join(','))).join('\n');
-  try{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv'})); a.download='excellence360-access-requests.csv'; document.body.appendChild(a); a.click(); a.remove(); toast('CSV downloaded'); }catch(e){ toast('Download is not available here'); }
+/* ----- exports ----- */
+const REQ_COLS=['Request ID','Submitted','Name','Email','Phone','Designation','Organisation','Department','Sections requested','Purpose','Status','Sections granted','Access code','Valid until','Decided by','Decided on','Remarks','Last access','Pages viewed'];
+const stamp=()=>dayKey(new Date());
+function saveBlob(blob,name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500); }
+function exportXlsx(){
+  if(typeof XLSX==='undefined'){ toast('Excel library not loaded'); return; }
+  const {rows,log}=filtered(), A=analyse(rows,log), wb=XLSX.utils.book_new();
+  const iso=d=>{ const x=new Date(d); return d&&!isNaN(x)?x:d||''; };
+  const add=(name,aoa,widths)=>{ const ws=XLSX.utils.aoa_to_sheet(aoa,{cellDates:true}); if(widths) ws['!cols']=widths.map(w=>({wch:w})); if(aoa.length>1) ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:aoa.length-1,c:aoa[0].length-1}})}; XLSX.utils.book_append_sheet(wb,ws,name); };
+  const summary=[['Excellence 360 · Access & Reading Report'],['Generated',new Date().toLocaleString('en-IN')],['Filters',filterSummary()],[],['Measure','Value'],
+    ['Enquiries',A.total],['Waiting',A.pending],['Approved',A.approved],['Rejected / closed',A.closed],['Approval rate (%)',A.rate??''],['Median decision time (hours)',A.median==null?'':Math.round(A.median)],['Active readers',A.readers],['Pages viewed',A.views]];
+  const ws=XLSX.utils.aoa_to_sheet(summary); ws['!cols']=[{wch:32},{wch:60}]; XLSX.utils.book_append_sheet(wb,ws,'Summary');
+  add('Requests',[REQ_COLS.concat(['Current status'])].concat(rows.map(r=>REQ_COLS.map(c=>['Submitted','Valid until','Decided on','Last access'].includes(c)?iso(r[c]):(r[c]??'')).concat([r._st]))),[18,18,22,28,14,22,26,20,14,40,10,14,12,18,14,18,24,18,10,12]);
+  add('Activity log',[['Time','Email','Event','Page','Detail']].concat(log.map(l=>[iso(l.time),l.email,l.event,l.page,l.detail])),[20,28,16,8,40]);
+  add('Trend',[[A.trend.weekly?'Week starting':'Date','Enquiries']].concat(A.trend.map(d=>[d.label,d.value])),[16,12]);
+  add('Funnel',[['Stage','Count','% of enquiries']].concat(A.funnel.map(d=>[d.label,d.value,A.total?Math.round(d.value/A.total*100):0])),[18,10,16]);
+  add('By status',[['Status','Requests']].concat(A.status.map(d=>[d.label,d.value])),[14,10]);
+  add('By designation',[['Designation','Requests']].concat(A.desig.map(d=>[d.label,d.value])),[36,10]);
+  add('By organisation',[['Organisation','Requests']].concat(A.org.map(d=>[d.label,d.value])),[36,10]);
+  add('Sections',[['Section','Requested','Page views']].concat(['S1','S2','S3'].map((s,i)=>[A.secReq[i].label,A.secReq[i].value,A.secViews[i].value])),[26,12,12]);
+  add('Top chapters',[['Chapter','Page views']].concat(A.chapterViews.map(d=>[d.label,d.value])),[48,12]);
+  add('Top readers',[['Reader','Page views']].concat(A.topReaders.map(d=>[d.label,d.value])),[48,12]);
+  const D=['Mon','Tue','Wed','Thu','Fri','Sat','Sun']; add('Activity heatmap',[['Day'].concat(Array.from({length:24},(_,h)=>String(h).padStart(2,'0')+':00'))].concat(A.heat.map((r,i)=>[D[i]].concat(r))),[8].concat(Array(24).fill(7)));
+  try{ const out=XLSX.write(wb,{bookType:'xlsx',type:'array'}); saveBlob(new Blob([out],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),'Excellence360-report-'+stamp()+'.xlsx'); toast('Excel report downloaded'); }catch(e){ toast('Download is not available here'); }
+}
+function svgToPng(svg,scale=2){ return new Promise((res,rej)=>{ const m=svg.match(/viewBox='0 0 (\d+) (\d+)'/); const w=+m[1],h=+m[2]; const img=new Image(); img.onload=()=>{ const c=document.createElement('canvas'); c.width=w*scale; c.height=h*scale; const x=c.getContext('2d'); x.scale(scale,scale); x.drawImage(img,0,0,w,h); res({url:c.toDataURL('image/png'),w,h}); }; img.onerror=rej; img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg); }); }
+async function exportPdf(){
+  if(!window.jspdf){ toast('PDF library not loaded'); return; }
+  const btn=$('#aPdf'); btn.disabled=true; btn.textContent='Building PDF…';
+  try{
+    const {rows,log}=filtered(), A=analyse(rows,log), P=palette(true), {jsPDF}=window.jspdf, doc=new jsPDF({unit:'pt',format:'a4'});
+    const W=595.28, M=36; let y=0;
+    const header=()=>{ doc.setFillColor(11,74,88); doc.rect(0,0,W,64,'F'); doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.text('Excellence 360 · Access & Reading Report',M,30); doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.text('Generated '+new Date().toLocaleString('en-IN')+'   ·   '+CFG.CONTACT_EMAIL,M,48); doc.setTextColor(16,40,46); };
+    header(); y=86;
+    doc.setFontSize(9); doc.setTextColor(90,113,119); doc.text(doc.splitTextToSize('Filters: '+filterSummary(),W-2*M),M,y); y+=22;
+    const k=[['Enquiries',A.total],['Waiting',A.pending],['Approved',A.approved],['Rejected / closed',A.closed],['Approval rate',A.rate==null?'—':A.rate+'%'],['Median decision',A.median==null?'—':(A.median<48?Math.round(A.median)+' h':(A.median/24).toFixed(1)+' d')],['Active readers',A.readers],['Pages viewed',A.views]];
+    const kw=(W-2*M-3*8)/4;
+    k.forEach((t,i)=>{ const x=M+(i%4)*(kw+8), yy=y+Math.floor(i/4)*54; doc.setDrawColor(211,222,223); doc.setFillColor(242,246,246); doc.roundedRect(x,yy,kw,46,5,5,'FD'); doc.setTextColor(224,103,63); doc.setFont('helvetica','bold'); doc.setFontSize(17); doc.text(String(t[1]),x+10,yy+22); doc.setTextColor(90,113,119); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.text(t[0],x+10,yy+37); });
+    y+=118;
+    const charts=chartSet(A,P).filter(c=>c.svg);
+    for(const c of charts){
+      const img=await svgToPng(c.svg), dw=W-2*M, dh=dw*img.h/img.w;
+      if(y+dh+34>812){ doc.addPage(); header(); y=86; }
+      doc.setTextColor(16,40,46); doc.setFont('helvetica','bold'); doc.setFontSize(11.5); doc.text(c.title,M,y); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(90,113,119); doc.text(c.note,M,y+12);
+      doc.addImage(img.url,'PNG',M,y+18,dw,dh); y+=dh+40;
+    }
+    doc.addPage(); header();
+    doc.setTextColor(16,40,46); doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('Requests ('+rows.length+')',M,90);
+    doc.autoTable({startY:98,margin:{left:M,right:M,top:80},styles:{fontSize:7.5,cellPadding:3,overflow:'linebreak'},headStyles:{fillColor:[11,74,88]},alternateRowStyles:{fillColor:[242,246,246]},
+      head:[['Submitted','Name','Email','Designation','Organisation','Sections','Status','Pages']],
+      body:[...rows].reverse().map(r=>[fmtDate(r.Submitted),r.Name||'',r.Email||'',r.Designation||'',r.Organisation||'',String(r['Sections requested']||''),r._st,+r['Pages viewed']||0]),
+      didDrawPage:()=>{ header(); }});
+    const n=doc.getNumberOfPages(); for(let i=1;i<=n;i++){ doc.setPage(i); doc.setFontSize(8); doc.setTextColor(90,113,119); doc.text('Page '+i+' of '+n,W-M,828,{align:'right'}); doc.text('Ajeenkya D Y Patil University · Excellence 360 portal',M,828); }
+    saveBlob(doc.output('blob'),'Excellence360-report-'+stamp()+'.pdf'); toast('PDF report downloaded');
+  }catch(e){ console.error(e); toast('Could not build the PDF: '+e.message); }
+  btn.disabled=false; btn.textContent='PDF report';
 }
 
 /* ---------- tour video chapters ---------- */
@@ -1249,7 +1557,7 @@ function route(){
   else if(h==='compass'||h==='ladder'||h==='tour'){ document.getElementById(h).scrollIntoView(); }
   else if(h.startsWith('c-')) {}
   else window.scrollTo(0,0);
-  if(v==='admin' && adminKey) loadAdmin();
+  if(v==='admin' && adminToken && !adminData) loadAdmin();
 }
 window.addEventListener('hashchange',route);
 $('#vList').onclick=()=>{ $('#vList').setAttribute('aria-pressed',true); $('#vWall').setAttribute('aria-pressed',false); $('#tocList').hidden=false; $('#tocWall').hidden=true; };
