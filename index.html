@@ -95,14 +95,16 @@ h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.
 .orbit{position:relative;width:min(450px,100%);aspect-ratio:1;margin:0 auto}
 .dial{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .dial text{font:600 9px var(--mono);fill:var(--on-teal-muted)}
-.ring{position:absolute;inset:0;animation:spin 90s linear infinite}
-.orbit:hover .ring,.orbit:focus-within .ring{animation-play-state:paused}
+.ring{position:absolute;inset:0}
 .node{position:absolute;left:50%;top:50%;width:0;height:0}
-.node .cr{position:absolute;left:0;top:0;width:0;height:0;animation:spin 90s linear infinite reverse}
-.node button{position:absolute;left:0;top:0;transform:translate(-50%,-50%);border:1.5px solid rgba(255,255,255,.35);background:rgba(7,40,48,.85);color:#fff;border-radius:999px;padding:7px 12px;font:700 12px var(--body);white-space:nowrap;cursor:pointer;backdrop-filter:blur(4px);transition:background .2s,border-color .2s}
-.orbit:hover .node .cr,.orbit:focus-within .node .cr{animation-play-state:paused}
+.node button{position:absolute;left:0;top:0;transform:translate(-50%,-50%);border:1.5px solid rgba(220,240,243,.55);background:#0a2f37;color:#fff;border-radius:999px;padding:8px 18px;font:700 16px/1 var(--body);letter-spacing:.01em;text-align:center!important;box-shadow:0 4px 14px rgba(0,0,0,.25);white-space:nowrap;cursor:pointer;backdrop-filter:blur(4px);transition:background .2s,border-color .2s}
 .node button:hover,.node button:focus-visible{background:var(--coral);border-color:var(--coral)}
-.node button small{display:block;font:500 10px var(--mono);color:var(--on-teal-muted)}
+.node button small{display:none}
+.node button.hot{background:var(--coral);border-color:var(--coral)}
+.orbit-core{position:absolute;inset:24%;border-radius:50%;border:1.5px solid rgba(224,103,63,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-align:center!important}
+.orbit-core b{font:800 clamp(48px,7vw,84px)/1 var(--display);color:var(--coral);letter-spacing:-.02em}
+.orbit-core span{font:600 clamp(10px,1.2vw,13px) var(--body);letter-spacing:.14em;color:var(--on-teal-muted)}
+.orbit-hint b{color:var(--on-teal)}
 .node button:hover small{color:#fff}
 .orbit .book{position:absolute;left:33%;right:33%;top:50%;transform:translateY(-50%);display:block;perspective:1200px}
 .orbit .book-3d{width:100%}
@@ -423,7 +425,7 @@ footer a{color:var(--on-teal)}
   .lrow{grid-template-columns:110px repeat(4,minmax(150px,1fr))}
   .ladder-scroll{overflow-x:auto}
   .kpi-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .orbit{width:min(420px,92vw)}
+  .orbit{width:min(420px,80vw)}
   .hero .wrap{grid-template-columns:1fr;padding-block:40px 56px}
   .book{order:-1}.book-3d{width:min(220px,60vw)}
   .q-grid{grid-template-columns:1fr}
@@ -433,7 +435,7 @@ footer a{color:var(--on-teal)}
   .viz-grid{grid-template-columns:1fr}
 }
 @media (max-width:560px){
-  .node button{padding:5px 8px;font-size:10px}.node button small{display:none}
+  .node button{padding:5px 9px;font-size:11.5px}
   .orbit .book-tag{display:none}
   .form{grid-template-columns:1fr}
   .track{grid-template-columns:1fr}.today{display:none}
@@ -511,15 +513,9 @@ footer a{color:var(--on-teal)}
         <div class="orbit" id="orbit">
           <svg class="dial" id="dial" viewBox="-250 -250 500 500" aria-hidden="true"></svg>
           <div class="ring" id="ring"></div>
-          <div class="book">
-            <div class="book-3d" id="book" role="button" tabindex="0" aria-label="Open the cover page">
-              <span class="spine"></span><span class="pages"></span>
-              <img src="pages/p001.webp" alt="Book cover: University Excellence 360°" draggable="false">
-              <span class="book-tag">305 pages · 3 sections</span>
-            </div>
-          </div>
+          <div class="orbit-core" id="book" role="button" tabindex="0" aria-label="Open the book cover"><b>360°</b><span>VIEW OF YOUR UNIVERSITY</span></div>
         </div>
-        <p class="orbit-hint">EVERY FRAMEWORK IN ONE ORBIT · TAP ONE TO JUMP TO ITS CHAPTER</p>
+        <p class="orbit-hint" id="orbitHint">EVERY FRAMEWORK IN ONE ORBIT · TAP ONE TO JUMP TO ITS CHAPTER</p>
       </div>
     </div>
   </section>
@@ -1032,12 +1028,25 @@ function renderHome(){
   $('#navGrid').innerHTML=tiles.map(t=>`<button class="tile" type="button" data-page="${t[2]}"><b>${esc(t[0])}</b><span>${esc(t[1])}</span><span class="pg">p. ${label(t[2])} →</span></button>`).join('');
   $$('#navGrid .tile').forEach(b=>b.onclick=()=>openPage(+b.dataset.page));
   // ---- 360° orbit ----
-  const dial=$('#dial'); let d='<circle r="236" fill="none" stroke="rgba(255,255,255,.14)"/><circle r="200" fill="none" stroke="rgba(255,255,255,.08)" stroke-dasharray="2 6"/>';
-  for(let a=0;a<360;a+=5){ const r1=a%30===0?222:229, rad=(a-90)*Math.PI/180; d+=`<line x1="${(r1*Math.cos(rad)).toFixed(1)}" y1="${(r1*Math.sin(rad)).toFixed(1)}" x2="${(236*Math.cos(rad)).toFixed(1)}" y2="${(236*Math.sin(rad)).toFixed(1)}" stroke="rgba(255,255,255,${a%30===0?.45:.18})"/>`;
-    if(a%30===0) d+=`<text x="${(211*Math.cos(rad)).toFixed(1)}" y="${(211*Math.sin(rad)+3).toFixed(1)}" text-anchor="middle">${a}°</text>`; }
+  const dial=$('#dial'); let d='<circle r="205" fill="none" stroke="rgba(220,240,243,.28)" stroke-width="1.5"/><circle r="236" fill="none" stroke="rgba(220,240,243,.07)"/>';
   dial.innerHTML=d;
   const fws=[['NAAC','Ch 1',93],['NBA','Ch 2',105],['NIRF','Ch 3',120],['QS','Ch 4',137],['THE','Ch 5',153],['I-GAUGE','Ch 6',176],['ISO · NABL','Ch 6',179],['ABET · AACSB','Ch 7',186],['Awards','Ch 8',201],['14 bodies','Part II',235]];
-  $('#ring').innerHTML=fws.map((f,i)=>{ const ang=(i/fws.length)*2*Math.PI-Math.PI/2; const R=41; return `<div class="node" style="left:${50+R*Math.cos(ang)}%;top:${50+R*Math.sin(ang)}%"><div class="cr"><button type="button" data-page="${f[2]}">${f[0]}<small>${f[1]} · p. ${label(f[2])}</small></button></div></div>`; }).join('');
+  { // labels travel round the ring, always upright and level; one framework is highlighted at a time
+    $('#ring').innerHTML=fws.map((f,i)=>`<div class="node"><button type="button" data-i="${i}" data-page="${f[2]}" aria-label="${f[0]}, ${f[1]}, page ${label(f[2])}">${f[0]}</button></div>`).join('');
+    const nodes=$$('#ring .node'), RAD=41, CNT=fws.length;
+    const place=a=>nodes.forEach((n,i)=>{ const t=a+(i/CNT)*2*Math.PI-Math.PI/2; n.style.left=(50+RAD*Math.cos(t))+'%'; n.style.top=(50+RAD*Math.sin(t))+'%'; });
+    const hint=$('#orbitHint'), btns=$$('#ring button');
+    const hot=i=>{ btns.forEach((b,k)=>b.classList.toggle('hot',k===i)); const f=fws[i]; hint.innerHTML=`<b>${f[0]}</b> · ${f[1]} · p. ${label(f[2])} &nbsp;·&nbsp; TAP ANY FRAMEWORK TO OPEN ITS CHAPTER`; };
+    btns.forEach((b,i)=>{ b.onmouseenter=()=>hot(i); b.onfocus=()=>hot(i); });
+    if(!window.__orbit){ window.__orbit={a:0,paused:false,last:0,h:0};
+      const O=window.__orbit, orb=$('#orbit'), still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      orb.addEventListener('mouseenter',()=>O.paused=true); orb.addEventListener('mouseleave',()=>O.paused=false);
+      orb.addEventListener('focusin',()=>O.paused=true); orb.addEventListener('focusout',()=>O.paused=false);
+      const tick=ts=>{ if(O.last&&!O.paused&&!still&&!document.hidden) O.a+=(ts-O.last)/1000*(2*Math.PI/140); O.last=ts; O.place&&O.place(O.a); requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+      setInterval(()=>{ if(!O.paused&&!document.hidden&&O.hot){ O.h=(O.h+1)%CNT; O.hot(O.h); } },2600); }
+    window.__orbit.place=place; window.__orbit.hot=hot; place(window.__orbit.a); hot(window.__orbit.h);
+  }
   $$('#ring button').forEach(b=>b.onclick=()=>openPage(+b.dataset.page));
   const last=store.get('ex360_last',null), cb=$('#continueBtn');
   if(last && last>1){ cb.hidden=false; cb.innerHTML=`<svg class="icon"><use href="#i-mark"/></svg>Continue reading at p. ${label(last)}`; cb.onclick=()=>openPage(last); }
