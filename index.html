@@ -528,7 +528,7 @@ footer a{color:var(--on-teal)}
     <div class="wrap">
       <div class="block-head">
         <div><div class="eyebrow">2-minute tour</div><h2>See the whole portal in action</h2></div>
-        <p class="muted">Twelve features in just over two minutes. Pick a chapter to jump straight to it.</p>
+        <p class="muted">Twelve features in just over two minutes, with narration and captions. Pick a chapter to jump straight to it.</p>
       </div>
       <div class="tour">
         <div class="tour-frame"><video id="tourVid" controls playsinline preload="metadata" poster="media/tour-poster.jpg"><source src="media/excellence360-tour.mp4" type="video/mp4"></video></div>
@@ -1579,7 +1579,7 @@ async function exportPdf(){
 
 /* ---------- tour video chapters ---------- */
 (function(){
-  const CH=[['Introducing the book',0],['The portal at a glance',6.4],['The framework orbit',16.4],['Secure reader access',27.4],['Smart contents',38.4],['305-page digital reader',45.4],['Readiness Compass',60.4],['2026 to 2029 roadmap',70.4],['Role-based reading paths',82.4],['Accreditation navigator',90.4],['NEW · Ask-us chatbot',97.4],['NEW · PDF copy on approval',104.4],['NEW · My account tracking',112.4],['NEW · QR scan & share',119.4],['Outro',127.4]];
+  const CH=[['Introducing the book',0],['The portal at a glance',6.5],['The framework orbit',16],['Secure reader access',28],['Smart contents',41],['305-page digital reader',46],['Readiness Compass',62],['2026 to 2029 roadmap',71],['Role-based reading paths',82.5],['Accreditation navigator',91],['NEW · Ask-us chatbot',97],['NEW · PDF copy on approval',104.5],['NEW · My account tracking',112],['NEW · QR scan & share',119.5],['Outro',127]];
   const v=$('#tourVid'), box=$('#chapters'); if(!v||!box) return;
   const mmss=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
   box.innerHTML=CH.map((c,i)=>`<button type="button" data-t="${c[1]}"><span class="n">${i>1&&i<CH.length-1?String(i-1).padStart(2,'0'):'—'}</span><span>${esc(c[0])}</span><span class="t">${mmss(c[1])}</span></button>`).join('');
