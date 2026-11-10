@@ -1,0 +1,1273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Excellence 360 Digital Edition</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Digital edition of University Excellence 360°, Accreditation, Ranking & Recognition with Strategic Planner 2027–2029 — Ajeenkya D Y Patil University, Pune.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Lato:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: a book-portal — teal "cover" band, then working sections; the reader is a full-screen overlay. */
+:root{
+  --teal:#0B4A58; --teal-2:#126577; --coral:#E0673F; --coral-soft:#FBE7DF;
+  --bg:#F2F6F6; --surface:#FFFFFF; --surface-2:#E8EFEF; --line:#D3DEDF;
+  --fg:#10282E; --muted:#5A7177; --on-teal:#F3FAFA; --on-teal-muted:#A9C9CE;
+  --ok:#1D8A5B; --ok-bg:#E1F3EA; --warn:#B7791F; --warn-bg:#FBF0DA; --bad:#C2413A; --bad-bg:#FBE4E2;
+  --shadow:0 1px 2px rgba(11,74,88,.08),0 8px 24px rgba(11,74,88,.08);
+  --display:"Archivo","Segoe UI",system-ui,sans-serif; --body:"Lato","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --teal:#0E5262; --teal-2:#2B8597; --coral:#F07D57; --coral-soft:#3A2219;
+  --bg:#0A171B; --surface:#112328; --surface-2:#173037; --line:#22404A;
+  --fg:#E4EFF0; --muted:#93AEB4; --on-teal:#F3FAFA; --on-teal-muted:#A9C9CE;
+  --ok:#5FD39C; --ok-bg:#12352A; --warn:#F2B75B; --warn-bg:#3A2D12; --bad:#F58A82; --bad-bg:#3D1C1A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --teal:#0E5262; --teal-2:#2B8597; --coral:#F07D57; --coral-soft:#3A2219;
+  --bg:#0A171B; --surface:#112328; --surface-2:#173037; --line:#22404A;
+  --fg:#E4EFF0; --muted:#93AEB4; --on-teal:#F3FAFA; --on-teal-muted:#A9C9CE;
+  --ok:#5FD39C; --ok-bg:#12352A; --warn:#F2B75B; --warn-bg:#3A2D12; --bad:#F58A82; --bad-bg:#3D1C1A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3); color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);margin:0}
+body{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
+h1,h2,h3,.eyebrow,.nav,.brand,.btn,.chip,.pgno,.mono,th{text-align:left;hyphens:manual;-webkit-hyphens:manual}
+.preview-banner,.toast,.r-lock,.thumb{text-align:center}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--teal)}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+.eyebrow{font:700 12px/1.2 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--coral)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:11px 20px;font:700 15px/1 var(--body);cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-ghost{background:transparent;border:1.5px solid currentColor}
+.btn-teal{background:var(--teal);color:var(--on-teal)}
+.btn-sm{padding:7px 14px;font-size:13px}
+.icon{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* top bar */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--teal);color:var(--on-teal)}
+.topbar .wrap{display:flex;align-items:center;gap:16px;min-height:60px;flex-wrap:wrap;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto;min-width:0}
+.brand-mark{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--coral);font:800 13px var(--display);color:#fff;flex:none}
+.brand b{font:700 15px/1.1 var(--display);display:block}
+.brand small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-teal-muted)}
+.nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.nav a{padding:7px 12px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;color:var(--on-teal-muted)}
+.nav a[aria-current="page"],.nav a:hover{color:var(--on-teal);background:rgba(255,255,255,.1)}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 6px 5px 12px;cursor:pointer;background:none;color:var(--on-teal)}
+.who .dot{width:8px;height:8px;border-radius:50%;background:var(--on-teal-muted)}
+.who[data-state="approved"] .dot{background:#6EE7A8}.who[data-state="pending"] .dot{background:#F6C451}
+.who span.pill{background:rgba(255,255,255,.14);border-radius:999px;padding:3px 10px;font-weight:700}
+.preview-banner{background:var(--warn-bg);color:var(--warn);font-size:13px;text-align:center;padding:6px 16px}
+
+/* hero */
+.hero{background:var(--teal);color:var(--on-teal);overflow:hidden;position:relative}
+.hero::after{content:"";position:absolute;right:-180px;top:-200px;width:620px;height:620px;border-radius:50%;border:70px solid rgba(255,255,255,.04)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:56px 72px;position:relative;z-index:1}
+.hero h1{font-size:clamp(40px,6.4vw,76px);line-height:.98;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--coral)}
+.hero .sub{font:600 clamp(20px,2.4vw,28px)/1.2 var(--display);margin-top:14px}
+.hero .lede{color:var(--on-teal-muted);max-width:56ch;margin:18px 0 26px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .author{display:flex;gap:12px;align-items:center;margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.15);font-size:14px}
+.hero .author b{display:block;font-size:16px}
+.book{perspective:1600px;display:flex;justify-content:center}
+.book-3d{position:relative;width:min(330px,72vw);aspect-ratio:595/842;transform:rotateY(-24deg) rotateX(4deg);transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1);cursor:pointer}
+.book-3d:hover{transform:rotateY(-8deg) rotateX(2deg)}
+.book-3d img{position:absolute;inset:0;width:100%;height:100%;border-radius:3px 6px 6px 3px;box-shadow:24px 30px 50px rgba(0,0,0,.45)}
+.book-3d .pages{position:absolute;top:1.2%;bottom:1.2%;right:-14px;width:16px;transform:rotateY(90deg) translateZ(-8px);transform-origin:left;background:repeating-linear-gradient(90deg,#f4f4f0 0 1px,#d9d9d2 1px 2px)}
+.book-3d .spine{position:absolute;inset:0 auto 0 0;width:16px;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.08));border-radius:3px 0 0 3px}
+.book-tag{position:absolute;left:-18px;bottom:16%;background:var(--coral);color:#fff;font:700 12px var(--body);letter-spacing:.08em;padding:8px 12px;border-radius:6px;transform:translateZ(30px);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+
+/* orbit hero */
+.orbit{position:relative;width:min(450px,100%);aspect-ratio:1;margin:0 auto}
+.dial{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.dial text{font:600 9px var(--mono);fill:var(--on-teal-muted)}
+.ring{position:absolute;inset:0;animation:spin 90s linear infinite}
+.orbit:hover .ring,.orbit:focus-within .ring{animation-play-state:paused}
+.node{position:absolute;left:50%;top:50%;width:0;height:0}
+.node .cr{position:absolute;left:0;top:0;width:0;height:0;animation:spin 90s linear infinite reverse}
+.node button{position:absolute;left:0;top:0;transform:translate(-50%,-50%);border:1.5px solid rgba(255,255,255,.35);background:rgba(7,40,48,.85);color:#fff;border-radius:999px;padding:7px 12px;font:700 12px var(--body);white-space:nowrap;cursor:pointer;backdrop-filter:blur(4px);transition:background .2s,border-color .2s}
+.orbit:hover .node .cr,.orbit:focus-within .node .cr{animation-play-state:paused}
+.node button:hover,.node button:focus-visible{background:var(--coral);border-color:var(--coral)}
+.node button small{display:block;font:500 10px var(--mono);color:var(--on-teal-muted)}
+.node button:hover small{color:#fff}
+.orbit .book{position:absolute;left:33%;right:33%;top:50%;transform:translateY(-50%);display:block;perspective:1200px}
+.orbit .book-3d{width:100%}
+.orbit .book-tag{display:none}
+.orbit-hint{text-align:center!important;font-size:12px;color:var(--on-teal-muted);margin-top:4px;letter-spacing:.06em}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero .big360{position:absolute;right:-2%;bottom:-18%;font:800 clamp(160px,26vw,380px)/1 var(--display);color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.06);pointer-events:none;letter-spacing:-.04em}
+.continue{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;color:var(--on-teal);background:rgba(255,255,255,.08);border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
+.continue:hover{background:rgba(255,255,255,.16)}
+.continue[hidden]{display:none!important}
+
+/* tour video */
+.tour{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
+.tour-frame{position:relative;border-radius:var(--r);overflow:hidden;background:#06161a;box-shadow:var(--shadow);aspect-ratio:16/9}
+.tour-frame video{width:100%;height:100%;display:block;background:#06161a}
+.chapters{display:grid;gap:6px;counter-reset:ch}
+.chapters button{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 12px;cursor:pointer;font-size:14px}
+.chapters button:hover,.chapters button[aria-current="true"]{border-color:var(--coral);background:var(--coral-soft)}
+.chapters .t{font:600 12px var(--mono);color:var(--coral)}
+.chapters .n{font:700 12px var(--mono);color:var(--muted)}
+
+/* QR features */
+.qr-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.25);background:none;color:var(--on-teal);border-radius:999px;padding:6px 12px;font:700 13px var(--body);cursor:pointer}
+.qr-btn:hover{background:rgba(255,255,255,.1)}
+.qr-box{display:grid;place-items:center;gap:10px;text-align:center!important}
+.qr-box .qr{background:#fff;padding:14px;border-radius:12px;box-shadow:var(--shadow);line-height:0}
+.qr-box .qr svg{width:220px;height:220px;display:block}
+.qr-box .url{font:600 12px var(--mono);word-break:break-all;color:var(--muted);max-width:320px}
+.scan-wrap{position:relative;border-radius:12px;overflow:hidden;background:#000;aspect-ratio:1;max-width:360px;margin:0 auto}
+.scan-wrap video{width:100%;height:100%;object-fit:cover;display:block}
+.scan-wrap::after{content:"";position:absolute;inset:18%;border:3px solid var(--coral);border-radius:14px;box-shadow:0 0 0 999px rgba(0,0,0,.35)}
+.scan-line{position:absolute;left:18%;right:18%;height:2px;background:var(--coral);top:20%;animation:scan 2.2s ease-in-out infinite alternate;z-index:2}
+@keyframes scan{to{top:80%}}
+.qr-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+
+/* compass */
+.compass{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)}
+.dims{display:grid;gap:14px}
+.dim label{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:14px}
+.dim label span{font:600 12px var(--mono);color:var(--coral);white-space:nowrap}
+.dim input{width:100%;accent-color:var(--coral)}
+.radar-wrap{display:flex;flex-direction:column;gap:14px;min-width:0}
+.radar{width:100%;max-width:440px;margin:0 auto;display:block;overflow:visible}
+.radar .grid{fill:none;stroke:var(--line)}
+.radar .axis{stroke:var(--line)}
+.radar .lbl{font:700 10.5px var(--body);fill:var(--muted)}
+.radar .target{fill:none;stroke:var(--teal-2);stroke-dasharray:4 4;stroke-width:1.5}
+.radar .you{fill:var(--coral);fill-opacity:.22;stroke:var(--coral);stroke-width:2;transition:all .3s}
+.radar .dot{fill:var(--coral)}
+.verdict{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;padding:16px;border-radius:8px;background:var(--surface-2)}
+.verdict .lvl{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:var(--on-teal);font:800 26px var(--display)}
+.startlist{display:grid;gap:8px}
+.startlist button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 12px;cursor:pointer;font-size:14px}
+.startlist button:hover{border-color:var(--coral)}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);justify-content:center}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:6px;background:var(--coral)}
+.legend i.t{background:none;border-top:2px dashed var(--teal-2)}
+
+/* ladder */
+.ladder{display:grid;gap:8px}
+.lrow{display:grid;grid-template-columns:170px repeat(4,minmax(0,1fr));gap:6px;align-items:stretch}
+.lrow.head div{font:700 12px var(--mono);color:var(--muted);padding:0 10px}
+.lrow .fw{font:800 15px var(--display);display:flex;align-items:center;cursor:pointer;color:var(--teal-2)}
+.lrow .fw:hover{color:var(--coral)}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px;line-height:1.35;text-align:left!important;position:relative}
+.step.y0{background:var(--surface-2);color:var(--muted)}
+.step.y3{background:var(--coral);border-color:var(--coral);color:#fff;font-weight:700}
+.kpi-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:22px}
+.kk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.kk b{font:800 26px var(--display);color:var(--coral)}
+.kk .bars{display:flex;align-items:flex-end;gap:5px;height:46px;margin:10px 0 6px}
+.kk .bars span{flex:1;background:var(--teal-2);border-radius:3px 3px 0 0;opacity:.45;position:relative}
+.kk .bars span:last-child{opacity:1;background:var(--coral)}
+.kk .yrs{display:flex;gap:5px;font:600 10px var(--mono);color:var(--muted)}
+.kk .yrs span{flex:1;text-align:center!important}
+.kk p{margin:4px 0 0;font-size:13px;color:var(--muted);text-align:left!important}
+
+/* progress */
+.journey{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--on-teal-muted)}
+.journey svg{width:34px;height:34px}
+.secprog{height:4px;border-radius:2px;background:rgba(255,255,255,.25);margin-top:8px;overflow:hidden}
+.secprog i{display:block;height:100%;background:#fff}
+.toc-row.seen>span:first-child::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:8px;vertical-align:1px}
+
+/* page turn */
+.r-page.turn-next{animation:turnOut .22s ease-in forwards;transform-origin:left center}
+.r-page.turn-prev{animation:turnOutR .22s ease-in forwards;transform-origin:right center}
+.r-page.turn-in{animation:turnIn .28s ease-out}
+@keyframes turnOut{to{transform:perspective(1800px) rotateY(-70deg);opacity:.4}}
+@keyframes turnOutR{to{transform:perspective(1800px) rotateY(70deg);opacity:.4}}
+@keyframes turnIn{from{transform:perspective(1800px) rotateY(12deg) translateX(14px);opacity:.5}}
+
+/* sections */
+section.block{padding-block:64px;scroll-margin-top:72px}
+.block-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.block-head h2{font-size:clamp(26px,3.2vw,38px);margin-top:8px}
+.block-head p{max-width:52ch;margin:0}
+.q-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.q-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px;cursor:pointer;text-align:left;transition:border-color .2s,transform .2s}
+.q-card:hover{border-color:var(--coral);transform:translateY(-2px)}
+.q-card .num{font:800 54px/1 var(--display);color:var(--teal-2);opacity:.35}
+.q-card h3{font-size:22px}
+.q-card .q{font:italic 15px var(--body);color:var(--coral)}
+.q-card .facts{display:flex;gap:18px;margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+.q-card .facts b{display:block;font:700 20px var(--display);color:var(--fg)}
+
+/* plan clock */
+.clock{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)}
+.clock-top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:baseline}
+.clock-count{font:800 clamp(34px,5vw,56px)/1 var(--display);color:var(--coral)}
+.track{position:relative;margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.yr{padding:16px;border-radius:8px;background:var(--surface-2);min-height:150px;display:flex;flex-direction:column;gap:6px;cursor:pointer;border:0;text-align:left}
+.yr:hover{outline:2px solid var(--teal-2)}
+.yr .y{font:800 26px var(--display)}
+.yr .th{font-weight:700;color:var(--teal-2)}
+.yr p{font-size:13.5px;margin:0;color:var(--muted)}
+.yr.now{background:var(--coral-soft)}
+.today{position:absolute;top:-22px;bottom:-6px;width:2px;background:var(--coral)}
+.today span{position:absolute;top:-4px;left:6px;white-space:nowrap;font:700 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--coral)}
+.months{display:grid;grid-template-columns:repeat(36,1fr);margin-top:6px;gap:1px}
+.months i{height:6px;background:var(--line);border-radius:1px}
+.months i.done{background:var(--teal-2)}
+
+/* paths */
+.paths{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:24px}
+.roles{display:flex;flex-direction:column;gap:6px}
+.role{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:12px 14px;text-align:left;cursor:pointer;font-weight:700}
+.role[aria-pressed="true"]{background:var(--teal);color:var(--on-teal);border-color:var(--teal)}
+.path-out{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.steps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.steps li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px;border-radius:8px;background:var(--surface-2);cursor:pointer}
+.steps li:hover{outline:2px solid var(--coral)}
+.steps .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--coral);color:#fff;font:700 13px var(--mono)}
+.steps .then .n{background:var(--teal-2)}
+
+/* navigator */
+.nav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:4px;min-height:112px;transition:border-color .2s}
+.tile:hover{border-color:var(--teal-2)}
+.tile b{font:800 20px var(--display);color:var(--teal-2)}
+.tile span{font-size:13px;color:var(--muted)}
+.tile .pg{margin-top:auto;font:600 12px var(--mono);color:var(--coral)}
+
+/* search */
+.search-box{display:flex;gap:8px;background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:6px 6px 6px 18px;align-items:center}
+.search-box:focus-within{border-color:var(--coral)}
+.search-box input{flex:1;border:0;background:none;outline:none;padding:8px 0;min-width:0}
+.results{margin-top:14px;display:grid;gap:8px}
+.res{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start}
+.res:hover{border-color:var(--coral)}
+.res mark{background:var(--coral-soft);color:inherit;padding:0 2px;border-radius:2px}
+.res small{display:block;color:var(--muted)}
+
+/* contents view */
+.contents-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;padding-block:40px 80px}
+.rail{position:sticky;top:84px;align-self:start;display:flex;flex-direction:column;gap:6px}
+.rail a{display:block;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;border-left:4px solid transparent}
+.rail a:hover{background:var(--surface)}
+.rail a.s1{border-color:var(--teal-2)}.rail a.s2{border-color:var(--coral)}.rail a.s3{border-color:#2B9C8F}
+.view-toggle{display:flex;background:var(--surface-2);border-radius:999px;padding:4px;gap:4px;width:max-content}
+.view-toggle button{border:0;background:none;padding:7px 14px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer}
+.view-toggle button[aria-pressed="true"]{background:var(--surface);box-shadow:var(--shadow)}
+.sec-block{margin-top:34px;scroll-margin-top:84px}
+.sec-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-radius:var(--r);color:#fff;cursor:pointer}
+.sec-head h3{font-size:20px}
+.sec-head .mono{background:rgba(255,255,255,.18);border-radius:6px;padding:2px 8px}
+.toc-l2{border-bottom:1px solid var(--line)}
+.toc-l2>summary{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) auto 24px;gap:12px;align-items:center;padding:12px 6px;cursor:pointer;font-weight:700}
+.toc-l2>summary::-webkit-details-marker{display:none}
+.toc-l2>summary .chev{transition:transform .2s;color:var(--muted);width:30px;height:30px;padding:6px;margin:-6px;border-radius:6px;cursor:pointer}
+.toc-l2>summary .chev:hover{background:var(--surface-2);color:var(--fg)}
+.toc-l2[open]>summary .chev{transform:rotate(90deg)}
+.toc-row{display:grid;grid-template-columns:minmax(0,1fr) auto 18px;gap:12px;align-items:center;padding:8px 6px 8px 22px;border-radius:6px;cursor:pointer;font-size:15px}
+.toc-row:hover,.toc-l2>summary:hover{background:var(--surface)}
+.toc-row.l4{padding-left:40px;font-size:14px}
+.pgno{font:600 13px var(--mono);color:var(--coral)}
+.lock{width:16px;height:16px;color:var(--muted)}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:14px;margin-top:24px}
+.thumb{border:0;background:none;padding:0;cursor:pointer;text-align:center;font:600 12px var(--mono);color:var(--muted)}
+.thumb .img{position:relative;aspect-ratio:595/842;border-radius:4px;overflow:hidden;background:var(--surface-2);box-shadow:var(--shadow);margin-bottom:6px}
+.thumb .sp{position:absolute;inset:0;background-size:1000% 400%}
+.thumb.locked .sp{filter:blur(2.5px) saturate(.6);opacity:.7}
+.r-page .sp{position:absolute;inset:0;background-size:1000% 400%;filter:blur(7px);opacity:.8}
+.thumb.locked .img::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B4A58' stroke-width='2'%3E%3Crect x='5' y='11' width='14' height='10' rx='2' fill='white'/%3E%3Cpath d='M8 11V7a4 4 0 0 1 8 0v4'/%3E%3C/svg%3E") center/34px no-repeat}
+.thumb:hover .img{outline:2px solid var(--coral)}
+
+/* reader */
+.reader{position:fixed;inset:0;z-index:80;background:#0E1D21;color:#E9F2F3;display:flex;flex-direction:column}
+.reader[hidden]{display:none!important}
+.r-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));background:#0B4A58}
+.r-bar .crumb{margin-right:auto;min-width:0;font-size:13px;color:#A9C9CE;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.r-bar .crumb b{color:#fff;font-size:15px;display:block;overflow:hidden;text-overflow:ellipsis}
+.r-btn{border:0;background:rgba(255,255,255,.1);color:#fff;border-radius:8px;height:38px;min-width:38px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-weight:700;font-size:13px}
+.r-btn:hover{background:rgba(255,255,255,.2)}
+.r-btn.coral{background:#E0673F}
+.r-btn[aria-pressed="true"]{background:#E0673F}
+.r-go{width:64px;height:38px;border-radius:8px;border:0;background:rgba(255,255,255,.12);color:#fff;text-align:center;font:600 14px var(--mono)}
+.r-stage{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:20px 12px 40px}
+.r-page{position:relative;width:min(100%,var(--pw,780px));height:auto;aspect-ratio:595/842;align-self:flex-start;background:#fff;box-shadow:0 20px 50px rgba(0,0,0,.5);flex:none;user-select:none;-webkit-user-select:none}
+.r-page img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;image-rendering:auto}
+.r-page .hot{position:absolute;cursor:pointer;border-radius:3px}
+.r-page .hot:hover{background:rgba(224,103,63,.18);outline:1.5px solid rgba(224,103,63,.7)}
+.wm{position:absolute;inset:0;pointer-events:none;opacity:.075;background-repeat:repeat}
+.r-foot{display:flex;align-items:center;gap:12px;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:#0B2B33}
+.r-foot input[type=range]{flex:1;accent-color:#E0673F;min-width:0}
+.r-lock{position:absolute;inset:0;display:grid;place-items:center;background:rgba(11,74,88,.92);color:#fff;text-align:center;padding:24px}
+.r-lock h3{font-size:24px;margin-bottom:8px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:rgba(6,20,24,.6);padding:16px;backdrop-filter:blur(4px)}
+.modal[hidden]{display:none!important}
+.sheet{background:var(--surface);color:var(--fg);border-radius:14px;width:min(640px,100%);max-height:calc(100dvh - 32px);overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.sheet-head{padding:22px 24px 0;display:flex;justify-content:space-between;gap:12px}
+.sheet-head h3{font-size:22px}
+.x{border:0;background:var(--surface-2);border-radius:50%;width:34px;height:34px;cursor:pointer;flex:none}
+.tabs{display:flex;gap:4px;padding:16px 24px 0;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{border:0;background:none;padding:10px 12px;font-weight:700;font-size:14px;cursor:pointer;border-bottom:3px solid transparent;color:var(--muted);white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--fg);border-color:var(--coral)}
+.sheet-body{padding:20px 24px 24px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form .full{grid-column:1/-1}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid var(--line);background:var(--bg);border-radius:8px;padding:10px 12px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--coral);outline:none}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.chk{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:14px}
+.chk:has(input:checked){border-color:var(--teal-2);background:var(--surface-2)}
+.note{font-size:13px;color:var(--muted)}
+.msg{padding:12px 14px;border-radius:8px;font-size:14px;margin-top:14px}
+.msg.ok{background:var(--ok-bg);color:var(--ok)}.msg.err{background:var(--bad-bg);color:var(--bad)}.msg.info{background:var(--warn-bg);color:var(--warn)}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0 4px}
+.flow div{background:var(--surface-2);border-radius:8px;padding:10px;font-size:13px}
+.flow b{display:block;font:700 12px var(--mono);color:var(--coral)}
+
+/* admin */
+.admin{padding-block:40px 80px}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:24px 0}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.kpi b{display:block;font:800 30px var(--display)}
+.kpi span{font-size:13px;color:var(--muted)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--teal);color:var(--on-teal);border-color:var(--teal)}
+.table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:14px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+.status{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:700;font-size:12px}
+.st-Pending{background:var(--warn-bg);color:var(--warn)}.st-Approved{background:var(--ok-bg);color:var(--ok)}.st-Rejected,.st-Revoked,.st-Expired{background:var(--bad-bg);color:var(--bad)}
+.decide{display:grid;gap:8px;margin-top:8px;padding:10px;border-radius:8px;background:var(--surface-2)}
+.decide .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.decide input[type=number]{width:80px}
+.decide input,.decide textarea{border:1px solid var(--line);border-radius:6px;padding:6px 8px;background:var(--surface)}
+.log{display:grid;gap:4px;max-height:360px;overflow:auto;font-size:13px}
+.log div{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:10px;padding:6px 10px;border-radius:6px;background:var(--surface)}
+footer{background:var(--teal);color:var(--on-teal-muted);font-size:14px}
+footer .wrap{padding-block:32px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--on-teal)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700;z-index:100;font-size:14px}
+
+@media (max-width:900px){
+  .tour{grid-template-columns:1fr}
+  .compass{grid-template-columns:1fr}
+  .lrow{grid-template-columns:110px repeat(4,minmax(150px,1fr))}
+  .ladder-scroll{overflow-x:auto}
+  .kpi-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .orbit{width:min(420px,92vw)}
+  .hero .wrap{grid-template-columns:1fr;padding-block:40px 56px}
+  .book{order:-1}.book-3d{width:min(220px,60vw)}
+  .q-grid{grid-template-columns:1fr}
+  .paths{grid-template-columns:1fr}.roles{flex-direction:row;flex-wrap:wrap}
+  .contents-layout{grid-template-columns:1fr}.rail{position:static;flex-direction:row;flex-wrap:wrap}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .node button{padding:5px 8px;font-size:10px}.node button small{display:none}
+  .orbit .book-tag{display:none}
+  .form{grid-template-columns:1fr}
+  .track{grid-template-columns:1fr}.today{display:none}
+  .flow{grid-template-columns:1fr}
+  .r-hide-sm{display:none!important}
+  .nav a{padding:6px 9px}
+  .brand small,#whoText{display:none}
+  .qr-btn span{display:none}
+  .topbar .wrap{gap:8px}
+}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-open" viewBox="0 0 24 24"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-mark" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h7v-4M17 21v-.01"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M17 6l3 3M14 9l2 2"/></symbol>
+</svg>
+
+<div id="previewBanner" class="preview-banner" hidden>Preview mode: requests are saved only in this browser. Approve them yourself in the <a href="#admin">Admin console</a> (key: <b class="mono">demo</b>). Connect the Google Sheet backend to go live.</div>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#home"><span class="brand-mark">360°</span><span><b>Excellence 360</b><small>ADYPU · Digital Edition</small></span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#contents" data-nav="contents">Contents</a>
+      <a href="#compass" data-nav="compass">Compass</a>
+      <a href="#search" data-nav="search">Search</a>
+    </nav>
+    <button class="qr-btn" id="scanBtn" type="button" aria-label="Scan a QR code"><svg class="icon"><use href="#i-scan"/></svg><span>Scan</span></button>
+    <button class="qr-btn" id="phoneBtn" type="button" aria-label="Open on your phone"><svg class="icon"><use href="#i-qr"/></svg><span>On phone</span></button>
+    <button class="who" id="whoBtn" type="button" data-state="guest"><span class="dot"></span><span id="whoText">Guest</span><span class="pill" id="whoAction">Get access</span></button>
+  </div>
+</header>
+
+<main id="viewHome">
+  <section class="hero">
+    <div class="big360" aria-hidden="true">360°</div>
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Ajeenkya D Y Patil University · Pune · First Edition 2027</div>
+        <h1 style="margin-top:18px">University Excellence <em>360°</em></h1>
+        <div class="sub">Accreditation, Ranking &amp; Recognition<br>with Strategic Planner 2027–2029</div>
+        <p class="lede">A complete handbook on governance, quality assurance, accreditation, rankings, recognition and strategic growth. 305 pages, three sections, every page one click from the contents.</p>
+        <div class="ctas">
+          <a class="btn btn-coral" href="#contents"><svg class="icon"><use href="#i-list"/></svg>Open the contents</a>
+          <a class="btn btn-ghost" href="#tour"><svg class="icon"><use href="#i-play"/></svg>Watch the tour</a>
+          <button class="btn btn-ghost" type="button" data-open-access="request"><svg class="icon"><use href="#i-key"/></svg>Request reader access</button>
+        </div>
+        <button class="continue" type="button" id="continueBtn" hidden></button>
+        <div class="journey" id="journey" style="margin-top:22px"></div>
+        <div class="author">
+          <div><span class="muted" style="color:var(--on-teal-muted)">Author</span><b>Dr. Rakesh Kumar Jain</b><span style="color:var(--on-teal-muted)">Vice Chancellor, Ajeenkya D Y Patil University, Pune</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="orbit" id="orbit">
+          <svg class="dial" id="dial" viewBox="-250 -250 500 500" aria-hidden="true"></svg>
+          <div class="ring" id="ring"></div>
+          <div class="book">
+            <div class="book-3d" id="book" role="button" tabindex="0" aria-label="Open the cover page">
+              <span class="spine"></span><span class="pages"></span>
+              <img src="pages/p001.webp" alt="Book cover: University Excellence 360°" draggable="false">
+              <span class="book-tag">305 pages · 3 sections</span>
+            </div>
+          </div>
+        </div>
+        <p class="orbit-hint">EVERY FRAMEWORK IN ONE ORBIT · TAP ONE TO JUMP TO ITS CHAPTER</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="tour">
+    <div class="wrap">
+      <div class="block-head">
+        <div><div class="eyebrow">100-second tour</div><h2>See the whole portal in action</h2></div>
+        <p class="muted">Eight features in under two minutes. Pick a chapter to jump straight to it.</p>
+      </div>
+      <div class="tour">
+        <div class="tour-frame"><video id="tourVid" controls playsinline preload="metadata" poster="media/tour-poster.jpg"><source src="media/excellence360-tour.mp4" type="video/mp4"></video></div>
+        <div class="chapters" id="chapters"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="block-head">
+        <div><div class="eyebrow">How the book is built</div><h2>Three sections, three questions</h2></div>
+        <p class="muted">Each section answers a different question. Pick one to see its chapters.</p>
+      </div>
+      <div class="q-grid" id="qGrid"></div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0" id="compass">
+    <div class="wrap">
+      <div class="block-head">
+        <div><div class="eyebrow">Readiness Compass</div><h2>Where does your institution stand?</h2></div>
+        <p class="muted">Rate eight areas on the five maturity levels used by NAAC's MBGL model. The compass draws your shape against the 2029 target and points you to the pages to read first. It is a self-reflection tool, not an official score, and nothing you enter leaves this device.</p>
+      </div>
+      <div class="compass">
+        <div class="dims" id="dims"></div>
+        <div class="radar-wrap">
+          <svg class="radar" id="radar" viewBox="-190 -170 380 340" role="img" aria-label="Radar chart of your ratings"></svg>
+          <div class="legend"><span><i></i>Your rating</span><span><i class="t"></i>2029 target (level 4)</span></div>
+          <div class="verdict"><div class="lvl mono" id="lvl">3</div><div><b id="lvlName">Established</b><div class="muted" style="font-size:14px" id="lvlNote"></div></div></div>
+          <div><div class="eyebrow" style="margin-bottom:8px">Read these first</div><div class="startlist" id="startList"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0" id="ladder">
+    <div class="wrap">
+      <div class="block-head">
+        <div><div class="eyebrow">Recognition ladder · Section 3.6</div><h2>From the 2026 baseline to 2029</h2></div>
+        <p class="muted">Year-wise targets for each framework, as set out in the Strategic Planner. Click a framework to open its targets page.</p>
+      </div>
+      <div class="ladder-scroll"><div class="ladder" id="ladderRows"></div></div>
+      <div class="kpi-strip" id="kpiStrip"></div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="clock">
+        <div class="clock-top">
+          <div><div class="eyebrow">Strategic Planner clock</div><h2 style="font-size:clamp(24px,3vw,34px);margin-top:8px" id="clockTitle">2027–2029 at a glance</h2></div>
+          <div style="text-align:right"><div class="clock-count mono" id="clockCount" style="text-align:right">—</div><div class="muted" id="clockSub"></div></div>
+        </div>
+        <div class="track" id="track"></div>
+        <div class="months" id="months" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="block-head">
+        <div><div class="eyebrow">Suggested reading paths</div><h2>Start where your role starts</h2></div>
+        <p class="muted">From the book's Reader's Guide. Choose your role; each step opens the right page.</p>
+      </div>
+      <div class="paths">
+        <div class="roles" id="roles" role="group" aria-label="Choose your role"></div>
+        <div class="path-out" id="pathOut"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="block-head">
+        <div><div class="eyebrow">Accreditation navigator</div><h2>Jump straight to a framework</h2></div>
+        <p class="muted">NAAC, NBA, NIRF, QS, THE and more, each with its chapter and the 2027–2029 targets.</p>
+      </div>
+      <div class="nav-grid" id="navGrid"></div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0" id="searchSection">
+    <div class="wrap">
+      <div class="block-head">
+        <div><div class="eyebrow">Search the book</div><h2>Find a topic, metric or body</h2></div>
+        <p class="muted" id="searchNote">Guests search chapter and topic titles. Approved readers search the full text of all 305 pages.</p>
+      </div>
+      <form class="search-box" id="searchForm" role="search">
+        <svg class="icon" style="color:var(--muted)"><use href="#i-search"/></svg>
+        <input id="q" type="search" placeholder="Try: MBGL, SDG evidence, CO-PO attainment, AACSB" aria-label="Search the book" autocomplete="off">
+        <button class="btn btn-teal btn-sm" type="submit">Search</button>
+      </form>
+      <div class="results" id="results"></div>
+    </div>
+  </section>
+</main>
+
+<main id="viewContents" hidden>
+  <div class="wrap contents-layout">
+    <aside class="rail" aria-label="Sections">
+      <div class="view-toggle" role="group" aria-label="View">
+        <button type="button" id="vList" aria-pressed="true">List</button>
+        <button type="button" id="vWall" aria-pressed="false">Page wall</button>
+      </div>
+      <a href="#c-F">Front matter</a>
+      <a class="s1" href="#c-S1">1 · Excellence 360°</a>
+      <a class="s2" href="#c-S2">2 · Accreditation &amp; Ranking</a>
+      <a class="s3" href="#c-S3">3 · Strategic Planner</a>
+      <a href="#c-B">Back matter</a>
+      <p class="note" style="margin-top:12px" id="railNote"></p>
+    </aside>
+    <div style="min-width:0">
+      <div class="eyebrow">Contents</div>
+      <h1 style="font-size:clamp(30px,4vw,44px);margin-top:8px">Every topic, one click away</h1>
+      <p class="muted" style="max-width:60ch">Click any entry to open that page; use the arrow to show its sub-topics. Inside the reader, <b>Contents</b> brings you straight back here, and the contents pages of the book itself are clickable too.</p>
+      <div id="tocList"></div>
+      <div id="tocWall" class="wall" hidden></div>
+    </div>
+  </div>
+</main>
+
+<main id="viewAdmin" hidden>
+  <div class="wrap admin">
+    <div class="eyebrow">Admin console</div>
+    <h1 style="font-size:clamp(28px,4vw,40px);margin-top:8px">Reader access requests</h1>
+    <div id="adminLogin" style="max-width:420px;margin-top:20px">
+      <p class="muted">Enter the admin key set in the backend to review and approve requests.</p>
+      <form id="adminForm" class="search-box"><input id="adminKey" type="password" placeholder="Admin key" aria-label="Admin key" autocomplete="current-password"><button class="btn btn-teal btn-sm" type="submit">Sign in</button></form>
+      <div id="adminMsg"></div>
+    </div>
+    <div id="adminBody" hidden>
+      <div class="kpis" id="kpis"></div>
+      <div class="filters" id="filters"></div>
+      <div class="table-wrap"><table><thead><tr><th>Reader</th><th>Organisation</th><th>Asked for</th><th>Purpose</th><th>Submitted</th><th>Status</th><th>Decision</th></tr></thead><tbody id="reqRows"></tbody></table></div>
+      <h2 style="font-size:22px;margin:36px 0 12px">Activity log</h2>
+      <div class="log" id="logList"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b style="color:var(--on-teal)">University Excellence 360° · Accreditation, Ranking &amp; Recognition</b><br>© 2027 Ajeenkya D Y Patil University, D Y Patil Knowledge City, Charholi Bk., Pune 411081</div>
+    <div>Questions about access: <span class="mono" id="contactMail">accreditationworking@gmail.com</span><br><a href="#admin">Admin console</a></div>
+  </div>
+</footer>
+
+<!-- Reader -->
+<div class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-label="Book reader">
+  <div class="r-bar">
+    <button class="r-btn coral" id="rContents" type="button"><svg class="icon"><use href="#i-list"/></svg>Contents</button>
+    <div class="crumb"><span id="rSec"></span><b id="rTitle"></b></div>
+    <button class="r-btn" id="rPrev" type="button" aria-label="Previous page"><svg class="icon"><use href="#i-left"/></svg></button>
+    <input class="r-go" id="rGo" inputmode="numeric" aria-label="Go to printed page">
+    <button class="r-btn" id="rNext" type="button" aria-label="Next page"><svg class="icon"><use href="#i-right"/></svg></button>
+    <button class="r-btn r-hide-sm" id="rOut" type="button" aria-label="Zoom out"><svg class="icon"><use href="#i-minus"/></svg></button>
+    <button class="r-btn r-hide-sm" id="rIn" type="button" aria-label="Zoom in"><svg class="icon"><use href="#i-plus"/></svg></button>
+    <button class="r-btn r-hide-sm" id="rShare" type="button" aria-label="Share this page by QR"><svg class="icon"><use href="#i-qr"/></svg></button>
+    <button class="r-btn" id="rMark" type="button" aria-pressed="false" aria-label="Bookmark this page"><svg class="icon"><use href="#i-mark"/></svg></button>
+    <button class="r-btn" id="rClose" type="button" aria-label="Close reader"><svg class="icon"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="r-stage" id="rStage">
+    <div class="r-page" id="rPage">
+      <img id="rImg" alt="" draggable="false"><span class="sp" id="rSp" hidden></span>
+      <div class="wm" id="rWm"></div>
+      <div id="rHots"></div>
+      <div class="r-lock" id="rLock" hidden>
+        <div><svg class="icon" style="width:40px;height:40px"><use href="#i-lock"/></svg>
+          <h3>This page is for approved readers</h3>
+          <p style="max-width:40ch;margin:0 auto 18px;color:#cfe3e6" id="rLockMsg">Request access once. After the admin approves it, you get an access code by email.</p>
+          <button class="btn btn-coral" type="button" data-open-access="request">Request access</button>
+          <button class="btn btn-ghost" type="button" data-open-access="code" style="color:#fff;margin-left:6px">I have a code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="r-foot">
+    <span class="mono" style="font-size:13px" id="rCount"></span>
+    <input type="range" id="rRange" min="1" max="305" value="1" aria-label="Page scrubber">
+    <span class="mono" style="font-size:13px;color:#A9C9CE" id="rMarks"></span>
+  </div>
+</div>
+
+<!-- Access modal -->
+<div class="modal" id="access" hidden role="dialog" aria-modal="true" aria-labelledby="accessTitle">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div><div class="eyebrow">Reader access</div><h3 id="accessTitle" style="margin-top:6px">Read the full book online</h3></div>
+      <button class="x" type="button" id="accessClose" aria-label="Close"><svg class="icon" style="margin:auto"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button role="tab" type="button" data-tab="request" aria-selected="true">Request access</button>
+      <button role="tab" type="button" data-tab="code" aria-selected="false">I have an access code</button>
+      <button role="tab" type="button" data-tab="status" aria-selected="false">Check status</button>
+    </div>
+    <div class="sheet-body">
+      <div data-pane="request">
+        <form class="form" id="reqForm">
+          <div class="field"><label for="fName">Full name</label><input id="fName" required autocomplete="name"></div>
+          <div class="field"><label for="fEmail">Email</label><input id="fEmail" type="email" required autocomplete="email"></div>
+          <div class="field"><label for="fPhone">Mobile</label><input id="fPhone" type="tel" autocomplete="tel" placeholder="+91"></div>
+          <div class="field"><label for="fDesig">Designation</label>
+            <select id="fDesig" required><option value="">Choose…</option><option>Vice Chancellor / Pro-VC</option><option>Registrar / Officer</option><option>Dean / Director</option><option>Head of Department</option><option>IQAC member</option><option>Faculty</option><option>Administrative staff</option><option>Research scholar / student</option><option>Accreditation / ranking consultant</option><option>Industry / other</option></select></div>
+          <div class="field"><label for="fOrg">Organisation / institution</label><input id="fOrg" required autocomplete="organization" placeholder="e.g. ADYPU, Pune"></div>
+          <div class="field"><label for="fDept">School / department</label><input id="fDept" placeholder="e.g. School of Engineering"></div>
+          <div class="field full"><label>Sections you need</label>
+            <div class="checks">
+              <label class="chk"><input type="checkbox" name="sec" value="S1" checked> 1 · Excellence 360°</label>
+              <label class="chk"><input type="checkbox" name="sec" value="S2" checked> 2 · Accreditation &amp; Ranking</label>
+              <label class="chk"><input type="checkbox" name="sec" value="S3" checked> 3 · Strategic Planner</label>
+            </div></div>
+          <div class="field full"><label for="fPurpose">How will you use it?</label><textarea id="fPurpose" rows="3" required placeholder="e.g. Preparing the NBA SAR for our B.Tech programme"></textarea></div>
+          <label class="full note" style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="fAgree" required style="margin-top:4px"> I agree to use the content for internal academic and quality-assurance work and not to reproduce it without the publisher's permission. My details and reading activity are recorded for access control.</label>
+          <div class="full"><button class="btn btn-coral" type="submit" id="reqSubmit">Send request</button></div>
+        </form>
+        <div class="flow"><div><b>01</b>You send this request</div><div><b>02</b>IQAC reviews it</div><div><b>03</b>You get an access code by email</div></div>
+        <div id="reqMsg"></div>
+      </div>
+      <div data-pane="code" hidden>
+        <form class="form" id="codeForm">
+          <div class="field"><label for="cEmail">Email used in the request</label><input id="cEmail" type="email" required autocomplete="email"></div>
+          <div class="field"><label for="cCode">Access code</label><input id="cCode" required class="mono" placeholder="ABCD-1234" style="text-transform:uppercase;letter-spacing:.1em"></div>
+          <div class="full"><button class="btn btn-teal" type="submit">Unlock the book</button></div>
+        </form>
+        <div id="codeMsg"></div>
+      </div>
+      <div data-pane="status" hidden>
+        <form class="form" id="statusForm">
+          <div class="field full"><label for="sEmail">Email used in the request</label><input id="sEmail" type="email" required autocomplete="email"></div>
+          <div class="full"><button class="btn btn-teal" type="submit">Check</button></div>
+        </form>
+        <div id="statusMsg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="qrModal" hidden role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+  <div class="sheet" style="width:min(460px,100%)">
+    <div class="sheet-head">
+      <div><div class="eyebrow" id="qrEyebrow">QR</div><h3 id="qrTitle" style="margin-top:6px">Open on your phone</h3></div>
+      <button class="x" type="button" id="qrClose" aria-label="Close"><svg class="icon" style="margin:auto"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet-body" id="qrBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="config.js"></script>
+<script src="vendor/qrcode.js"></script>
+<script src="vendor/jsQR.js"></script>
+<script>
+(function(){
+'use strict';
+const CFG = Object.assign({BACKEND_URL:'',CONTACT_EMAIL:'accreditationworking@gmail.com',SITE_URL:''}, window.PORTAL_CONFIG||{});
+const LIVE = !!CFG.BACKEND_URL;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = { get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
+const PUBLIC = n => n<=12 || n===305;
+const SEC = n => n<=12?'F':n<=91?'S1':n<=277?'S2':n<=299?'S3':n<=304?'B':'F';
+const SEC_INFO = {
+  F:{name:'Front matter',color:'#5A7177'},
+  S1:{name:'Section 1 · University Excellence 360°',short:'Excellence 360°',color:'#126577',start:13,end:91,q:'What should we build?',desc:'Pillars, policies, SOPs, a ten-year roadmap, eight challenge playbooks and nine annexures for every university function.',facts:[['3','pillars'],['8','playbooks'],['9','annexures']]},
+  S2:{name:'Section 2 · Accreditation, Ranking & Recognition',short:'Accreditation & Ranking',color:'#E0673F',start:92,end:277,q:'How are we judged?',desc:'How NAAC, NBA, NIRF, QS, THE, ratings, international accreditation and awards work, and how to improve on each.',facts:[['9','chapters'],['122','topics'],['14','bodies']]},
+  S3:{name:'Section 3 · Strategic Planner 2027–2029',short:'Strategic Planner',color:'#2B9C8F',start:278,end:299,q:'What will we do, and when?',desc:'Goals, targets, owners, KPIs and month-by-month actions for ADYPU from January 2027 to December 2029.',facts:[['10','goals'],['23','KPIs'],['36','months']]},
+  B:{name:'Back matter',color:'#5A7177'}
+};
+const label = n => n===1?'Cover':n===305?'Back cover':n<=12?['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi'][n-2]:String(n-12);
+const fromLabel = s => { s=String(s).trim().toLowerCase(); const r=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']; if(r.includes(s)) return r.indexOf(s)+2; const n=parseInt(s,10); return n>=1&&n<=292?n+12:null; };
+
+let TOC=[], LINKS={}, META={labels:{},public:{}}, FULLTEXT=null, DEMO_MAN=null;
+let session = store.get('ex360_session', null);  // {email, code, name, pages, granted, search, validUntil}
+let pendingPage = null, cur = 1, zoom = store.get('ex360_zoom', 860), marks = store.get('ex360_marks', []);
+
+/* ---------- backend (live = Google Apps Script, preview = this browser) ---------- */
+async function api(body){
+  if (LIVE){
+    const r = await fetch(CFG.BACKEND_URL,{method:'POST',body:JSON.stringify(body)});
+    if(!r.ok) throw new Error('The server did not respond. Please try again.');
+    return r.json();
+  }
+  return demoApi(body);
+}
+function demoDB(){ return store.get('ex360_demo_db',{rows:[],log:[]}); }
+function demoSave(db){ store.set('ex360_demo_db',db); }
+async function demoManifest(){ if(DEMO_MAN) return DEMO_MAN; try{ DEMO_MAN = await (await fetch('data/demo-manifest.json')).json(); }catch(e){ DEMO_MAN={keys:{}}; } return DEMO_MAN; }
+async function demoApi(b){
+  const db = demoDB(), now = new Date().toISOString();
+  const log = (email,event,page,detail)=>{ db.log.push({time:now,email,event,page:page||'',detail:detail||''}); };
+  const find = e => [...db.rows].reverse().find(r=>r.Email===String(e||'').trim().toLowerCase());
+  const expired = r => r['Valid until'] && new Date(r['Valid until'])<new Date();
+  let out;
+  switch(b.action){
+    case 'request':{
+      const email=String(b.email||'').trim().toLowerCase();
+      const ex=find(email);
+      if(ex && (ex.Status==='Pending'||(ex.Status==='Approved'&&!expired(ex)))){ out={ok:true,id:ex['Request ID'],status:ex.Status,duplicate:true}; break; }
+      const id='EX360-'+now.slice(2,10).replace(/-/g,'')+'-'+Math.floor(1000+Math.random()*9000);
+      db.rows.push({'Request ID':id,Submitted:now,Name:b.name,Email:email,Phone:b.phone,Designation:b.designation,Organisation:b.organisation,Department:b.department,'Sections requested':(b.sections||[]).join(', '),Purpose:b.purpose,Status:'Pending','Sections granted':'','Access code':'','Valid until':'','Decided by':'','Decided on':'',Remarks:'','Last access':'','Pages viewed':0});
+      log(email,'Request submitted','',id); out={ok:true,id,status:'Pending'}; break; }
+    case 'status':{ const r=find(b.email); out = r?{ok:true,status:r.Status==='Approved'&&expired(r)?'Expired':r.Status,id:r['Request ID'],remarks:r.Remarks,validUntil:r['Valid until']}:{ok:true,status:'None'}; break; }
+    case 'verify':{
+      const r=find(b.email), code=String(b.code||'').trim().toUpperCase();
+      if(!r||r.Status!=='Approved'||r['Access code']!==code){ out={ok:false,error:'Email and access code do not match an approved request.'}; break; }
+      if(expired(r)){ out={ok:false,error:'Your access has expired. Please submit a fresh request.'}; break; }
+      const man=await demoManifest(), granted=(r['Sections granted']||'S1, S2, S3').split(/\s*,\s*/).concat(['B']);
+      const keys={}; granted.forEach(g=>{ if(man.keys&&man.keys[g]) keys[g]=man.keys[g]; });
+      r['Last access']=now; log(r.Email,'Signed in');
+      out={ok:true,name:r.Name,granted,keys,validUntil:r['Valid until']}; break; }
+    case 'log':{ const r=find(b.email); if(r&&r['Access code']===String(b.code).toUpperCase()){ r['Pages viewed']=(+r['Pages viewed']||0)+1; r['Last access']=now; log(r.Email,'Viewed page',b.page,b.detail);} out={ok:true}; break; }
+    case 'adminList': if(b.adminKey!=='demo'){out={ok:false,error:'Admin key is incorrect. In preview mode the key is "demo".'};break;} out={ok:true,rows:db.rows,log:[...db.log].reverse().slice(0,300)}; break;
+    case 'adminDecide':{
+      if(b.adminKey!=='demo'){out={ok:false,error:'Admin key is incorrect.'};break;}
+      const r=db.rows.find(x=>x['Request ID']===b.id); if(!r){out={ok:false,error:'Request not found'};break;}
+      r.Status=b.decision; r['Decided by']='Admin console'; r['Decided on']=now; if(b.remarks) r.Remarks=b.remarks;
+      if(b.decision==='Approved'){ const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let c=''; for(let i=0;i<8;i++) c+=a[Math.floor(Math.random()*a.length)];
+        r['Access code']=r['Access code']||c.slice(0,4)+'-'+c.slice(4); r['Sections granted']=(b.sections&&b.sections.length?b.sections:['S1','S2','S3']).join(', ');
+        r['Valid until']=new Date(Date.now()+(+b.days||180)*864e5).toISOString(); }
+      log(r.Email,b.decision,'',b.remarks||r['Sections granted']); out={ok:true}; break; }
+    default: out={ok:false,error:'Unknown action'};
+  }
+  demoSave(db); return out;
+}
+
+/* ---------- access state ---------- */
+const canRead = n => PUBLIC(n) || !!(session && session.keys && session.keys[SEC(n)]);
+/* Locked pages are stored encrypted (AES-256-GCM, one key per section). Approved readers receive the keys. */
+const pad3 = n => String(n).padStart(3,'0');
+const blobCache = new Map(), keyCache = {};
+async function sectionKey(sec){ if(!keyCache[sec]){ const raw=Uint8Array.from(atob(session.keys[sec]),c=>c.charCodeAt(0)); keyCache[sec]=crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']); } return keyCache[sec]; }
+async function decryptFile(url,sec){ const r=await fetch(url); if(!r.ok) throw new Error('Page file missing'); const buf=new Uint8Array(await r.arrayBuffer()); return crypto.subtle.decrypt({name:'AES-GCM',iv:buf.slice(0,12)},await sectionKey(sec),buf.slice(12)); }
+async function pageUrl(n){
+  if(PUBLIC(n)) return 'pages/p'+pad3(n)+'.webp';
+  if(!canRead(n)) return '';
+  if(blobCache.has(n)) return blobCache.get(n);
+  const u=URL.createObjectURL(new Blob([await decryptFile('pages/p'+pad3(n)+'.bin',SEC(n))],{type:'image/webp'}));
+  blobCache.set(n,u); if(blobCache.size>40){ const [k,v]=blobCache.entries().next().value; URL.revokeObjectURL(v); blobCache.delete(k); }
+  return u;
+}
+const sprite = n => { const i=n-1, k=i%40; return `background-image:url(thumbs/sheet-${Math.floor(i/40)}.webp);background-position:${(k%10)/9*100}% ${Math.floor(k/10)/3*100}%`; };
+function renderWho(){
+  const b=$('#whoBtn');
+  const pend=store.get('ex360_pending',null);
+  if(session){ b.dataset.state='approved'; $('#whoText').textContent=session.name||session.email; $('#whoAction').textContent='Approved'; }
+  else if(pend){ b.dataset.state='pending'; $('#whoText').textContent=pend.email; $('#whoAction').textContent='Pending'; }
+  else { b.dataset.state='guest'; $('#whoText').textContent='Guest'; $('#whoAction').textContent='Get access'; }
+  $('#railNote').textContent = session ? 'Signed in as '+(session.name||session.email)+'. Sections unlocked: '+session.granted.filter(s=>s!=='B').map(s=>SEC_INFO[s].short).join(', ')+'.' : 'Front matter is open to all. Sections 1–3 open after your request is approved.';
+  $('#searchNote').textContent = session ? 'Full-text search across every page you can read.' : 'Guests search chapter and topic titles. Approved readers search the full text of all 305 pages.';
+}
+async function unlock(email,code,quiet){
+  const r = await api({action:'verify',email,code});
+  if(!r.ok){ if(!quiet) throw new Error(r.error||'Could not unlock.'); session=null; store.set('ex360_session',null); renderWho(); return false; }
+  session={email:email.trim().toLowerCase(),code:code.trim().toUpperCase(),name:r.name,keys:r.keys||{},granted:r.granted,validUntil:r.validUntil};
+  for(const k in keyCache) delete keyCache[k]; blobCache.forEach(v=>URL.revokeObjectURL(v)); blobCache.clear();
+  store.set('ex360_session',session); store.set('ex360_pending',null); FULLTEXT=null;
+  renderWho(); renderToc(); if(!$('#reader').hidden) openPage(cur,true);
+  return true;
+}
+
+/* ---------- toast ---------- */
+let tT; function toast(t){ const el=$('#toast'); el.textContent=t; el.hidden=false; clearTimeout(tT); tT=setTimeout(()=>el.hidden=true,2600); }
+
+/* ---------- home blocks ---------- */
+function renderHome(){
+  $('#qGrid').innerHTML = ['S1','S2','S3'].map((s,i)=>{const x=SEC_INFO[s]; return `<button class="q-card" type="button" data-sec="${s}"><span class="num">0${i+1}</span><span class="q">${x.q}</span><h3>${esc(x.name.split(' · ')[1])}</h3><span class="muted" style="font-size:15px">${x.desc}</span><span class="facts">${x.facts.map(f=>`<span><b>${f[0]}</b>${f[1]}</span>`).join('')}<span><b class="mono">${x.end-x.start+1}</b>pages</span></span></button>`}).join('');
+  $$('#qGrid .q-card').forEach(b=>b.onclick=()=>{ location.hash='contents'; setTimeout(()=>{const el=document.getElementById('c-'+b.dataset.sec); el&&el.scrollIntoView({behavior:'smooth'});},60); });
+
+  // plan clock
+  const years=[{y:2027,th:'Year of Systems',tag:'Build & Comply',p:'Baseline audit, policy & SOP library, ERP and evidence vault live, all eligible NIRF categories.',page:289},
+               {y:2028,th:'Year of Evidence',tag:'Transform & Strengthen',p:'OBE in every course, KPI dashboards, NBA cycles, QS Asia and THE Impact submissions.',page:291},
+               {y:2029,th:'Year of Recognition',tag:'Outperform & Differentiate',p:'Climb NIRF bands, debut in QS Asia, MBGL-ready under NAAC, international accreditation.',page:293}];
+  const start=new Date(2027,0,1), end=new Date(2030,0,1), now=new Date();
+  const frac=Math.min(1,Math.max(0,(now-start)/(end-start)));
+  $('#track').innerHTML = years.map(y=>`<button class="yr${now.getFullYear()===y.y?' now':''}" type="button" data-page="${y.page}"><span class="y mono">${y.y}</span><span class="th">${y.th}</span><span class="note" style="font-weight:700">${y.tag}</span><p>${y.p}</p></button>`).join('') + (frac>0&&frac<1?`<div class="today" style="left:${frac*100}%"><span>Today</span></div>`:'');
+  $$('#track .yr').forEach(b=>b.onclick=()=>openPage(+b.dataset.page));
+  const monthsDone = now<start?0:Math.min(36,(now.getFullYear()-2027)*12+now.getMonth()+1);
+  $('#months').innerHTML = Array.from({length:36},(_,i)=>`<i class="${i<monthsDone?'done':''}" title="${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i%12]} ${2027+Math.floor(i/12)}"></i>`).join('');
+  if(now<start){ const d=Math.ceil((start-now)/864e5); $('#clockCount').textContent=d+' days'; $('#clockSub').textContent='until the plan begins on 1 January 2027'; }
+  else if(now<end){ $('#clockCount').textContent=monthsDone+' / 36'; $('#clockSub').textContent='months of the plan completed · '+Math.ceil((end-now)/864e5)+' days to the 2029 promise'; }
+  else { $('#clockCount').textContent='36 / 36'; $('#clockSub').textContent='The 2027–2029 plan period is complete'; }
+
+  // reading paths (Reader's Guide, p. vi)
+  const P=(t,p)=>({t,p});
+  const roles=[
+    ['Board & leadership',[P('Preface',6),P('3.3 Vision 2029 & annual themes',281),P('3.4 Ten strategic goals',282),P('3.7 KPI dashboard',286)],[P('Section 1 framework, pp. 2–13',14)]],
+    ['IQAC & Rankings Office',[P('Ch. 1 NAAC accreditation',93),P('Ch. 2 NBA',105),P('Ch. 3 NIRF',120),P('Ch. 4 QS rankings',137),P('Ch. 5 THE rankings',153),P('Ch. 6 Ratings & certifications',170),P('3.6 Accreditation & ranking targets',285),P('3.9 Annual calendar of submissions',288)],[P('A–Z index for metrics',303)]],
+    ['Deans & Heads',[P('Challenge playbooks, pp. 14–21',26),P('Annexures I–IX',34)],[P('2027 month-by-month planner',290),P('2028 month-by-month planner',292),P('2029 month-by-month planner',294)]],
+    ['NBA / programme coordinators',[P('Ch. 2 NBA programme accreditation',105),P('Ch. 7 International accreditation',186),P('Part II · Professional bodies',235)],[P('Annexure I · Vision & Mission',34),P('Annexure V · Examinations',58)]],
+    ['Research & innovation teams',[P('Annexure III · Research ecosystem',44),P('Annexure IV · Innovation & IPR',51),P('Ch. 6 Ratings & certifications',170)],[P('KPI dashboard: G6–G7',286)]],
+    ['Faculty & staff',[P('Annexure V · Examinations',58),P('Annexure VI · Co- & extra-curricular',65),P('Annexure VII · Welfare & grievance',71),P('Annexure VIII · Progression & industry',77),P('Annexure IX · Campus facilities',84)],[P('A–Z index',303)]]
+  ];
+  const showRole=i=>{ $$('#roles .role').forEach((b,j)=>b.setAttribute('aria-pressed',i===j)); const r=roles[i];
+    $('#pathOut').innerHTML=`<h3 style="font-size:22px">${esc(r[0])}</h3><p class="muted" style="margin:4px 0 0">Start with, in order:</p><ol class="steps">${r[1].map((s,k)=>`<li data-page="${s.p}"><span class="n">${k+1}</span><span>${esc(s.t)}</span><span class="pgno">${canRead(s.p)?'':'<svg class="icon lock" style="vertical-align:-3px"><use href="#i-lock"/></svg> '}p. ${label(s.p)}</span></li>`).join('')}</ol><p class="muted" style="margin:18px 0 0">Then use:</p><ol class="steps then">${r[2].map((s,k)=>`<li data-page="${s.p}"><span class="n">${k+1}</span><span>${esc(s.t)}</span><span class="pgno">p. ${label(s.p)}</span></li>`).join('')}</ol>`;
+    $$('#pathOut li').forEach(li=>li.onclick=()=>openPage(+li.dataset.page)); store.set('ex360_role',i); };
+  $('#roles').innerHTML=roles.map(r=>`<button class="role" type="button">${esc(r[0])}</button>`).join('');
+  $$('#roles .role').forEach((b,i)=>b.onclick=()=>showRole(i));
+  showRole(store.get('ex360_role',1));
+
+  // navigator
+  const tiles=[['NAAC','Binary & MBGL accreditation',93],['NBA','Programme accreditation',105],['NIRF','National ranking',120],['QS','World, Asia & sustainability',137],['THE','WUR & Impact rankings',153],['QS Stars · I-GAUGE','Ratings & ISO / NABL',170],['ABET · AACSB','International accreditation',186],['Awards','Media & industry awards',201],['Reputation','Brand & visibility',218],['14 bodies','ACCA to CIM',235],['Targets','2027–2029 by framework',285],['KPI dashboard','23 lead KPIs',286]];
+  $('#navGrid').innerHTML=tiles.map(t=>`<button class="tile" type="button" data-page="${t[2]}"><b>${esc(t[0])}</b><span>${esc(t[1])}</span><span class="pg">p. ${label(t[2])} →</span></button>`).join('');
+  $$('#navGrid .tile').forEach(b=>b.onclick=()=>openPage(+b.dataset.page));
+  // ---- 360° orbit ----
+  const dial=$('#dial'); let d='<circle r="236" fill="none" stroke="rgba(255,255,255,.14)"/><circle r="200" fill="none" stroke="rgba(255,255,255,.08)" stroke-dasharray="2 6"/>';
+  for(let a=0;a<360;a+=5){ const r1=a%30===0?222:229, rad=(a-90)*Math.PI/180; d+=`<line x1="${(r1*Math.cos(rad)).toFixed(1)}" y1="${(r1*Math.sin(rad)).toFixed(1)}" x2="${(236*Math.cos(rad)).toFixed(1)}" y2="${(236*Math.sin(rad)).toFixed(1)}" stroke="rgba(255,255,255,${a%30===0?.45:.18})"/>`;
+    if(a%30===0) d+=`<text x="${(211*Math.cos(rad)).toFixed(1)}" y="${(211*Math.sin(rad)+3).toFixed(1)}" text-anchor="middle">${a}°</text>`; }
+  dial.innerHTML=d;
+  const fws=[['NAAC','Ch 1',93],['NBA','Ch 2',105],['NIRF','Ch 3',120],['QS','Ch 4',137],['THE','Ch 5',153],['I-GAUGE','Ch 6',176],['ISO · NABL','Ch 6',179],['ABET · AACSB','Ch 7',186],['Awards','Ch 8',201],['14 bodies','Part II',235]];
+  $('#ring').innerHTML=fws.map((f,i)=>{ const ang=(i/fws.length)*2*Math.PI-Math.PI/2; const R=41; return `<div class="node" style="left:${50+R*Math.cos(ang)}%;top:${50+R*Math.sin(ang)}%"><div class="cr"><button type="button" data-page="${f[2]}">${f[0]}<small>${f[1]} · p. ${label(f[2])}</small></button></div></div>`; }).join('');
+  $$('#ring button').forEach(b=>b.onclick=()=>openPage(+b.dataset.page));
+  const last=store.get('ex360_last',null), cb=$('#continueBtn');
+  if(last && last>1){ cb.hidden=false; cb.innerHTML=`<svg class="icon"><use href="#i-mark"/></svg>Continue reading at p. ${label(last)}`; cb.onclick=()=>openPage(last); }
+  renderJourney();
+
+  // ---- Readiness Compass ----
+  const DIMS=[['Governance & compliance','Pillar 1 · Compliance & Governance',15],['Teaching, learning & OBE','2.10 OBE & attainment',117],['Research','Annexure III · Research Ecosystem',44],['Innovation & IPR','Annexure IV · Innovation & IPR',51],['Student progression','Annexure VIII · Progression & Industry',77],['Campus & digital','Annexure IX · Campus Facilities',84],['Student life & welfare','Annexure VII · Welfare & Grievance',71],['Reputation & global','Ch. 9 · Reputation & Visibility',218]];
+  const LV=['','Beginning','Developing','Established','Advanced','Leading'];
+  const LVN=['','Practices exist in pockets; little is documented.','Policies exist; evidence is partial and unit-wise.','Approved SOPs and evidence in most units.','Measured, benchmarked and improving year on year.','Recognised externally; others learn from you.'];
+  let vals=store.get('ex360_compass',[3,2,2,2,3,3,3,2]);
+  $('#dims').innerHTML=DIMS.map((x,i)=>`<div class="dim"><label for="dm${i}">${x[0]}<span id="dv${i}"></span></label><input id="dm${i}" type="range" min="1" max="5" step="1" value="${vals[i]}"></div>`).join('');
+  const N=DIMS.length, R=120, pt=(i,v)=>{ const a=-Math.PI/2+i*2*Math.PI/N; return [(R*v/5*Math.cos(a)).toFixed(1),(R*v/5*Math.sin(a)).toFixed(1)]; };
+  const drawRadar=()=>{
+    let g=''; for(let k=1;k<=5;k++) g+=`<polygon class="grid" points="${DIMS.map((_,i)=>pt(i,k).join(',')).join(' ')}"/>`;
+    DIMS.forEach((x,i)=>{ const [ex,ey]=pt(i,5); const [lx,ly]=pt(i,6.1); g+=`<line class="axis" x1="0" y1="0" x2="${ex}" y2="${ey}"/><text class="lbl" x="${lx}" y="${ly}" text-anchor="${Math.abs(lx)<8?'middle':lx>0?'start':'end'}" dominant-baseline="middle">${x[0].split(' & ')[0].split(',')[0]}</text>`; });
+    g+=`<polygon class="target" points="${DIMS.map((_,i)=>pt(i,4).join(',')).join(' ')}"/>`;
+    g+=`<polygon class="you" points="${vals.map((v,i)=>pt(i,v).join(',')).join(' ')}"/>`;
+    g+=vals.map((v,i)=>{const [x,y]=pt(i,v); return `<circle class="dot" cx="${x}" cy="${y}" r="3.5"/>`;}).join('');
+    $('#radar').innerHTML=g;
+    vals.forEach((v,i)=>$('#dv'+i).textContent=v+' · '+LV[v]);
+    const avg=vals.reduce((a,b)=>a+b,0)/N, lv=Math.max(1,Math.min(5,Math.round(avg)));
+    $('#lvl').textContent=avg.toFixed(1); $('#lvlName').textContent='Overall: '+LV[lv];
+    const gap=vals.filter(v=>v<4).length; $('#lvlNote').textContent=LVN[lv]+' '+(gap?gap+' of 8 areas are below the 2029 target level.':'Every area meets the 2029 target level.');
+    const low=vals.map((v,i)=>[v,i]).sort((a,b)=>a[0]-b[0]).slice(0,3);
+    $('#startList').innerHTML=low.map(([v,i])=>`<button type="button" data-page="${DIMS[i][2]}"><span><b>${DIMS[i][0]}</b> · level ${v}<br><span class="muted">${DIMS[i][1]}</span></span><span class="pgno">p. ${label(DIMS[i][2])} →</span></button>`).join('');
+    $$('#startList button').forEach(b=>b.onclick=()=>openPage(+b.dataset.page));
+    store.set('ex360_compass',vals);
+  };
+  $$('#dims input').forEach((inp,i)=>inp.oninput=()=>{ vals[i]=+inp.value; drawRadar(); });
+  drawRadar();
+
+  // ---- Recognition ladder (Section 3.6, p. 273) ----
+  const L=[['NAAC','A grade · CGPA 3.01','AQAR on time; MBGL gap analysis','Mock assessment; Basic Accreditation','MBGL application at target level'],
+    ['NIRF Engg.','201–300','Hold band; data audit','151–200','101–150'],
+    ['NIRF others','Not listed','Submit 5 categories','Listed in 3+','All eligible categories'],
+    ['NBA','MBA, Biotech','Wave 1 SARs (3)','Wave 2 SARs; Wave 1 visits','8+ programmes accredited'],
+    ['QS I-GAUGE','Diamond (2026)','Retain; subject ratings','E-LEAD / subject ratings','Diamond retained; Diamond+ ready'],
+    ['QS Asia','Contributor','Data submission','Close peer-set gaps','Listed (2029 edition)'],
+    ['THE Impact','—','SDG 17 + 5 SDGs','8 SDGs; evidence repository','Ranked in 4+ SDGs'],
+    ['GreenMetric','—','First submission','Improve by 10%','Top national band'],
+    ['IIC (MoE)','To confirm','4-Star','4-Star+ / 5-Star','5-Star'],
+    ['International','—','Shortlist bodies','2 applications','2 flagship accreditations']];
+  $('#ladderRows').innerHTML=`<div class="lrow head"><div></div><div>2026 baseline</div><div>2027 · Systems</div><div>2028 · Evidence</div><div>2029 · Recognition</div></div>`+
+    L.map(r=>`<div class="lrow"><div class="fw" data-page="285" role="link" tabindex="0">${r[0]}</div>${r.slice(1).map((c,k)=>`<div class="step y${k}">${esc(c)}</div>`).join('')}</div>`).join('');
+  $$('#ladderRows .fw').forEach(b=>b.onclick=()=>openPage(285));
+  const K=[['Patents filed','cumulative from 2027',[15,35,60],v=>v],['Start-ups incubated','cumulative',[12,25,40],v=>v],['Faculty with PhD','share of faculty',[50,60,70],v=>v+'%'],['Placement','eligible students',[80,85,90],v=>v+'%'],['Q1/Q2 papers','share of papers',[30,40,50],v=>v+'%']];
+  $('#kpiStrip').innerHTML=K.map(k=>{const mx=Math.max(...k[2]); return `<button class="kk" type="button" data-page="286" style="text-align:left;cursor:pointer"><b>${k[3](k[2][2])}</b><div class="bars">${k[2].map(v=>`<span style="height:${(v/mx*100).toFixed(0)}%" title="${k[3](v)}"></span>`).join('')}</div><div class="yrs"><span>2027</span><span>2028</span><span>2029</span></div><p><b style="font:700 13px var(--body);color:var(--fg)">${k[0]}</b> · ${k[1]}</p></button>`;}).join('');
+  $$('#kpiStrip .kk').forEach(b=>b.onclick=()=>openPage(286));
+
+  const bk=$('#book'); bk.onclick=()=>openPage(1); bk.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openPage(1);}};
+}
+
+/* ---------- reading journey ---------- */
+let seen=new Set(store.get('ex360_seen',[]));
+function markSeen(n){ if(!seen.has(n)){ seen.add(n); store.set('ex360_seen',[...seen]); } }
+function renderJourney(){
+  const total=305, c=seen.size, pct=c/total, r=14, C=2*Math.PI*r;
+  const el=document.getElementById('journey'); if(!el) return;
+  el.innerHTML=`<svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="${r}" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="4"/><circle cx="17" cy="17" r="${r}" fill="none" stroke="#E0673F" stroke-width="4" stroke-dasharray="${(C*pct).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 17 17)" stroke-linecap="round"/></svg><span>Your journey: <b style="color:var(--on-teal)">${c}</b> of 305 pages read</span>`;
+}
+
+/* ---------- contents ---------- */
+function renderToc(){
+  const lockIco = n => canRead(n)?'<span></span>':'<svg class="icon lock"><use href="#i-lock"/></svg>';
+  const groups={F:[],S1:[],S2:[],S3:[],B:[]};
+  let curSec='F';
+  TOC.forEach(e=>{ if(e.l===1){ curSec = e.t.startsWith('SECTION 1')?'S1':e.t.startsWith('SECTION 2')?'S2':e.t.startsWith('SECTION 3')?'S3':e.t==='Back Matter'?'B':'F'; groups[curSec].push(e);} else groups[curSec].push(e); });
+  let html='';
+  for(const s of ['F','S1','S2','S3','B']){
+    const g=groups[s]; if(!g.length) continue;
+    const head=g.find(e=>e.l===1)||{t:SEC_INFO[s].name,p:s==='F'?2:1};
+    const title = s==='F'?'Front matter':s==='B'?'Back matter':head.t;
+    const rng={F:[1,12],S1:[13,91],S2:[92,277],S3:[278,299],B:[300,305]}[s]; let rd=0; for(let k=rng[0];k<=rng[1];k++) if(seen.has(k)) rd++; const tot=rng[1]-rng[0]+1;
+    html+=`<div class="sec-block" id="c-${s}"><div class="sec-head" style="background:${SEC_INFO[s].color};display:block" data-page="${head.p}"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><h3>${esc(title)}</h3><span class="mono">${label(head.p)}</span></div><div style="display:flex;gap:10px;align-items:center;font-size:12px;opacity:.9;margin-top:6px"><div class="secprog" style="flex:1;margin:0"><i style="width:${(rd/tot*100).toFixed(1)}%"></i></div><span class="mono">${rd}/${tot} read</span></div></div>`;
+    // build nested tree recursively: an entry followed by deeper entries becomes a collapsible group
+    const items=g.filter(e=>e.l>1 && e.t!=='Cover');
+    const build=(arr,depth)=>{ let h='', i=0;
+      while(i<arr.length){ const e=arr[i]; const kids=[]; let j=i+1;
+        while(j<arr.length && arr[j].l>e.l){ kids.push(arr[j]); j++; }
+        const pad = 6+depth*18;
+        if(kids.length){
+          const open = s==='F'||s==='B'||s==='S3'||e.t.startsWith('Part ');
+          h+=`<details class="toc-l2"${open?' open':''} style="${depth?'border-bottom:0;margin-left:'+(depth*18)+'px':''}"><summary data-page="${e.p}"><span>${esc(e.t)}</span><span class="pgno">${label(e.p)}</span><svg class="icon chev"><use href="#i-chev"/></svg></summary>${build(kids,depth+1)}</details>`;
+        } else {
+          h+=`<div class="toc-row${seen.has(e.p)?' seen':''}" style="padding-left:${depth?pad+16:6}px;${depth?'':'font-weight:700'}" data-page="${e.p}" role="link" tabindex="0"><span>${esc(e.t)}</span><span class="pgno">${label(e.p)}</span>${lockIco(e.p)}</div>`;
+        }
+        i=j; }
+      return h; };
+    html+=build(items,0);
+    html+='</div>';
+  }
+  $('#tocList').innerHTML=html;
+  $$('#tocList [data-page]').forEach(el=>{
+    const go=ev=>{ if(el.tagName==='SUMMARY'){ if(ev.target.closest('.chev')) return; ev.preventDefault(); } openPage(+el.dataset.page); };
+    el.addEventListener('click',go);
+    el.addEventListener('keydown',ev=>{ if(ev.key==='Enter'&&el.tagName!=='SUMMARY') openPage(+el.dataset.page); });
+  });
+  // page wall
+  $('#tocWall').innerHTML = Array.from({length:305},(_,i)=>i+1).map(n=>`<button class="thumb${canRead(n)?'':' locked'}" type="button" data-page="${n}" title="${esc(sectionTitleFor(n))}"><div class="img"><span class="sp" style="${sprite(n)}"></span></div>${label(n)}</button>`).join('');
+  $$('#tocWall .thumb').forEach(b=>b.onclick=()=>openPage(+b.dataset.page));
+}
+function sectionTitleFor(n){ let t=null; for(const e of TOC){ if(e.p<=n && e.l>=2) t=e; if(e.p>n) break; } return t?t.t:(SEC_INFO[SEC(n)].name||''); }
+function chapterFor(n){ let c=null; for(const e of TOC){ if(e.p>n) break; if(e.l<=3 && e.l>=2) c=e; } return c; }
+
+/* ---------- reader ---------- */
+let lastLogged=0;
+let turning=false;
+function turnTo(n){ if(turning||n<1||n>305||n===cur) return; const pg=$('#rPage');
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ openPage(n); return; }
+  turning=true; const dir=n>cur?'turn-next':'turn-prev'; pg.classList.remove('turn-in'); pg.classList.add(dir);
+  setTimeout(()=>{ pg.classList.remove(dir); openPage(n); pg.classList.add('turn-in'); setTimeout(()=>{pg.classList.remove('turn-in'); turning=false;},300); },210); }
+function openPage(n,keep){
+  n=Math.max(1,Math.min(305,n|0)); cur=n;
+  const R=$('#reader'); if(R.hidden){ R.hidden=false; document.body.style.overflow='hidden'; }
+  if(!keep && location.hash!=='#read-'+n) history.replaceState(null,'','#read-'+n);
+  const ok=canRead(n);
+  $('#rImg').alt='Page '+label(n); $('#rSp').setAttribute('style',sprite(n));
+  if(ok){ const want=n; pageUrl(n).then(u=>{ if(cur!==want||!u) return; $('#rImg').src=u; $('#rImg').hidden=false; $('#rSp').hidden=true; }).catch(()=>{ if(cur===want) toast('Could not open this page. Please sign in again.'); }); }
+  if(!(ok && PUBLIC(n))){ $('#rImg').hidden=true; $('#rSp').hidden=false; }
+  $('#rLock').hidden=ok;
+  if(!ok){ $('#rLockMsg').textContent = store.get('ex360_pending',null) ? 'Your request is with the admin. You will receive an access code by email once it is approved.' : 'Request access once. After the admin approves it, you get an access code by email.'; }
+  const s=SEC(n); $('#rSec').textContent=SEC_INFO[s].name; const ch=chapterFor(n); $('#rTitle').textContent= n===1?'Cover':ch?ch.t:SEC_INFO[s].name;
+  $('#rGo').value=label(n); $('#rRange').value=n; $('#rCount').textContent=n+' / 305';
+  $('#rMark').setAttribute('aria-pressed',marks.includes(n));
+  $('#rMarks').textContent=marks.length?marks.length+' saved':'';
+  $('#rPage').style.setProperty('--pw',zoom+'px');
+  // clickable hotspots from the PDF (contents entries, index numbers, Contents/A–Z buttons)
+  $('#rHots').innerHTML = ok ? (LINKS[n]||[]).map(h=>`<a class="hot" style="left:${h[0]}%;top:${h[1]}%;width:${h[2]}%;height:${h[3]}%" data-to="${h[4]}" href="#read-${h[4]}" aria-label="Go to page ${label(h[4])}"></a>`).join('') : '';
+  $$('#rHots .hot').forEach(a=>a.onclick=ev=>{ev.preventDefault(); openPage(+a.dataset.to);});
+  // personal watermark
+  if(session&&!PUBLIC(n)){ const t=(session.name||'')+' · '+session.email+' · '+new Date().toLocaleDateString('en-IN');
+    const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='420' height='220'><text x='10' y='120' transform='rotate(-24 210 110)' font-family='Arial' font-size='15' fill='%230B4A58'>${t.replace(/[&<>'"#]/g,'')}</text></svg>`;
+    $('#rWm').style.backgroundImage=`url("data:image/svg+xml;utf8,${svg}")`; } else $('#rWm').style.backgroundImage='';
+  $('#rStage').scrollTop=0;
+  // preload neighbours
+  [n+1,n-1].forEach(k=>{ if(k>=1&&k<=305&&canRead(k)) pageUrl(k).then(u=>{ if(u){ const im=new Image(); im.src=u; } }).catch(()=>{}); });
+  if(session && !PUBLIC(n) && LIVE && n!==lastLogged){ lastLogged=n; api({action:'log',email:session.email,code:session.code,page:label(n),detail:sectionTitleFor(n)}).catch(()=>{}); }
+  if(session && !PUBLIC(n) && !LIVE){ api({action:'log',email:session.email,code:session.code,page:label(n),detail:sectionTitleFor(n)}); }
+  store.set('ex360_last',n);
+  if(canRead(n)){ markSeen(n); renderJourney(); }
+}
+function closeReader(toContents){
+  $('#reader').hidden=true; document.body.style.overflow=''; renderToc();
+  if(toContents){ location.hash='contents'; route(); setTimeout(()=>{ const el=document.querySelector(`#tocList [data-page="${cur}"]`) || document.getElementById('c-'+SEC(cur)); if(el){ const d=el.closest('details'); if(d) d.open=true; el.scrollIntoView({block:'center'}); el.style.background='var(--coral-soft)'; setTimeout(()=>el.style.background='',1600);} },50); }
+  else { history.replaceState(null,'','#'+(lastView||'home')); }
+}
+$('#rContents').onclick=()=>closeReader(true);
+$('#rClose').onclick=()=>closeReader(false);
+$('#rPrev').onclick=()=>turnTo(cur-1);
+$('#rNext').onclick=()=>turnTo(cur+1);
+$('#rIn').onclick=()=>{zoom=Math.min(1400,zoom+120);store.set('ex360_zoom',zoom);$('#rPage').style.setProperty('--pw',zoom+'px');};
+$('#rOut').onclick=()=>{zoom=Math.max(420,zoom-120);store.set('ex360_zoom',zoom);$('#rPage').style.setProperty('--pw',zoom+'px');};
+$('#rGo').onchange=e=>{ const n=fromLabel(e.target.value); if(n) openPage(n); else { toast('Type a printed page number, e.g. 139 or vii'); e.target.value=label(cur);} };
+$('#rRange').oninput=e=>{ $('#rCount').textContent=e.target.value+' / 305'; };
+$('#rRange').onchange=e=>openPage(+e.target.value);
+$('#rMark').onclick=()=>{ marks = marks.includes(cur)?marks.filter(x=>x!==cur):[...marks,cur].sort((a,b)=>a-b); store.set('ex360_marks',marks); openPage(cur,true); toast(marks.includes(cur)?'Page saved to your bookmarks':'Bookmark removed'); };
+$('#rPage').addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape' && !$('#qrModal').hidden){ closeQr(); return; }
+  if($('#reader').hidden||e.target.matches('input,textarea,select')) return;
+  if(e.key==='ArrowRight') turnTo(cur+1); else if(e.key==='ArrowLeft') turnTo(cur-1); else if(e.key==='Escape') closeReader(true);
+});
+// swipe on phones
+let tx=null; $('#rStage').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+$('#rStage').addEventListener('touchend',e=>{ if(tx==null) return; const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>70 && zoom<=900) turnTo(cur+(dx<0?1:-1)); tx=null; });
+
+/* ---------- access modal ---------- */
+function openAccess(tab,page){
+  if(page) pendingPage=page;
+  $('#access').hidden=false; setTab(tab||'request');
+  const pend=store.get('ex360_pending',null); if(pend){ $('#cEmail').value=pend.email; $('#sEmail').value=pend.email; }
+  setTimeout(()=>{ const f=$('#access [data-pane]:not([hidden]) input'); f&&f.focus(); },30);
+}
+function setTab(t){ $$('#access [role=tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t)); $$('#access [data-pane]').forEach(p=>p.hidden=p.dataset.pane!==t); }
+$$('#access [role=tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+$('#accessClose').onclick=()=>$('#access').hidden=true;
+$('#access').addEventListener('click',e=>{ if(e.target.id==='access') $('#access').hidden=true; });
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-open-access]'); if(b){ openAccess(b.dataset.openAccess, cur); } });
+$('#whoBtn').onclick=()=>{ if(session){ if(confirmSignOut()) {} } else openAccess(store.get('ex360_pending',null)?'status':'request'); };
+function confirmSignOut(){ const m=$('#statusMsg'); setTab('status'); $('#access').hidden=false; $('#sEmail').value=session.email;
+  m.innerHTML=`<div class="msg ok">Signed in as <b>${esc(session.name)}</b> (${esc(session.email)}). Access valid until ${esc(fmtDate(session.validUntil))}.</div><button class="btn btn-ghost btn-sm" type="button" id="signOut" style="margin-top:12px">Sign out on this device</button>`;
+  $('#signOut').onclick=()=>{ session=null; store.set('ex360_session',null); renderWho(); renderToc(); $('#access').hidden=true; toast('Signed out'); }; return true; }
+const fmtDate = d => d ? new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+const msg=(el,cls,html)=>{ $(el).innerHTML=`<div class="msg ${cls}">${html}</div>`; };
+
+$('#reqForm').onsubmit=async e=>{
+  e.preventDefault();
+  if(!LIVE && /github\.io$/.test(location.hostname)){ msg('#reqMsg','info','Online requests open shortly. Until then, please email <b>'+esc(CFG.CONTACT_EMAIL)+'</b> with your name, designation, organisation and the sections you need.'); return; }
+  const btn=$('#reqSubmit'); btn.disabled=true; btn.textContent='Sending…';
+  const secs=$$('#reqForm input[name=sec]:checked').map(x=>x.value);
+  if(!secs.length){ msg('#reqMsg','err','Choose at least one section.'); btn.disabled=false; btn.textContent='Send request'; return; }
+  try{
+    const r=await api({action:'request',name:$('#fName').value,email:$('#fEmail').value,phone:$('#fPhone').value,designation:$('#fDesig').value,organisation:$('#fOrg').value,department:$('#fDept').value,sections:secs,purpose:$('#fPurpose').value});
+    if(!r.ok) throw new Error(r.error);
+    const email=$('#fEmail').value.trim().toLowerCase();
+    store.set('ex360_pending',{email,id:r.id}); renderWho();
+    msg('#reqMsg','ok', r.duplicate ? `You already have a request on file (<b class="mono">${esc(r.id)}</b>, ${esc(r.status)}). ${r.status==='Approved'?'Use the <b>I have an access code</b> tab.':'We will email you when it is approved.'}` :
+      `Request <b class="mono">${esc(r.id)}</b> received. The IQAC team will review it and email your access code to <b>${esc(email)}</b>.${LIVE?'':' <br><i>Preview mode:</i> open the Admin console (key <b>demo</b>) to approve it and see the code.'}`);
+    $('#reqForm').reset(); $$('#reqForm input[name=sec]').forEach(x=>x.checked=true);
+  }catch(err){ msg('#reqMsg','err',esc(err.message)); }
+  btn.disabled=false; btn.textContent='Send request';
+};
+$('#codeForm').onsubmit=async e=>{
+  e.preventDefault();
+  try{ await unlock($('#cEmail').value,$('#cCode').value); msg('#codeMsg','ok','Unlocked. Welcome, '+esc(session.name)+'.'); toast('Book unlocked');
+    setTimeout(()=>{ $('#access').hidden=true; if(pendingPage && !PUBLIC(pendingPage)) openPage(pendingPage); },700);
+  }catch(err){ msg('#codeMsg','err',esc(err.message)); }
+};
+$('#statusForm').onsubmit=async e=>{
+  e.preventDefault();
+  try{ const r=await api({action:'status',email:$('#sEmail').value}); if(!r.ok) throw new Error(r.error);
+    const t={None:['info','No request found for this email. Use the <b>Request access</b> tab.'],Pending:['info',`Request <b class="mono">${esc(r.id)}</b> is waiting for approval.`],Approved:['ok',`Approved. Check your email for the access code and use the <b>I have an access code</b> tab. Valid until ${esc(fmtDate(r.validUntil))}.`],Rejected:['err','Your request was not approved.'+(r.remarks?' Reason: '+esc(r.remarks):'')],Revoked:['err','Access for this email has been withdrawn.'],Expired:['err','Your access has expired. Please send a new request.']}[r.status]||['info',esc(r.status)];
+    msg('#statusMsg',t[0],t[1]);
+  }catch(err){ msg('#statusMsg','err',esc(err.message)); }
+};
+
+/* ---------- search ---------- */
+async function loadFull(){
+  if(FULLTEXT||!session||!session.keys) return FULLTEXT;
+  const all=Object.assign({},META.public);
+  for(const sec of Object.keys(session.keys)){ try{ Object.assign(all, JSON.parse(new TextDecoder().decode(await decryptFile('data/text-'+sec+'.bin',sec)))); }catch(e){} }
+  FULLTEXT=all; return FULLTEXT; }
+async function runSearch(q){
+  q=q.trim(); const out=$('#results'); if(q.length<2){ out.innerHTML=''; return; }
+  const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'ig');
+  const hits=[];
+  TOC.forEach(e=>{ if(re.test(e.t)) hits.push({p:e.p,title:e.t,snip:'Contents entry',score:3}); re.lastIndex=0; });
+  const full = await loadFull();
+  const texts = full || META.public;
+  Object.keys(texts).forEach(k=>{ const n=+k; if(!canRead(n)) return; const t=texts[k]; const m=t.search(re); re.lastIndex=0; if(m>=0){ const cnt=(t.match(re)||[]).length; hits.push({p:n,title:sectionTitleFor(n),snip:'…'+t.slice(Math.max(0,m-70),m+110)+'…',score:1+Math.min(cnt,5)/5}); } });
+  const seen=new Set(); const list=hits.sort((a,b)=>b.score-a.score||a.p-b.p).filter(h=>{ const k=h.p+'|'+(h.snip==='Contents entry'); if(seen.has(k)) return false; seen.add(k); return true; }).slice(0,40);
+  out.innerHTML = list.length ? `<p class="muted" style="margin:0">${list.length} result${list.length>1?'s':''}${full?'':' in titles'}${session?'':' · <a href="#" data-open-access="request">Request access</a> for full-text search'}</p>` + list.map(h=>`<div class="res" data-page="${h.p}"><div><b>${esc(h.title)}</b><small>${esc(h.snip).replace(re,m=>`<mark>${m}</mark>`)}</small></div><span class="pgno">p. ${label(h.p)} ${canRead(h.p)?'':'🔒'}</span></div>`).join('') : '<p class="muted">No matches. Try a shorter word, such as an abbreviation (AQAR, SAR, OBE).</p>';
+  $$('#results .res').forEach(r=>r.onclick=()=>openPage(+r.dataset.page));
+}
+$('#searchForm').onsubmit=e=>{e.preventDefault(); runSearch($('#q').value);};
+let sT; $('#q').oninput=e=>{ clearTimeout(sT); sT=setTimeout(()=>runSearch(e.target.value),250); };
+
+/* ---------- admin ---------- */
+let adminKey=null, adminData=null, adminFilter='Pending';
+$('#adminForm').onsubmit=async e=>{ e.preventDefault(); adminKey=$('#adminKey').value; await loadAdmin(); };
+async function loadAdmin(){
+  try{ const r=await api({action:'adminList',adminKey}); if(!r.ok) throw new Error(r.error); adminData=r; $('#adminLogin').hidden=true; $('#adminBody').hidden=false; renderAdmin(); }
+  catch(err){ $('#adminMsg').innerHTML=`<div class="msg err">${esc(err.message)}</div>`; }
+}
+function renderAdmin(){
+  const rows=adminData.rows.map(r=>Object.assign({},r,{_st: r.Status==='Approved'&&r['Valid until']&&new Date(r['Valid until'])<new Date()?'Expired':r.Status}));
+  const c=s=>rows.filter(r=>r._st===s).length, views=rows.reduce((a,r)=>a+(+r['Pages viewed']||0),0);
+  $('#kpis').innerHTML=[['Total requests',rows.length],['Waiting',c('Pending')],['Approved',c('Approved')],['Rejected / revoked',c('Rejected')+c('Revoked')+c('Expired')],['Pages viewed',views]].map(k=>`<div class="kpi"><b class="mono">${k[1]}</b><span>${k[0]}</span></div>`).join('');
+  $('#filters').innerHTML=['Pending','Approved','Rejected','All'].map(f=>`<button class="chip" type="button" aria-pressed="${adminFilter===f}" data-f="${f}">${f}${f!=='All'?' · '+c(f):''}</button>`).join('')+`<span style="margin-left:auto;display:flex;gap:8px"><button class="chip" type="button" id="refresh">Refresh</button>${LIVE?'<button class="chip" type="button" id="csv">Export CSV</button>':''}</span>`;
+  $$('#filters [data-f]').forEach(b=>b.onclick=()=>{adminFilter=b.dataset.f;renderAdmin();});
+  $('#refresh').onclick=loadAdmin; if($('#csv')) $('#csv').onclick=()=>exportCsv(rows);
+  const list=rows.filter(r=>adminFilter==='All'||r._st===adminFilter||(adminFilter==='Rejected'&&['Revoked','Expired'].includes(r._st))).reverse();
+  const secTxt=s=>String(s||'').split(/\s*,\s*/).filter(Boolean).map(x=>(SEC_INFO[x]||{}).short||x).join(', ')||'—';
+  $('#reqRows').innerHTML = list.length ? list.map(r=>`<tr data-id="${esc(r['Request ID'])}">
+    <td><b>${esc(r.Name)}</b><br><span class="muted">${esc(r.Email)}</span><br><span class="muted">${esc(r.Phone||'')}</span><br><span class="mono note">${esc(r['Request ID'])}</span></td>
+    <td>${esc(r.Organisation)}<br><span class="muted">${esc(r.Designation)}${r.Department?' · '+esc(r.Department):''}</span></td>
+    <td>${esc(secTxt(r['Sections requested']))}</td>
+    <td style="max-width:240px">${esc(r.Purpose)}</td>
+    <td class="mono" style="white-space:nowrap">${esc(fmtDate(r.Submitted))}</td>
+    <td><span class="status st-${esc(r._st)}">${esc(r._st)}</span>${r['Access code']&&r._st==='Approved'?`<div class="mono" style="margin-top:6px">${esc(r['Access code'])}</div><div class="note">until ${esc(fmtDate(r['Valid until']))}<br>${+r['Pages viewed']||0} pages viewed</div>`:''}${r.Remarks?`<div class="note">${esc(r.Remarks)}</div>`:''}</td>
+    <td style="min-width:240px">${decideUi(r)}</td></tr>`).join('') : `<tr><td colspan="7" class="muted" style="text-align:center;padding:30px">No ${adminFilter==='All'?'':adminFilter.toLowerCase()+' '}requests yet.</td></tr>`;
+  $$('#reqRows [data-act]').forEach(b=>b.onclick=()=>decide(b));
+  $('#logList').innerHTML = (adminData.log||[]).slice(0,150).map(l=>`<div><span class="mono note">${esc(new Date(l.time).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}))}</span><span><b>${esc(l.event)}</b> · ${esc(l.email)}${l.detail?' · <span class="muted">'+esc(l.detail)+'</span>':''}</span><span class="pgno">${l.page?'p. '+esc(l.page):''}</span></div>`).join('') || '<p class="muted">No activity yet.</p>';
+}
+function decideUi(r){
+  const req=String(r['Sections requested']||'S1, S2, S3');
+  const box=(s)=>`<label class="chk" style="padding:4px 8px;font-size:12px"><input type="checkbox" name="g" value="${s}" ${req.includes(s)?'checked':''}>${s}</label>`;
+  if(r._st==='Approved') return `<div class="decide"><input name="rm" placeholder="Reason (optional)"><button class="btn btn-ghost btn-sm" type="button" data-act="Revoked">Revoke access</button></div>`;
+  return `<div class="decide"><div class="row">${box('S1')}${box('S2')}${box('S3')}</div><div class="row"><label class="note">Valid for <input type="number" name="days" value="180" min="1" max="1095"> days</label></div><input name="rm" placeholder="Note to reader (optional)"><div class="row"><button class="btn btn-teal btn-sm" type="button" data-act="Approved">Approve</button><button class="btn btn-ghost btn-sm" type="button" data-act="Rejected">Reject</button></div></div>`;
+}
+async function decide(b){
+  const tr=b.closest('tr'), id=tr.dataset.id;
+  const sections=[...tr.querySelectorAll('input[name=g]:checked')].map(x=>x.value);
+  const days=(tr.querySelector('input[name=days]')||{}).value, remarks=(tr.querySelector('input[name=rm]')||{}).value||'';
+  if(b.dataset.act==='Approved'&&!sections.length){ toast('Choose at least one section to grant'); return; }
+  b.disabled=true; b.textContent='Saving…';
+  try{ const r=await api({action:'adminDecide',adminKey,id,decision:b.dataset.act,sections,days,remarks}); if(!r.ok) throw new Error(r.error); toast(b.dataset.act==='Approved'?(LIVE?'Approved · access code emailed':'Approved · code shown in the Status column'):b.dataset.act); await loadAdmin(); }
+  catch(err){ toast(err.message); b.disabled=false; }
+}
+function exportCsv(rows){
+  const cols=['Request ID','Submitted','Name','Email','Phone','Designation','Organisation','Department','Sections requested','Purpose','Status','Sections granted','Access code','Valid until','Decided by','Decided on','Remarks','Last access','Pages viewed'];
+  const csv=[cols.join(',')].concat(rows.map(r=>cols.map(c=>'"'+String(r[c]??'').replace(/"/g,'""')+'"').join(','))).join('\n');
+  try{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv'})); a.download='excellence360-access-requests.csv'; document.body.appendChild(a); a.click(); a.remove(); toast('CSV downloaded'); }catch(e){ toast('Download is not available here'); }
+}
+
+/* ---------- tour video chapters ---------- */
+(function(){
+  const CH=[['Intro',0],['The framework orbit',10],['Secure reader access',21],['Smart contents',32],['305-page digital reader',39],['Readiness Compass',54],['2026 to 2029 roadmap',64],['Role-based reading paths',76],['Accreditation navigator',84]];
+  const v=$('#tourVid'), box=$('#chapters'); if(!v||!box) return;
+  const mmss=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+  box.innerHTML=CH.map((c,i)=>`<button type="button" data-t="${c[1]}"><span class="n">${i?'0'+i:'—'}</span><span>${esc(c[0])}</span><span class="t">${mmss(c[1])}</span></button>`).join('');
+  $$('#chapters button').forEach(b=>b.onclick=()=>{ v.currentTime=+b.dataset.t; v.play().catch(()=>{}); });
+  v.addEventListener('timeupdate',()=>{ let k=0; CH.forEach((c,i)=>{ if(v.currentTime>=c[1]) k=i; }); $$('#chapters button').forEach((b,i)=>b.setAttribute('aria-current',i===k)); });
+})();
+
+/* ---------- QR: show, share, scan, unlock links ---------- */
+const SITE = (CFG.SITE_URL || (location.origin + location.pathname)).replace(/#.*$/,'');
+function qrSvg(text){ if(typeof qrcode!=='function') return '<p class="muted">QR library not loaded.</p>'; const q=qrcode(0,'M'); q.addData(text); q.make(); return q.createSvgTag({cellSize:4,margin:2,scalable:true}); }
+function b64u(s){ return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+function unb64u(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4) s+='='; return decodeURIComponent(escape(atob(s))); }
+const unlockLink = () => session ? SITE+'#unlock='+b64u(session.email+'|'+session.code) : null;
+let scanStream=null, scanTimer=null;
+function stopScan(){ if(scanTimer) cancelAnimationFrame(scanTimer); scanTimer=null; if(scanStream){ scanStream.getTracks().forEach(t=>t.stop()); scanStream=null; } }
+function closeQr(){ stopScan(); $('#qrModal').hidden=true; }
+$('#qrClose').onclick=closeQr;
+$('#qrModal').addEventListener('click',e=>{ if(e.target.id==='qrModal') closeQr(); });
+function showQr(eyebrow,title,url,note){
+  $('#qrEyebrow').textContent=eyebrow; $('#qrTitle').textContent=title;
+  $('#qrBody').innerHTML=`<div class="qr-box"><div class="qr">${qrSvg(url)}</div><div class="url">${esc(url.length>80?url.slice(0,60)+'…':url)}</div><p class="muted" style="margin:0;max-width:34ch">${note}</p><button class="btn btn-ghost btn-sm" type="button" id="qrCopy">Copy link</button></div>`;
+  $('#qrCopy').onclick=()=>{ (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(()=>toast('Link copied')).catch(()=>toast('Copy not available here')); };
+  $('#qrModal').hidden=false;
+}
+$('#phoneBtn').onclick=()=>{
+  const tabs = session ? `<div class="qr-tabs"><button class="chip" type="button" aria-pressed="true" data-q="site">Open the portal</button><button class="chip" type="button" aria-pressed="false" data-q="me">Continue with my access</button></div>` : '';
+  showQr('Scan with your phone camera','Open on your phone',SITE,'Point your phone camera at the code to open the portal there.');
+  if(session){ $('#qrBody').insertAdjacentHTML('afterbegin',tabs);
+    $$('#qrBody [data-q]').forEach(b=>b.onclick=()=>{ if(b.dataset.q==='me'){ showQr('Private · do not share','Continue on another device',unlockLink(),'This code carries your access. Scan it on your own phone or tablet and the book unlocks there too.'); } else $('#phoneBtn').click(); }); }
+};
+$('#rShare').onclick=()=>showQr('Share this page','Page '+label(cur)+' by QR',SITE+'#read-'+cur,'Anyone who scans this opens page '+label(cur)+'. Locked pages still need approved access.');
+function handleScanned(text){
+  stopScan();
+  let u; try{ u=new URL(text, SITE); }catch(e){ u=null; }
+  const sameSite = u && (u.origin+u.pathname).replace(/index\.html$/,'')===SITE.replace(/index\.html$/,'');
+  if(sameSite && u.hash){ closeQr(); location.hash=u.hash; route(); toast('Opened from QR'); return; }
+  if(sameSite){ closeQr(); location.hash='home'; toast('Opened from QR'); return; }
+  $('#qrBody').innerHTML=`<div class="msg info">This QR code is not for the Excellence 360 portal:<br><span class="mono" style="word-break:break-all">${esc(text.slice(0,160))}</span></div>`;
+}
+$('#scanBtn').onclick=async()=>{
+  $('#qrEyebrow').textContent='Scanner'; $('#qrTitle').textContent='Scan a QR code';
+  $('#qrBody').innerHTML=`<div class="scan-wrap"><video id="scanVid" playsinline muted></video><div class="scan-line"></div></div><p class="muted" style="text-align:center!important;margin:14px 0 0">Scan a QR code printed in the book, shared by a colleague, or from your approval email.</p><div style="text-align:center!important;margin-top:10px"><label class="btn btn-ghost btn-sm" style="cursor:pointer">Upload a QR image<input type="file" accept="image/*" id="scanFile" hidden></label></div><div id="scanMsg"></div>`;
+  $('#qrModal').hidden=false;
+  $('#scanFile').onchange=e=>{ const f=e.target.files[0]; if(!f) return; const img=new Image(); img.onload=()=>{ const c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; const x=c.getContext('2d'); x.drawImage(img,0,0); const d=x.getImageData(0,0,c.width,c.height); const r=typeof jsQR==='function'?jsQR(d.data,c.width,c.height):null; if(r) handleScanned(r.data); else $('#scanMsg').innerHTML='<div class="msg err">No QR code found in that image.</div>'; }; img.src=URL.createObjectURL(f); };
+  try{
+    scanStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+    const v=$('#scanVid'); v.srcObject=scanStream; await v.play();
+    const c=document.createElement('canvas'), x=c.getContext('2d',{willReadFrequently:true});
+    const det = ('BarcodeDetector' in window) ? new BarcodeDetector({formats:['qr_code']}) : null;
+    const tick=async()=>{ if(!scanStream) return;
+      if(v.readyState>=2){
+        if(det){ try{ const r=await det.detect(v); if(r.length){ handleScanned(r[0].rawValue); return; } }catch(e){} }
+        else if(typeof jsQR==='function'){ c.width=v.videoWidth; c.height=v.videoHeight; x.drawImage(v,0,0); const d=x.getImageData(0,0,c.width,c.height); const r=jsQR(d.data,c.width,c.height,{inversionAttempts:'dontInvert'}); if(r){ handleScanned(r.data); return; } }
+      }
+      scanTimer=requestAnimationFrame(tick); };
+    tick();
+  }catch(err){ $('#scanMsg').innerHTML='<div class="msg info">The camera is not available here. Allow camera access in your browser, or upload a photo of the QR code instead.</div>'; }
+};
+async function unlockFromHash(h){
+  try{ const [email,code]=unb64u(h.slice(7)).split('|'); history.replaceState(null,'','#home');
+    await unlock(email,code); toast('Welcome, '+(session.name||email)+'. The book is unlocked.'); }
+  catch(e){ history.replaceState(null,'','#home'); openAccess('code'); msg('#codeMsg','err','That unlock link did not work: '+esc(e.message||'')); }
+}
+
+/* ---------- routing ---------- */
+let lastView='home';
+function route(){
+  const h=(location.hash||'#home').slice(1);
+  if(h.startsWith('unlock=')){ unlockFromHash(h); return; }
+  if(h.startsWith('read-')){ openPage(parseInt(h.slice(5),10)||1,true); return; }
+  if(!$('#reader').hidden && !h.startsWith('read-')){ $('#reader').hidden=true; document.body.style.overflow=''; }
+  const v = h==='contents'?'contents':h==='admin'?'admin':'home';
+  lastView=v;
+  $('#viewHome').hidden=v!=='home'; $('#viewContents').hidden=v!=='contents'; $('#viewAdmin').hidden=v!=='admin';
+  $$('.nav a').forEach(a=>{ const on = (h==='search'||h==='compass') ? a.dataset.nav===h : a.dataset.nav===v; if(on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  if(h==='search'){ $('#searchSection').scrollIntoView(); setTimeout(()=>$('#q').focus(),50); }
+  else if(h==='compass'||h==='ladder'||h==='tour'){ document.getElementById(h).scrollIntoView(); }
+  else if(h.startsWith('c-')) {}
+  else window.scrollTo(0,0);
+  if(v==='admin' && adminKey) loadAdmin();
+}
+window.addEventListener('hashchange',route);
+$('#vList').onclick=()=>{ $('#vList').setAttribute('aria-pressed',true); $('#vWall').setAttribute('aria-pressed',false); $('#tocList').hidden=false; $('#tocWall').hidden=true; };
+$('#vWall').onclick=()=>{ $('#vWall').setAttribute('aria-pressed',true); $('#vList').setAttribute('aria-pressed',false); $('#tocList').hidden=true; $('#tocWall').hidden=false; };
+$$('.rail a').forEach(a=>a.onclick=e=>{ e.preventDefault(); const el=document.getElementById(a.getAttribute('href').slice(1)); if($('#tocList').hidden){ const s=a.getAttribute('href').slice(3); const n={F:1,S1:13,S2:92,S3:278,B:300}[s]; const t=document.querySelector(`#tocWall [data-page="${n}"]`); t&&t.scrollIntoView({behavior:'smooth',block:'start'}); } else el&&el.scrollIntoView({behavior:'smooth'}); });
+
+/* ---------- boot ---------- */
+async function boot(){
+  $('#previewBanner').hidden=LIVE;
+  if(!LIVE && /github\.io$/.test(location.hostname)) $('#previewBanner').innerHTML='Reader approvals open soon. You can browse the contents, front matter and tour now, and send an access request.'; $('#contactMail').textContent=CFG.CONTACT_EMAIL;
+  renderWho(); renderHome();
+  try{ const [t,l,m]=await Promise.all(['data/toc.json','data/links.json','data/meta.json'].map(u=>fetch(u).then(r=>r.json()))); TOC=t; LINKS=l; META=m; }catch(e){ console.warn('data load failed',e); }
+  renderToc(); renderHome(); route();
+  if(session) unlock(session.email,session.code,true).catch(()=>{});
+}
+boot();
+})();
+</script>
+
+</body>
+</html>
