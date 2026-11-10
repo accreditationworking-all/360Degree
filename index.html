@@ -1648,17 +1648,29 @@ function goDemo(e){ if(e) e.preventDefault(); $('#access').hidden=true; if(!$('#
   location.hash='tour'; route(); const v=$('#tourVid'); if(v){ v.currentTime=0; v.play().catch(()=>{}); } }
 $('#lockDemo').onclick=goDemo; $('#reqDemo').onclick=goDemo;
 
-/* ---------- tour video: pause when out of sight, resume on click ---------- */
+/* ---------- tour video: pause as soon as the visitor moves anywhere else ---------- */
 (function(){
-  const v=$('#tourVid'); if(!v) return;
+  const v=$('#tourVid'), tour=$('#tour'); if(!v) return;
   const pause=()=>{ if(!v.paused) v.pause(); };
   window.pauseTour=pause;
-  if('IntersectionObserver' in window){ new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting||e.intersectionRatio<0.35) pause(); }),{threshold:[0,0.35]}).observe(v); }
-  document.addEventListener('visibilitychange',()=>{ if(document.hidden) pause(); });
+  const mostlyVisible=()=>{ const r=v.getBoundingClientRect(), vh=innerHeight||document.documentElement.clientHeight;
+    const vis=Math.max(0,Math.min(r.bottom,vh)-Math.max(r.top,0)); return r.height>0 && vis/r.height>=0.8 && !$('#viewHome').hidden; };
+  // scrolling the video partly out of view
+  let y0=null; v.addEventListener('play',()=>{ y0=scrollY; });
+  window.addEventListener('scroll',()=>{ if(!v.paused && (Math.abs(scrollY-(y0==null?scrollY:y0))>100 || !mostlyVisible())) pause(); },{passive:true});
+  if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio<0.8) pause(); }),{threshold:[0,.2,.4,.6,.8,1]}).observe(v);
+  // any click outside the tour section (menu, buttons, cards, links)
+  document.addEventListener('click',e=>{ if(!v.paused && !(tour&&tour.contains(e.target))) pause(); },true);
+  // keyboard navigation away from the tour
+  document.addEventListener('focusin',e=>{ if(!v.paused && !(tour&&tour.contains(e.target))) pause(); });
+  // page jumps, other views, tab switch, window switch
   window.addEventListener('hashchange',()=>{ if(location.hash!=='#tour') pause(); });
-  const ob=new MutationObserver(()=>{ if(!$('#reader').hidden||!$('#access').hidden||!$('#qrModal').hidden||!$('#acct').hidden) pause(); });
-  ['#reader','#access','#qrModal','#acct'].forEach(id=>{ const el=$(id); if(el) ob.observe(el,{attributes:true,attributeFilter:['hidden']}); });
-  v.addEventListener('click',()=>{ if(v.paused) v.play().catch(()=>{}); });
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden) pause(); });
+  window.addEventListener('blur',pause);
+  window.addEventListener('pagehide',pause);
+  const ob=new MutationObserver(()=>{ if(!$('#reader').hidden||!$('#access').hidden||!$('#qrModal').hidden||!$('#acct').hidden||!$('#chat').hidden||$('#viewHome').hidden) pause(); });
+  ['#reader','#access','#qrModal','#acct','#chat','#viewHome'].forEach(id=>{ const el=$(id); if(el) ob.observe(el,{attributes:true,attributeFilter:['hidden']}); });
+  // clicking the video (or its play button) resumes from where it stopped: the player's own controls handle this
 })();
 
 /* ---------- chatbot: answers from the site's own content, hands off to the team ---------- */
