@@ -440,6 +440,7 @@ footer a{color:var(--on-teal)}
     <nav class="nav" aria-label="Main">
       <a href="#home" data-nav="home">Home</a>
       <a href="#contents" data-nav="contents">Contents</a>
+      <a href="#tour" data-nav="tour">Demo</a>
       <a href="#compass" data-nav="compass">Compass</a>
       <a href="#search" data-nav="search">Search</a>
     </nav>
@@ -701,6 +702,7 @@ footer a{color:var(--on-teal)}
           <p style="max-width:40ch;margin:0 auto 18px;color:#cfe3e6" id="rLockMsg">Request access once. After the admin approves it, you get an access code by email.</p>
           <button class="btn btn-coral" type="button" data-open-access="request">Request access</button>
           <button class="btn btn-ghost" type="button" data-open-access="code" style="color:#fff;margin-left:6px">I have a code</button>
+          <p style="margin:16px 0 0"><a href="#tour" id="lockDemo" style="color:#cfe3e6">Not sure yet? Watch the 100-second demo</a></p>
         </div>
       </div>
     </div>
@@ -744,6 +746,7 @@ footer a{color:var(--on-teal)}
           <label class="full note" style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="fAgree" required style="margin-top:4px"> I agree to use the content for internal academic and quality-assurance work and not to reproduce it without the publisher's permission. My details and reading activity are recorded for access control.</label>
           <div class="full"><button class="btn btn-coral" type="submit" id="reqSubmit">Send request</button></div>
         </form>
+        <p class="note" style="margin:14px 0 0">Want to see what you get first? <a href="#tour" id="reqDemo">Watch the 100-second demo</a>.</p>
         <div class="flow"><div><b>01</b>You send this request</div><div><b>02</b>IQAC reviews it</div><div><b>03</b>You get an access code by email</div></div>
         <div id="reqMsg"></div>
       </div>
@@ -1544,6 +1547,10 @@ async function unlockFromHash(h){
   catch(e){ history.replaceState(null,'','#home'); openAccess('code'); msg('#codeMsg','err','That unlock link did not work: '+esc(e.message||'')); }
 }
 
+function goDemo(e){ if(e) e.preventDefault(); $('#access').hidden=true; if(!$('#reader').hidden){ $('#reader').hidden=true; document.body.style.overflow=''; }
+  location.hash='tour'; route(); const v=$('#tourVid'); if(v){ v.currentTime=0; v.play().catch(()=>{}); } }
+$('#lockDemo').onclick=goDemo; $('#reqDemo').onclick=goDemo;
+
 /* ---------- routing ---------- */
 let lastView='home';
 function route(){
@@ -1554,7 +1561,7 @@ function route(){
   const v = h==='contents'?'contents':h==='admin'?'admin':'home';
   lastView=v;
   $('#viewHome').hidden=v!=='home'; $('#viewContents').hidden=v!=='contents'; $('#viewAdmin').hidden=v!=='admin';
-  $$('.nav a').forEach(a=>{ const on = (h==='search'||h==='compass') ? a.dataset.nav===h : a.dataset.nav===v; if(on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  $$('.nav a').forEach(a=>{ const on = (h==='search'||h==='compass'||h==='tour') ? a.dataset.nav===h : a.dataset.nav===v; if(on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   if(h==='search'){ $('#searchSection').scrollIntoView(); setTimeout(()=>$('#q').focus(),50); }
   else if(h==='compass'||h==='ladder'||h==='tour'){ document.getElementById(h).scrollIntoView(); }
   else if(h.startsWith('c-')) {}
